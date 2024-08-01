@@ -1,0 +1,33 @@
+﻿<Window x:Class="SHEndevour.Views.AddEditUserDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SHEndevour.Views"
+        mc:Ignorable="d"
+        Title="Add/Edit User" Height="400" Width="400">
+    <Grid>
+        <StackPanel Margin="10">
+            <!--Username-->
+            <Label Content="Username"/>
+            <TextBox x:Name="UsernameTextBox" Margin="3"/>
+            <!--Password-->
+            <Label Content="Password"/>
+            <PasswordBox x:Name="PasswordBox" Margin="3"/>
+            <!--Role-->
+            <Label Content="Role"/>
+            <TextBox x:Name="RoleTextBox" Margin="3"/>
+            <!--First Name-->
+            <Label Content="Name"/>
+            <TextBox x:Name="FirstNameTextBox" Margin="3"/>
+            <!--Last Name-->
+            <Label Content="Last Name"/>
+            <TextBox x:Name="LastNameTextBox" Margin="3"/>
+            <!--Email-->
+            <Label Content="Email"/>
+            <TextBox x:Name="EmailTextBox" Margin="3"/>
+            <!--Save Button-->
+            <Button Content="Save" Click="Save_Click" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>
