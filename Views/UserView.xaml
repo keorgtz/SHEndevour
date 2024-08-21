@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="SHEndevour.Views.UserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SHEndevour.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:SHEndevour.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:UserManagementViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="450" d:DesignWidth="660" Background="#3d3d3d" MinWidth="660">
+
+
+    <UserControl.DataContext>
+        <vm:UserManagementViewModel />
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Fila superior -->
+        <materialDesign:ColorZone
+                        Margin="10"
+                        materialDesign:ElevationAssist.Elevation="Dp3"
+                        ClipToBounds="False"
+                        CornerRadius="5"
+                        Foreground="White"
+                        Mode="PrimaryMid">
+
+            <StackPanel Orientation="Horizontal" Margin="10">
+
+                <Button Command="{Binding AddUserCommand}" Padding="7" Margin="0,0,5,0"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="0,2,5,0" Kind="AccountPlus" />
+                        <TextBlock Text="Añadir"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Command="{Binding ViewUserCommand}" Padding="7" Margin="0,0,5,0"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="0,2,5,0" Kind="AccountDetails" />
+                        <TextBlock Text="Examinar" />
+                    </StackPanel>
+                </Button>
+
+                <Button Command="{Binding DeleteUserCommand}" Padding="7" Margin="0,0,5,0"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="0,2,5,0" Kind="AccountRemove" />
+                        <TextBlock Text="Eliminar" />
+                    </StackPanel>
+                </Button>
+
+                
+
+                <StackPanel Orientation="Vertical" Margin="5,0,5,0" 
+                            Width="200">
+
+                    <TextBox x:Name="SearchBox" Width="190"
+                             Padding="8"
+                             materialDesign:HintAssist.Foreground="White"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Hint="Buscar Usuario"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <!-- Popup para mostrar los resultados filtrados -->
+                    <Popup IsOpen="{Binding IsPopupOpen}"
+                           Placement="Bottom"
+                           StaysOpen="False"
+                           PlacementTarget="{Binding ElementName=SearchBox}">
+
+                        <Border Background="White" CornerRadius="5" BorderBrush="Gray" BorderThickness="1">
+                            <ListBox ItemsSource="{Binding FilteredUsers}"
+                                     SelectedItem="{Binding SelectedUser}"
+                                     Width="200"
+                                     MaxHeight="200"
+                                     Background="#2d2d2d"
+                                     
+                                     Style="{StaticResource MaterialDesignListBox}">
+
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Username}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+                    </Popup>
+                </StackPanel>
+
+                <Button Content="{materialDesign:PackIcon Kind= Magnify }"
+                    Command="{Binding SearchCommand}"
+                    CommandParameter="{Binding Text, ElementName=SearchBox}"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Padding="10"
+                    Margin="10,0,0,0" />
+            </StackPanel>
+        </materialDesign:ColorZone>
+
+        <!-- Fila inferior - DataGrid -->
+        <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding Users}"
+                  AutoGenerateColumns="False"
+                  x:Name="UserDataGrid"
+                  SelectionMode="Single"
+                  CanUserAddRows="False"
+                  SelectionUnit="FullRow"
+                  Margin="5"
+                  materialDesign:ThemeAssist.Theme="Dark"
+                  materialDesign:ElevationAssist.Elevation="Dp4"
+                  Style="{StaticResource MaterialDesignDataGrid}">
+
+            <DataGrid.Columns>
+
+                <!-- Columna con CheckBox -->
+                <DataGridTemplateColumn Width="75">
+                    <DataGridTemplateColumn.Header>
+                        <CheckBox Foreground="White" Content="{materialDesign:PackIcon Kind=AccountCheck }" 
+                          Checked="HeaderCheckBox_Checked"
+                          Unchecked="HeaderCheckBox_Unchecked"/>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Usuario" Binding="{Binding Username}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding FirstName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Apellido" Binding="{Binding LastName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Telefono" Binding="{Binding PhoneNumber}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Rol" Binding="{Binding Role.Name}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

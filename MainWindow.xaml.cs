@@ -1,15 +1,9 @@
-﻿using SHEndevour.Views;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using SHEndevour.Utilities;
+using SHEndevour.Views;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Runtime.InteropServices;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Button = System.Windows.Controls.Button;
+using MessageBox = System.Windows.MessageBox;
 
 namespace SHEndevour
 {
@@ -19,23 +13,25 @@ namespace SHEndevour
     public partial class MainWindow : Window
     {
 
-        [DllImport("dwmapi.dll", PreserveSig = true)]
-        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
-
-        private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
-
         public MainWindow()
         {
             InitializeComponent();
-            SetTitleBarColor(); //Funcion para Establecer el Tema del Sistema a la Ventana de la App
+
+            // Cargar los datos del usuario logueado
+            if (App.CurrentUser != null)
+            {
+                UsernameTextBlock.Text = $"Username: {App.CurrentUser.Username}";
+                RoleTextBlock.Text = $"Role: {App.CurrentUser.Role?.Name}";
+            }
+            else
+            {
+                UsernameTextBlock.Text = "No user logged in";
+                RoleTextBlock.Text = "No Role available";
+            }
+
         }
 
-        private void SetTitleBarColor()
-        {
-            var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
-            int useImmersiveDarkMode = 1; // 0 for light mode, 1 for dark mode
-            DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, ref useImmersiveDarkMode, sizeof(int));
-        }
+
 
         private void NavigationButton_Click(object sender, RoutedEventArgs e)
         {
@@ -49,16 +45,38 @@ namespace SHEndevour
                         MainContent.Content = new HomeView();
                         break;
                     case "Usuarios":
-                        MainContent.Content = new UsersView();
+                        MainContent.Content = new UserView();
                         break;
-                    case "Configuración":
+                    case "Configuracion":
                         MainContent.Content = new SettingView();
                         break;
+
                     default:
                         // Manejar un valor de tag no esperado si es necesario
                         break;
                 }
             }
         }
+
+        private void ButtonReporting_Click(object sender, RoutedEventArgs e)
+        {
+
+            // Crear y mostrar la nueva ventana
+            ReportDesignerWindow reportDesignerWindow = new ReportDesignerWindow();
+            reportDesignerWindow.Show();
+
+
+            // Cerrar la ventana actual
+            this.Close();
+        }
+
+        private void ViewReport_Click(object sender, RoutedEventArgs e)
+        {
+            ReportViewerWindow reportViewerWindow = new ReportViewerWindow();
+            reportViewerWindow.Show();
+
+            this.Close();
+        }
+
     }
 }

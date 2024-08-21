@@ -1,27 +1,48 @@
-﻿using SHEndevour.Utilities;
-using System.Configuration;
-using System.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SHEndevour.Models;
+using SHEndevour.Utilities;
+using SHEndevour.Views;
 using System.Windows;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
 
 namespace SHEndevour
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+
+        public static UserModel CurrentUser { get; set; }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
+
+
+            // Crear el servicio y el contexto
             using (var context = new AppDbContext())
             {
-                // Este método crea la base de datos si no existe
-                context.Database.EnsureCreated();
+                try
+                {
+                    // Crear la base de datos y las tablas si no existen
+                    context.Database.EnsureCreated();
+                    Console.WriteLine("Base de datos y tablas aseguradas.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al conectar con la base de datos: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    
+                    Environment.Exit(1);
+                }
             }
 
-            Console.WriteLine("Base de datos y tabla Users creadas (si no existían).");
+            //Inicializador de Administracion
+            AdminUserInitializer.EnsureAdminUser();
+
+            
+
+
         }
     }
-
 }

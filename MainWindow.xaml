@@ -3,28 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:SHEndevour"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="450" Width="855" MinWidth="855" Background="#2d2d2d">
 
     <Window.Resources>
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#272C3D"/>
+            <Setter Property="Background" Value="#18191B"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="8">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"
-                                          Content="{TemplateBinding Content}"/>
-
-                            <Border.Effect>
-                                <DropShadowEffect Opacity="0.4" Color="Black" BlurRadius="5" ShadowDepth="2" Direction="320"/>
-                            </Border.Effect>
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0"
+                                CornerRadius="8">
+                            <ContentPresenter Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
 
                         </Border>
                         <ControlTemplate.Triggers>
@@ -35,8 +31,13 @@
                             </Trigger>
                             <!-- Trigger para cuando el botón esté en foco -->
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="Background" Value="#373A47"/>
+                                <Setter Property="Background" Value="#272C3D"/>
                                 <Setter Property="BorderBrush" Value="#C6C6C6"/>
+                            </Trigger>
+                            <!-- Trigger para cuando el mouse está sobre el botón -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3A3D46"/>
+                                <Setter Property="BorderBrush" Value="#3A3D46"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -44,39 +45,47 @@
             </Setter>
         </Style>
     </Window.Resources>
+    
+    
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-
+    
+    
     <Grid>
         <!-- Definimos dos columnas, la primera es el Sidebar, la segunda es el contenido -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="auto"/>
             <!-- Ancho del Sidebar -->
             <ColumnDefinition Width="*"/>
             <!-- Resto de la página -->
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
-        <StackPanel Grid.Column="0" Background="#18191B"> <!-- #18191B -->
+        <StackPanel Grid.Column="0" Background="#18191B">
             <!-- Información del usuario -->
             <StackPanel Margin="0,0,0,20">
-                <TextBlock Text="Usuario: Endevour" Foreground="White" FontSize="16" Padding="10,10,10,10"/>
-                <TextBlock Text="Role: Admin" Foreground="White" FontSize="14" Padding="10,0,10,10"/>
-
+                <TextBlock x:Name="UsernameTextBlock" Foreground="White" FontSize="16" Padding="10,10,10,10"/>
+                <TextBlock x:Name="RoleTextBlock" Foreground="White" FontSize="14" Padding="10,0,10,10"/>
             </StackPanel>
 
             <!-- Botones de navegación -->
+
             <Button Content="Inicio" Tag="Inicio" Margin="10,5" Padding="10"
-                    Click="NavigationButton_Click" Style="{StaticResource RoundedButtonStyle}" Width="180" Height="35"/>
+                    Click="NavigationButton_Click" Style="{StaticResource RoundedButtonStyle}" Width="160" Height="35"/>
             <Button Content="Usuarios" Tag="Usuarios" Margin="10,5" Padding="10"
-                    Click="NavigationButton_Click" Style="{StaticResource RoundedButtonStyle}" Width="180" Height="35"/>
-            <Button Content="Configuración" Tag="Configuración" Margin="10,5" Padding="10"
-                    Click="NavigationButton_Click" Style="{StaticResource RoundedButtonStyle}" Width="180" Height="35"/>
-
-            
-
+                    Click="NavigationButton_Click" Style="{StaticResource RoundedButtonStyle}" Width="160" Height="35"/>
+            <Button Content="Configuración" Tag="Configuracion" Margin="10,5" Padding="10"
+                    Click="NavigationButton_Click" Style="{StaticResource RoundedButtonStyle}" Width="160" Height="35"/>
+            <Button Content="ReportDesigner" Margin="10,5" Padding="10"
+                    Click="ButtonReporting_Click" Style="{StaticResource RoundedButtonStyle}" Width="160" Height="35"/>
+            <Button Content="Reportes" Margin="10,5" Padding="10"
+                    Click="ViewReport_Click" Style="{StaticResource RoundedButtonStyle}" Width="160" Height="35"/>
         </StackPanel>
 
         <!-- Contenido Principal -->
         <ContentControl x:Name="MainContent" Grid.Column="1" Background="White"/>
     </Grid>
+    
+    
 </Window>

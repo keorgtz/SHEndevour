@@ -13,15 +13,27 @@
     <Compile Update="Views\HomeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\LoginWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ReportDesignerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ReportViewerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\SettingView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\UsersView.xaml.cs">
+    <Compile Update="Views\UserView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Styles.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AddEditUserDialog.xaml">
@@ -30,10 +42,19 @@
     <Page Update="Views\HomeView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ReportDesignerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ReportViewerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\SettingView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\UsersView.xaml">
+    <Page Update="Views\UserView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-K:\0Dev\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\
+K:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\
 SHEndevour
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-K:\0Dev\SHEndevour\SHEndevour\App.xaml
-52115030752
+K:\0Dev\Code\Main\SHEndevour\SHEndevour\App.xaml
+91042638267
 
-11192152139
-23818579688
-MainWindow.xaml;Views\AddEditUserDialog.xaml;Views\HomeView.xaml;Views\SettingView.xaml;Views\UsersView.xaml;
+22-143468311
+300-559736091
+MainWindow.xaml;Resources\Styles.xaml;Views\AddEditUserDialog.xaml;Views\HomeView.xaml;Views\LoginWindow.xaml;Views\ReportDesignerWindow.xaml;Views\ReportViewerWindow.xaml;Views\SettingView.xaml;Views\UserView.xaml;
 
 False
 

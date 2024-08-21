@@ -1,34 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace SHEndevour.Models
 {
-    public class UserModel
+    public class UserModel : AuditableEntity
     {
         [Key]
-        public int Id { get; set; } // Campo Id único
-
-        [Required]
-        [MaxLength(50)]
+        public int Id { get; set; }
         public string Username { get; set; }
-
-        [Required]
-        [MinLength(4)]
         public string Password { get; set; }
-
-        [Required]
-        [MaxLength(20)]
-        public string Role { get; set; }
-
+        public int RoleId { get; set; }
+        public RoleModel Role { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string PhoneNumber {  get; set; } 
         public string Email { get; set; }
-
+        public bool IsSelected { get; set; }
     }
 }

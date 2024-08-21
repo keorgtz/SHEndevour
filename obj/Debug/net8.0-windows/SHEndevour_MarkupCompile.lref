@@ -1,8 +1,10 @@
-﻿
-
-FK:\0Dev\SHEndevour\SHEndevour\MainWindow.xaml;;
-FK:\0Dev\SHEndevour\SHEndevour\Views\AddEditUserDialog.xaml;;
-FK:\0Dev\SHEndevour\SHEndevour\Views\HomeView.xaml;;
-FK:\0Dev\SHEndevour\SHEndevour\Views\SettingView.xaml;;
-FK:\0Dev\SHEndevour\SHEndevour\Views\UsersView.xaml;;
+﻿K:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\App.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\MainWindow.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\HomeView.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\LoginWindow.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\ReportDesignerWindow.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\ReportViewerWindow.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\SettingView.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\UserView.xaml;;
 
