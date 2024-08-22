@@ -7,47 +7,63 @@
         xmlns:local="clr-namespace:SHEndevour"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="855" MinWidth="855" Background="#2d2d2d">
+        Title="Endevour" Height="450" Width="865" MinWidth="865" Background="#2d2d2d">
+    
+    
 
     <Window.Resources>
-        <Style x:Key="RoundedButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#18191B"/>
+        <!-- Estilo personalizado para botones redondeados -->
+        <Style x:Key="RoundB" TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignPaperButton}">
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="35"/>
+        </Style>
+        
+        <Style x:Key="RoundBFlat" TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="35"/>
+            <!--#region -->
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="RadioButton">
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="0"
-                                CornerRadius="8">
-                            <ContentPresenter Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
-
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding materialDesign:ButtonAssist.CornerRadius}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <!-- Trigger para cuando el botón esté seleccionado (IsPressed) -->
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#272C3D"/>
-                                <Setter Property="BorderBrush" Value="#2E2E2E"/>
-                            </Trigger>
-                            <!-- Trigger para cuando el botón esté en foco -->
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="Background" Value="#272C3D"/>
-                                <Setter Property="BorderBrush" Value="#C6C6C6"/>
-                            </Trigger>
-                            <!-- Trigger para cuando el mouse está sobre el botón -->
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#3A3D46"/>
-                                <Setter Property="BorderBrush" Value="#3A3D46"/>
+                            <Trigger Property="IsChecked" Value="True" >
+                                <Setter Property="Foreground" Value="#3e3e3e"/>
+                                <Setter Property="Background" Value="#9e9e9e"/>
+                                <Setter Property="Width" Value="60"/>
+                                <Setter Property="Height" Value="60"/>
+                                <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp5"/>
+
+                                
+                                
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <!--#endregion-->
+            
         </Style>
+
+        
+        
     </Window.Resources>
-    
-    
-    
+
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     
@@ -62,29 +78,51 @@
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
-        <StackPanel Grid.Column="0" Background="#18191B">
-            <!-- Información del usuario -->
-            <StackPanel Margin="0,0,0,20">
-                <TextBlock x:Name="UsernameTextBlock" Foreground="White" FontSize="16" Padding="10,10,10,10"/>
-                <TextBlock x:Name="RoleTextBlock" Foreground="White" FontSize="14" Padding="10,0,10,10"/>
+
+        <materialDesign:ColorZone
+                Margin="10"
+                materialDesign:ElevationAssist.Elevation="Dp4"
+                materialDesign:ColorZoneAssist.Background="#2e2e2e"
+                ClipToBounds="False"
+                CornerRadius="35"
+                Foreground="White">
+
+            <StackPanel Orientation="Vertical" >
+
+                <RadioButton Content="{materialDesign:PackIcon Size=30, 
+                        Kind= HomeVariantOutline}"
+                        Tag="Inicio" 
+                        Click="NavigationButton_Click" 
+                        Style="{StaticResource RoundB}"/>
+
+                <Separator Margin="10"/>
+
+                <RadioButton Content="{materialDesign:PackIcon Size=30,
+                        Kind= AccountGroupOutline }" Tag="Usuarios"
+                        Click="NavigationButton_Click"
+                        Style="{StaticResource RoundBFlat}"/>
+
+                <RadioButton Content="{materialDesign:PackIcon Size=30,
+                        Kind= CogOutline }" Tag="Configuracion"  
+                        Click="NavigationButton_Click"
+                        Style="{StaticResource RoundBFlat}"/>
+
+                <RadioButton Content="{materialDesign:PackIcon Size=30,
+                        Kind= FileExcel }"
+                        Click="ButtonReporting_Click" 
+                        Style="{StaticResource RoundBFlat}"/>
+
+                <RadioButton Content="{materialDesign:PackIcon Size=30,
+                        Kind= FileEye }"
+                        Click="ViewReport_Click" 
+                        Style="{StaticResource RoundBFlat}"/>
+
             </StackPanel>
-
-            <!-- Botones de navegación -->
-
-            <Button Content="Inicio" Tag="Inicio" Margin="10,5" Padding="10"
-                    Click="NavigationButton_Click" Style="{StaticResource RoundedButtonStyle}" Width="160" Height="35"/>
-            <Button Content="Usuarios" Tag="Usuarios" Margin="10,5" Padding="10"
-                    Click="NavigationButton_Click" Style="{StaticResource RoundedButtonStyle}" Width="160" Height="35"/>
-            <Button Content="Configuración" Tag="Configuracion" Margin="10,5" Padding="10"
-                    Click="NavigationButton_Click" Style="{StaticResource RoundedButtonStyle}" Width="160" Height="35"/>
-            <Button Content="ReportDesigner" Margin="10,5" Padding="10"
-                    Click="ButtonReporting_Click" Style="{StaticResource RoundedButtonStyle}" Width="160" Height="35"/>
-            <Button Content="Reportes" Margin="10,5" Padding="10"
-                    Click="ViewReport_Click" Style="{StaticResource RoundedButtonStyle}" Width="160" Height="35"/>
-        </StackPanel>
+        </materialDesign:ColorZone>
 
         <!-- Contenido Principal -->
-        <ContentControl x:Name="MainContent" Grid.Column="1" Background="White"/>
+            <ContentControl x:Name="MainContent" Grid.Column="1" Background="White"/>
+
     </Grid>
     
     

@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DevExpress.Drawing.Internal.Fonts;
+using Microsoft.EntityFrameworkCore;
 using SHEndevour.Utilities;
 using SHEndevour.Views;
 using System.Windows;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using Button = System.Windows.Controls.Button;
 using MessageBox = System.Windows.MessageBox;
 
@@ -17,17 +19,15 @@ namespace SHEndevour
         {
             InitializeComponent();
 
-            // Cargar los datos del usuario logueado
-            if (App.CurrentUser != null)
-            {
-                UsernameTextBlock.Text = $"Username: {App.CurrentUser.Username}";
-                RoleTextBlock.Text = $"Role: {App.CurrentUser.Role?.Name}";
-            }
-            else
-            {
-                UsernameTextBlock.Text = "No user logged in";
-                RoleTextBlock.Text = "No Role available";
-            }
+         // Cargar los datos del usuario logueado
+            //if (App.CurrentUser != null)
+            //{
+            //    UsernameTextBlock.Text = $"Username: {App.CurrentUser.Username}";
+            //}
+            //else
+            //{
+            //    UsernameTextBlock.Text = "No user logged in";
+            //}
 
         }
 
@@ -35,7 +35,7 @@ namespace SHEndevour
 
         private void NavigationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button button) // Verificación de que el sender es un Button
+            if (sender is System.Windows.Controls.RadioButton button) // Verificación de que el sender es un Button
             {
                 string tag = button.Tag?.ToString() ?? string.Empty; // Manejo de nulo con ?? y ?? operator
 
@@ -48,14 +48,17 @@ namespace SHEndevour
                         MainContent.Content = new UserView();
                         break;
                     case "Configuracion":
-                        MainContent.Content = new SettingView();
+                        SettingView settingWindow = new SettingView();
+                        settingWindow.Show();
                         break;
 
                     default:
                         // Manejar un valor de tag no esperado si es necesario
                         break;
                 }
+
             }
+
         }
 
         private void ButtonReporting_Click(object sender, RoutedEventArgs e)

@@ -22,6 +22,15 @@
     <Compile Update="Views\ReportViewerWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Settings\RoomSetting.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Rooms\ConfigurarHabitacion.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Rooms\ConfigurarTipoDeHabitacion.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\SettingView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +58,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ReportViewerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\RoomSetting.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Rooms\ConfigurarHabitacion.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Rooms\ConfigurarTipoDeHabitacion.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SettingView.xaml">

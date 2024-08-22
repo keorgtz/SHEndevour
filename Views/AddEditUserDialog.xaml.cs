@@ -78,6 +78,7 @@ namespace SHEndevour.Views
             FirstNameTextBox.Text = User.FirstName;
             LastNameTextBox.Text = User.LastName;
             EmailTextBox.Text = User.Email;
+            PhoneTextBox.Text = User.PhoneNumber;
             RoleComboBox.SelectedValue = User.RoleId; // Seleccionar el rol actual del usuario
         }
 
