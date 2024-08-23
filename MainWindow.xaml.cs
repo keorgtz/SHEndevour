@@ -18,8 +18,10 @@ namespace SHEndevour
         public MainWindow()
         {
             InitializeComponent();
+            //Iniciamos al App cargando el HomeView
+            MainContent.Content = new HomeView();
 
-         // Cargar los datos del usuario logueado
+            // Cargar los datos del usuario logueado
             //if (App.CurrentUser != null)
             //{
             //    UsernameTextBlock.Text = $"Username: {App.CurrentUser.Username}";
