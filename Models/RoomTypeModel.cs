@@ -48,5 +48,7 @@ namespace SHEndevour.Models
 
         public ICollection<RoomModel> Rooms { get; set; }
 
+        public bool IsSelected { get; set; }
+
     }
 }

@@ -10,16 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SHEndevour.Views.Settings;
+
 using RadioButton = System.Windows.Controls.RadioButton;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace SHEndevour.Views
 {
     /// <summary>
     /// Lógica de interacción para SettingView.xaml
     /// </summary>
-    public partial class SettingView : Window
+    public partial class SettingView : UserControl
     {
         public SettingView()
         {
@@ -48,7 +51,5 @@ namespace SHEndevour.Views
             }
 
         }
-
-
     }
 }

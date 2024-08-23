@@ -50,8 +50,7 @@ namespace SHEndevour
                         MainContent.Content = new UserView();
                         break;
                     case "Configuracion":
-                        SettingView settingWindow = new SettingView();
-                        settingWindow.Show();
+                        MainContent.Content = new SettingView();
                         break;
 
                     default:

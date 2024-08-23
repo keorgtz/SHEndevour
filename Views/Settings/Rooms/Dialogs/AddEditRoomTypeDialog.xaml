@@ -1,0 +1,256 @@
+﻿<Window x:Class="SHEndevour.Views.Settings.Rooms.Dialogs.AddEditRoomTypeDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SHEndevour.Views.Settings.Rooms.Dialogs"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Añadir Usuario" Height="450" Width="550"
+        WindowStartupLocation="CenterScreen"
+        Background="#2d2d2d" Foreground="White">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="20,10,20,10">
+
+            <TextBlock Text="ENDEVØUR" TextAlignment="Center"
+                   FontSize="35" Margin="0,10,0,5"
+                   materialDesign:ElevationAssist.Elevation="Dp4" 
+                   FontFamily="Berlin Sans FB"/>
+
+            <TextBlock x:Name="AddEditSubtitle" TextAlignment="Center"
+                   FontSize="15" Margin="0,0,0,20"
+                   materialDesign:ElevationAssist.Elevation="Dp4" 
+                   FontFamily="Vernada"/>
+
+            <StackPanel Orientation="Horizontal" Margin="5">
+
+                <TextBox x:Name="RoomTypeKeyTextBox" Padding="7" Margin="5"
+                     materialDesign:HintAssist.Hint="Clave de Tipo" 
+                     Style="{StaticResource MaterialDesignFilledTextBox}"
+                     VerticalAlignment="Top"
+                     TextChanged="OnTextChanged" Height="30" Width="100"/>
+
+                <TextBox x:Name="RoomTypeDescriptionBox" 
+                         Padding="7" Margin="5"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         materialDesign:HintAssist.Hint="Description"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         TextChanged="OnTextChanged" Height="60" MinWidth="300"/>
+
+            </StackPanel>
+
+            <Separator Margin="15,5,15,5"/>
+
+            <StackPanel Margin="5,10,5,5">
+
+                <materialDesign:ColorZone Mode="Custom"
+                                          CornerRadius="5"
+                                          HorizontalAlignment="Center"
+                                          materialDesign:ColorZoneAssist.Background="DarkSlateBlue"
+                                          materialDesign:ElevationAssist.Elevation="Dp4">
+
+                    <StackPanel Margin="15,0,15,0">
+
+                        <TextBlock Text="Tipos de Tarifas"
+                                   TextAlignment="Center"
+                                   Foreground="White"
+                                   FontFamily="Berlin Sans FB"
+                                   FontSize="20"/>
+
+                    </StackPanel>
+                    
+                </materialDesign:ColorZone>
+
+                <materialDesign:ColorZone CornerRadius="15"
+                                          Margin="0,10,0,0"
+                                          materialDesign:ElevationAssist.Elevation="Dp1">
+
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Grid.Column="0" Orientation="Vertical">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Sencilla"
+                                           Margin="10,0,10,0"
+                                           FontFamily="Verdana"/>
+
+                                <StackPanel Margin="5,0,5,0" Orientation="Horizontal" VerticalAlignment="Center">
+
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Dollar"/>
+
+                                    <TextBox x:Name="SingleTextBox" Padding="5" Margin="5"
+                                         materialDesign:HintAssist.Hint="Normal" 
+                                         Style="{StaticResource MaterialDesignTextBox}"
+                                         VerticalAlignment="Top"
+                                         TextChanged="OnTextChanged"/>
+
+                                </StackPanel>
+
+                                <StackPanel Margin="5,0,5,0" Orientation="Horizontal" VerticalAlignment="Center">
+
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Dollar"/>
+
+                                    <TextBox x:Name="SingleMinTextBox" Padding="5" Margin="5"
+                                         materialDesign:HintAssist.Hint="Minima" 
+                                         Style="{StaticResource MaterialDesignTextBox}"
+                                         VerticalAlignment="Top"
+                                         TextChanged="OnTextChanged"/>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Doble"
+                                           Margin="10,0,10,0"
+                                           FontFamily="Verdana"/>
+
+                                <StackPanel Margin="5,0,5,0" Orientation="Horizontal" VerticalAlignment="Center">
+
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Dollar"/>
+
+                                    <TextBox x:Name="DoubleTextBox" Padding="5" Margin="5"
+                                         materialDesign:HintAssist.Hint="Normal" 
+                                         Style="{StaticResource MaterialDesignTextBox}"
+                                         VerticalAlignment="Top"
+                                         TextChanged="OnTextChanged"/>
+
+                                </StackPanel>
+
+                                <StackPanel Margin="5,0,5,0" Orientation="Horizontal" VerticalAlignment="Center">
+
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Dollar"/>
+
+                                    <TextBox x:Name="DoubleMinTextBox" Padding="5" Margin="5"
+                                         materialDesign:HintAssist.Hint="Minima" 
+                                         Style="{StaticResource MaterialDesignTextBox}"
+                                         VerticalAlignment="Top"
+                                         TextChanged="OnTextChanged"/>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Triple"
+                                           Margin="10,0,10,0"
+                                           FontFamily="Verdana"/>
+
+                                <StackPanel Margin="5,0,5,0" Orientation="Horizontal" VerticalAlignment="Center">
+
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Dollar"/>
+
+                                    <TextBox x:Name="TripleTextBox" Padding="5" Margin="5"
+                                         materialDesign:HintAssist.Hint="Normal" 
+                                         Style="{StaticResource MaterialDesignTextBox}"
+                                         VerticalAlignment="Top"
+                                         TextChanged="OnTextChanged"/>
+
+                                </StackPanel>
+
+                                <StackPanel Margin="5,0,5,0" Orientation="Horizontal" VerticalAlignment="Center">
+
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Dollar"/>
+
+                                    <TextBox x:Name="TripleMinTextBox" Padding="5" Margin="5"
+                                         materialDesign:HintAssist.Hint="Minima" 
+                                         Style="{StaticResource MaterialDesignTextBox}"
+                                         VerticalAlignment="Top"
+                                         TextChanged="OnTextChanged"/>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    <StackPanel Grid.Column="3">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Cuadruple"
+                                           Margin="10,0,10,0"
+                                           FontFamily="Verdana"/>
+
+                                <StackPanel Margin="5,0,5,0" Orientation="Horizontal" VerticalAlignment="Center">
+
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Dollar"/>
+
+                                    <TextBox x:Name="QuadrupleTextBox" Padding="5" Margin="5"
+                                         materialDesign:HintAssist.Hint="Normal" 
+                                         Style="{StaticResource MaterialDesignTextBox}"
+                                         VerticalAlignment="Top"
+                                         TextChanged="OnTextChanged"/>
+
+                                </StackPanel>
+
+                                <StackPanel Margin="5,0,5,0" Orientation="Horizontal" VerticalAlignment="Center">
+
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Dollar"/>
+
+                                    <TextBox x:Name="QuadrupleMinTextBox" Padding="5" Margin="5"
+                                         materialDesign:HintAssist.Hint="Minima" 
+                                         Style="{StaticResource MaterialDesignTextBox}"
+                                         VerticalAlignment="Top"
+                                         TextChanged="OnTextChanged"/>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+
+                </Grid>
+
+                </materialDesign:ColorZone>
+
+            </StackPanel>
+
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" 
+                Margin="10"
+                HorizontalAlignment="Right">
+
+            <Button Content="Cancelar"
+                Foreground="Red"
+                IsCancel="True" 
+                Style="{StaticResource MaterialDesignFlatButton}" />
+
+            <Button x:Name="AddButton" Content="Agregar" Click="OnAcceptClick" 
+                Style="{StaticResource MaterialDesignFlatButton}"
+                IsEnabled="False" />
+
+        </StackPanel>
+
+    </Grid>
+</Window>

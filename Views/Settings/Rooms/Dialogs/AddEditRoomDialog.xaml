@@ -1,0 +1,16 @@
+﻿<Window x:Class="SHEndevour.Views.Settings.Rooms.Dialogs.AddEditRoomDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SHEndevour.Views.Settings.Rooms.Dialogs"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Añadir Usuario" Height="370" Width="500"
+        WindowStartupLocation="CenterScreen"
+        Background="#2d2d2d" Foreground="White">
+    
+    <Grid>
+        
+    </Grid>
+</Window>

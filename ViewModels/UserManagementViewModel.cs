@@ -65,7 +65,7 @@ namespace SHEndevour.ViewModels
 
                 foreach (var user in usersFromDb)
                 {
-                    Users.Add(user);
+                    Users.Add(user);    
                 }
             }
         }
@@ -118,6 +118,9 @@ namespace SHEndevour.ViewModels
                         dbContext.Users.Update(updatedUser);
                         dbContext.SaveChanges();
                     }
+
+                    selectedUser.IsSelected = false;
+                    selectedUser = null;
 
                     LoadUsers();
                     MessageBox.Show("Usuario actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -211,13 +214,17 @@ namespace SHEndevour.ViewModels
                     using (var dbContext = new AppDbContext())
                     {
                         dbContext.Users.Update(user);
+                        SelectedUser.IsSelected = false;
                         dbContext.SaveChanges();
                     }
 
+                    SelectedUser.IsSelected = false;
+
                     LoadUsers();
                     MessageBox.Show("Usuario actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    
                 }
-
+                SelectedUser.IsSelected = false;
                 SelectedUser = null;
                 IsPopupOpen = false;
             }

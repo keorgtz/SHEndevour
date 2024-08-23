@@ -5,8 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SHEndevour.Views.Settings.Rooms"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:SHEndevour.ViewModels.Settings.Rooms"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800" Background="#2d2d2d">
+             d:DataContext="{d:DesignInstance Type=vm:RoomManagementViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="450" d:DesignWidth="600" Background="#2d2d2d">
+
+    <UserControl.DataContext>
+        <vm:RoomManagementViewModel />
+    </UserControl.DataContext>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -15,53 +22,86 @@
         </Grid.RowDefinitions>
 
 
-        <materialDesign:ColorZone Margin="10"
-                                  materialDesign:ElevationAssist.Elevation="Dp3"
-                                  ClipToBounds="False"
-                                  CornerRadius="5"
-                                  Foreground="White">
+        <Grid Grid.Row="0">
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                <Button Padding="7" Margin="0,0,5,0" Foreground="RoyalBlue"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Margin="0,2,5,0" Kind="AccountPlus" />
-                        <TextBlock Text="Crear Habitacion"/>
-                    </StackPanel>
-                </Button>
 
-                <Button Padding="7" Margin="0,0,5,0" Foreground="Teal"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Margin="0,2,5,0" Kind="AccountPlus" />
-                        <TextBlock Text="Examinar Habitacion"/>
-                    </StackPanel>
-                </Button>
 
-                <Button Padding="7" Margin="0,0,5,0" Foreground="Red"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Margin="0,2,5,0" Kind="AccountPlus" />
-                        <TextBlock Text="Eliminar Habitacion"/>
-                    </StackPanel>
-                </Button>
+            <materialDesign:ColorZone Margin="10"
+              materialDesign:ElevationAssist.Elevation="Dp4"
+              ClipToBounds="False"
+              CornerRadius="5"
+              Foreground="White"
+              Mode="Custom"
+              HorizontalAlignment="Left"
+              materialDesign:ColorZoneAssist.Background="#022534">
 
-            </StackPanel>
-        </materialDesign:ColorZone>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+
+                    <Button Padding="7" Margin="0,0,5,0" Foreground="RoyalBlue"
+    Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="2" Kind="Plus"/>
+                            <TextBlock Text="Agregar"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Padding="7" Margin="0,0,5,0" Foreground="Teal"
+    Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="2" Kind="Edit" />
+                            <TextBlock Text="Ver Datos"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Padding="7" Margin="0,0,5,0" Foreground="Red"
+    Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="2" Kind="Delete" />
+                            <TextBlock Text="Eliminar"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </materialDesign:ColorZone>
+
+
+            <materialDesign:Card Grid.Column="1" Margin="10"
+                         UniformCornerRadius="5"
+                         Background="#13161B"
+                         HorizontalAlignment="Center"
+                         Padding="10,0,10,0"
+              materialDesign:ElevationAssist.Elevation="Dp4">
+
+                <TextBlock FontFamily="Berlin Sans FB" FontSize="20" 
+                   Foreground="#55B9CB"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center">
+                Lista de Habitaciones
+                </TextBlock>
+
+            </materialDesign:Card>
+
+
+        </Grid>
 
 
 
         <DataGrid Grid.Row="1"
                   ItemsSource="{Binding Room}"
+                  SelectedItem="{Binding SelectedRoom}"
                   AutoGenerateColumns="False"
                   x:Name="UserDataGrid"
                   SelectionMode="Single"
                   CanUserAddRows="False"
                   SelectionUnit="FullRow"
-                  Margin="5"
+                  Margin="10"
                   materialDesign:ThemeAssist.Theme="Dark"
-                  materialDesign:ElevationAssist.Elevation="Dp4"
+                  materialDesign:ElevationAssist.Elevation="Dp8"
                   Style="{StaticResource MaterialDesignDataGrid}">
 
             <DataGrid.Columns>
@@ -80,6 +120,7 @@
 
                 <DataGridTextColumn Header="ID" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Clave de Habitacion" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tipo de Habitacion" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

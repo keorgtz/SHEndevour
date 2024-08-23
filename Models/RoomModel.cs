@@ -28,6 +28,7 @@ namespace SHEndevour.Models
         [ForeignKey("RoomTypeModel")]
         public int RoomTypeId { get; set; }
         public RoomTypeModel RoomType { get; set; }
+        public bool IsSelected { get; set; }
     }
 
     // Enum for Room Status

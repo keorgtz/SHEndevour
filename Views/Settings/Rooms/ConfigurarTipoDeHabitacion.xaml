@@ -5,11 +5,178 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SHEndevour.Views.Settings.Rooms"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:SHEndevour.ViewModels.Settings.Rooms"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="#2d2d2d">
+             d:DataContext="{d:DesignInstance Type=vm:RoomTypeManagementViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="450" d:DesignWidth="600" Background="#2d2d2d">
+
+    <UserControl.DataContext>
+        <vm:RoomTypeManagementViewModel />
+    </UserControl.DataContext>
+
     <Grid>
-        <TextBlock>
-            TIPO HABITACION
-        </TextBlock>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+
+            <materialDesign:ColorZone Margin="10"
+                      materialDesign:ElevationAssist.Elevation="Dp4"
+                      ClipToBounds="False"
+                      CornerRadius="5"
+                      Foreground="White"
+                      Mode="Custom"
+                      HorizontalAlignment="Left"
+                      materialDesign:ColorZoneAssist.Background="#022534">
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+
+                    <Button Command="{Binding AddRoomTypeCommand}"
+                            Padding="7" Margin="0,0,5,0" Foreground="RoyalBlue"
+            Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="2" Kind="Add" />
+                            <TextBlock Text="Crear Tipo"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Command="{Binding ViewRoomTypeCommand}"
+                            Padding="7" Margin="0,0,5,0" Foreground="Teal"
+            Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="2" Kind="Edit" />
+                            <TextBlock Text="Examinar Tipo"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Command="{Binding DeleteRoomTypeCommand}"
+                            Padding="7" Margin="0,0,5,0" Foreground="Red"
+            Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="2" Kind="Remove" />
+                            <TextBlock Text="Eliminar Tipo"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </materialDesign:ColorZone>
+
+
+            <materialDesign:Card Grid.Column="1" Margin="10"
+                                 UniformCornerRadius="5"
+                                 Background="#094f6e"
+                                 Foreground="White"
+                                 HorizontalAlignment="Center"
+                                 Padding="10,0,10,0"
+                      materialDesign:ElevationAssist.Elevation="Dp4">
+
+                <StackPanel Orientation="Horizontal" Margin="5,0,5,0" 
+                            Width="200">
+
+                    <TextBox x:Name="SearchBox" Width="120" Height="25"
+                             Padding="5" Margin="2"
+                             materialDesign:HintAssist.IsFloating="False"
+                             Background="#084f6e" BorderThickness="0" Opacity="0.5"
+                             BorderBrush="Teal"
+                             materialDesign:HintAssist.Hint="Buscar Usuario"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <!-- Popup para mostrar los resultados filtrados -->
+                    <Popup IsOpen="{Binding IsPopupOpen}"
+                           Placement="Bottom"
+                           StaysOpen="False"
+                           PlacementTarget="{Binding ElementName=SearchBox}">
+
+                        <Border Background="White" CornerRadius="5" BorderBrush="Gray" BorderThickness="1">
+                            <ListBox ItemsSource="{Binding FilteredRoomTypes}"
+                                     SelectedItem="{Binding SelectedRoomType}"
+                                     Width="120"
+                                     MaxHeight="200"
+                                     Background="#2d2d2d"
+                     
+                                     Style="{StaticResource MaterialDesignListBox}">
+
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding RoomTypeKey}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+                    </Popup>
+
+                    <Button Content="{materialDesign:PackIcon Kind= Magnify }"
+                            Command="{Binding SearchCommand}"
+                            Width="25" Height="25"
+                            CommandParameter="{Binding Text, ElementName=SearchBox}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Padding="5"
+                            Margin="5,0,0,0" />
+                </StackPanel>
+                
+            </materialDesign:Card>
+
+
+        </Grid>
+        
+
+        
+
+
+
+
+
+            <DataGrid Grid.Row="1"
+              ItemsSource="{Binding RoomTypes}"
+              AutoGenerateColumns="False"
+              x:Name="RoomTypeDataGrid"
+              SelectionMode="Single"
+              CanUserAddRows="False"
+              SelectionUnit="FullRow"
+              Margin="10"
+              materialDesign:ThemeAssist.Theme="Dark"
+              materialDesign:ElevationAssist.Elevation="Dp8"
+              Style="{StaticResource MaterialDesignDataGrid}">
+
+            <DataGrid.Columns>
+
+                <!-- Columna con CheckBox -->
+                <DataGridTemplateColumn Width="75">
+                    <DataGridTemplateColumn.Header>
+                        <CheckBox Foreground="White" Content="{materialDesign:PackIcon Kind=AccountCheck }"
+                                  Checked="RoomTypeGridCheck_Checked"
+                                  Unchecked="RoomTypeGridCheck_Unchecked"/>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" /> 
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Binding="{Binding Id}" Header="ID" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding RoomTypeKey}"  Header="Tipo" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding SingleRate, StringFormat=N2}" Header="Sencilla" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding MinSingleRate, StringFormat=N2}" Header="SencillaMin" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding DoubleRate, StringFormat=N2}" Header="Doble" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding MinDoubleRate, StringFormat=N2}" Header="DobleMin" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TripleRate, StringFormat=N2}" Header="Triple" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding MinTripleRate, StringFormat=N2}" Header="TripleMin" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding QuadrupleRate, StringFormat=N2}" Header="Quadruple" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding MinQuadrupleRate, StringFormat=N2}" Header="QuadrupleMin" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </UserControl>

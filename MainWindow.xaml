@@ -103,7 +103,8 @@
                         Style="{StaticResource RoundBFlat}"/>
 
                 <RadioButton Content="{materialDesign:PackIcon Size=30,
-                        Kind= CogOutline }" Tag="Configuracion"  
+                        Kind= CogOutline }" Tag="Configuracion"
+                        IsChecked="{x:Null}"
                         Click="NavigationButton_Click"
                         Style="{StaticResource RoundBFlat}"/>
 

@@ -124,6 +124,7 @@
                         <CheckBox Foreground="White" Content="{materialDesign:PackIcon Kind=AccountCheck }" 
                           Checked="HeaderCheckBox_Checked"
                           Unchecked="HeaderCheckBox_Unchecked"/>
+                          
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

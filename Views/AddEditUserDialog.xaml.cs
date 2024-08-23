@@ -18,6 +18,7 @@ using MaterialDesignThemes.Wpf;
 using MaterialDesignExtensions.Controls;
 using System.Text.RegularExpressions;
 using MessageBox = System.Windows.MessageBox;
+using DevExpress.XtraRichEdit.Import.Doc;
 
 
 namespace SHEndevour.Views
@@ -37,6 +38,7 @@ namespace SHEndevour.Views
                 PopulateFields(); // Poblar los campos si se está editando un usuario
                 Title = "Editar Usuario";
                 AddEditSubtitle.Text = "Edicion de Usuario";
+                user.IsSelected = false;
             }
             else
             {
@@ -162,6 +164,7 @@ namespace SHEndevour.Views
             }
 
             AddButton.IsEnabled = isFormValid;
+            User.IsSelected = false;
         }
 
         private void OnTextChanged(object sender, RoutedEventArgs e)

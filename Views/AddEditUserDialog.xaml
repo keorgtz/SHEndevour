@@ -5,6 +5,7 @@
         Title="Añadir Usuario" Height="370" Width="500"
         WindowStartupLocation="CenterScreen"
         Background="#2d2d2d" Foreground="White">
+    
     <Grid>
 
         <Grid.RowDefinitions>
