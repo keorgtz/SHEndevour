@@ -57,7 +57,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         {
             using (var dbContext = new AppDbContext())
             {
-                var roomTypesFromDb = dbContext.RoomType
+                var roomTypesFromDb = dbContext.RoomTypeTable
                                                .Include(rt => rt.Rooms) // Incluir las habitaciones asociadas si es necesario
                                                .ToList();
 
@@ -83,7 +83,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
 
                 using (var dbContext = new AppDbContext())
                 {
-                    dbContext.RoomType.Add(newRoomType);
+                    dbContext.RoomTypeTable.Add(newRoomType);
                     dbContext.SaveChanges();
                 }
 
@@ -108,7 +108,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
 
                     using (var dbContext = new AppDbContext())
                     {
-                        dbContext.RoomType.Update(updateRoomT);
+                        dbContext.RoomTypeTable.Update(updateRoomT);
                         dbContext.SaveChanges();
                     }
 
@@ -145,7 +145,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                     {
                         foreach (var roomType in selectedRoomTypes)
                         {
-                            dbContext.RoomType.Remove(roomType);
+                            dbContext.RoomTypeTable.Remove(roomType);
                         }
                         dbContext.SaveChanges();
                     }
@@ -181,12 +181,14 @@ namespace SHEndevour.ViewModels.Settings.Rooms
 
             // Asegurarse de que no haya un tipo de habitación seleccionado accidentalmente al escribir
             SelectedRoomType = null;
+            //SelectedRoomType.IsSelected = false;
         }
 
         partial void OnSearchTextChanged(string value)
         {
             SelectedRoomType = null;
             SearchRoomType();
+            SelectedRoomType = null;
         }
 
         partial void OnSelectedRoomTypeChanged(RoomTypeModel roomType)
@@ -199,7 +201,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                 {
                     using (var dbContext = new AppDbContext())
                     {
-                        dbContext.RoomType.Update(roomType);
+                        dbContext.RoomTypeTable.Update(roomType);
                         SelectedRoomType.IsSelected = false;
                         dbContext.SaveChanges();
                     }

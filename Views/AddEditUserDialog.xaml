@@ -93,7 +93,7 @@
 
             <Button Content="Cancelar"
                     Foreground="Red"
-                    IsCancel="True" 
+                    IsCancel="True" Click="CancelButton_Click"
                     Style="{StaticResource MaterialDesignFlatButton}" />
 
             <Button x:Name="AddButton" Content="Agregar" Click="OnAcceptClick" 

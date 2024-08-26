@@ -18,7 +18,6 @@ using MaterialDesignThemes.Wpf;
 using MaterialDesignExtensions.Controls;
 using System.Text.RegularExpressions;
 using MessageBox = System.Windows.MessageBox;
-using DevExpress.XtraRichEdit.Import.Doc;
 
 
 namespace SHEndevour.Views
@@ -49,7 +48,10 @@ namespace SHEndevour.Views
 
             DataContext = User;
             ValidateFields(); // Inicializar la validación de campos
+
         }
+
+        
 
         private void PhoneTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -141,8 +143,11 @@ namespace SHEndevour.Views
                 User.RoleId = (int)RoleComboBox.SelectedValue; // Guarda el Id del rol seleccionado
             }
 
+            
             DialogResult = true;
+            User.IsSelected = false;
             Close();
+            User.IsSelected = false;
         }
 
 
@@ -165,6 +170,7 @@ namespace SHEndevour.Views
 
             AddButton.IsEnabled = isFormValid;
             User.IsSelected = false;
+            
         }
 
         private void OnTextChanged(object sender, RoutedEventArgs e)
@@ -190,6 +196,11 @@ namespace SHEndevour.Views
             // Expresión regular para validar correos electrónicos
             string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, emailPattern);
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

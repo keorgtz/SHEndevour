@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +6,6 @@ namespace SHEndevour.Models
 {
     public class RoomTypeModel : AuditableEntity
     {
-
         [Key]
         public int Id { get; set; }
 
@@ -46,9 +41,9 @@ namespace SHEndevour.Models
         [Column(TypeName = "money")]
         public decimal MinQuadrupleRate { get; set; }
 
+        // Navigation property for Rooms
         public ICollection<RoomModel> Rooms { get; set; }
 
         public bool IsSelected { get; set; }
-
     }
 }

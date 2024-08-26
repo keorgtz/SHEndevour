@@ -42,24 +42,27 @@
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
 
-                    <Button Padding="7" Margin="0,0,5,0" Foreground="RoyalBlue"
-    Style="{StaticResource MaterialDesignFlatButton}">
+                    <Button Command="{Binding AddRoomCommand}" 
+                            Padding="7" Margin="0,0,5,0" Foreground="RoyalBlue"
+                            Style="{StaticResource MaterialDesignFlatButton}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Margin="2" Kind="Plus"/>
                             <TextBlock Text="Agregar"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Padding="7" Margin="0,0,5,0" Foreground="Teal"
-    Style="{StaticResource MaterialDesignFlatButton}">
+                    <Button Command="{Binding ViewRoomCommand}" 
+                            Padding="7" Margin="0,0,5,0" Foreground="Teal"
+                            Style="{StaticResource MaterialDesignFlatButton}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Margin="2" Kind="Edit" />
                             <TextBlock Text="Ver Datos"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Padding="7" Margin="0,0,5,0" Foreground="Red"
-    Style="{StaticResource MaterialDesignFlatButton}">
+                    <Button Command="{Binding DeleteRoomCommand}" 
+                            Padding="7" Margin="0,0,5,0" Foreground="Red"
+                            Style="{StaticResource MaterialDesignFlatButton}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Margin="2" Kind="Delete" />
                             <TextBlock Text="Eliminar"/>
@@ -71,18 +74,57 @@
 
 
             <materialDesign:Card Grid.Column="1" Margin="10"
-                         UniformCornerRadius="5"
-                         Background="#13161B"
-                         HorizontalAlignment="Center"
-                         Padding="10,0,10,0"
-              materialDesign:ElevationAssist.Elevation="Dp4">
+                                 UniformCornerRadius="5"
+                                 Background="#094f6e"
+                                 Foreground="White"
+                                 HorizontalAlignment="Center"
+                                 Padding="10,0,10,0"
+                      materialDesign:ElevationAssist.Elevation="Dp4">
 
-                <TextBlock FontFamily="Berlin Sans FB" FontSize="20" 
-                   Foreground="#55B9CB"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center">
-                Lista de Habitaciones
-                </TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="5,0,5,0" 
+                            Width="200">
+
+                    <TextBox x:Name="SearchBox" Width="120" Height="25"
+                             Padding="5" Margin="2"
+                             materialDesign:HintAssist.IsFloating="False"
+                             Background="#084f6e" BorderThickness="0" Opacity="0.5"
+                             BorderBrush="Teal"
+                             materialDesign:HintAssist.Hint="Buscar Habitacion"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <!-- Popup para mostrar los resultados filtrados -->
+                    <Popup IsOpen="{Binding IsPopupOpen}"
+                           Placement="Bottom"
+                           StaysOpen="False"
+                           PlacementTarget="{Binding ElementName=SearchBox}">
+
+                        <Border Background="White" CornerRadius="5" BorderBrush="Gray" BorderThickness="1">
+                            <ListBox ItemsSource="{Binding FilteredRooms}"
+                                     SelectedItem="{Binding SelectedRoom}"
+                                     Width="120"
+                                     MaxHeight="200"
+                                     Background="#2d2d2d"
+                     
+                                     Style="{StaticResource MaterialDesignListBox}">
+
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding RoomKey}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+                    </Popup>
+
+                    <Button Content="{materialDesign:PackIcon Kind= Magnify }"
+                            Command="{Binding SearchCommand}"
+                            Width="25" Height="25"
+                            CommandParameter="{Binding Text, ElementName=SearchBox}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Padding="5"
+                            Margin="5,0,0,0" />
+                </StackPanel>
 
             </materialDesign:Card>
 
@@ -92,10 +134,9 @@
 
 
         <DataGrid Grid.Row="1"
-                  ItemsSource="{Binding Room}"
-                  SelectedItem="{Binding SelectedRoom}"
+                  ItemsSource="{Binding Rooms}"
                   AutoGenerateColumns="False"
-                  x:Name="UserDataGrid"
+                  x:Name="RoomDataGrid"
                   SelectionMode="Single"
                   CanUserAddRows="False"
                   SelectionUnit="FullRow"
@@ -109,18 +150,20 @@
                 <!-- Columna con CheckBox -->
                 <DataGridTemplateColumn Width="75">
                     <DataGridTemplateColumn.Header>
-                        <CheckBox Foreground="White" Content="{materialDesign:PackIcon Kind=AccountCheck }"/>
+                        <CheckBox Foreground="White" Content="{materialDesign:PackIcon Kind=AccountCheck }"
+                                  Checked="RoomGridCheck_Checked"
+                                  Unchecked="RoomGridCheck_Unchecked"/>
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <!-- <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" /> -->
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="ID" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Clave de Habitacion" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Tipo de Habitacion" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Clave de Habitacion" Binding="{Binding RoomKey}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tipo de Habitacion" Binding="{Binding RoomType.RoomTypeKey}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

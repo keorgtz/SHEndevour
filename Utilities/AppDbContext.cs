@@ -10,8 +10,8 @@ namespace SHEndevour.Utilities
         // Agregamos los Modelos para que se Generen las Tablas
         public DbSet<UserModel> Users { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
-        public DbSet<RoomModel> Room { get; set; }
-        public DbSet<RoomTypeModel> RoomType { get; set; }
+        public DbSet<RoomModel> RoomTable { get; set; }
+        public DbSet<RoomTypeModel> RoomTypeTable { get; set; }
 
         //public DbSet<ProductModel> Products { get; set; }  ---------  // Si tienes más modelos, añádelos aquí
 

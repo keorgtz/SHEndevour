@@ -10,6 +10,7 @@ using SHEndevour.Views;
 using Microsoft.EntityFrameworkCore;
 using SHEndevour.Utilities;
 using MessageBox = System.Windows.MessageBox;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace SHEndevour.ViewModels
 {
@@ -61,7 +62,7 @@ namespace SHEndevour.ViewModels
                                            .Include(u => u.Role) // Incluir el rol asociado
                                            .ToList();
 
-                Users.Clear(); // Limpiar la colección actual
+                Users.Clear(); // Limpiar la colección actual\
 
                 foreach (var user in usersFromDb)
                 {
@@ -175,6 +176,7 @@ namespace SHEndevour.ViewModels
                 FilteredUsers.Clear();
                 IsPopupOpen = false;
                 return;
+                
             }
 
             var filteredUsersList = Users
@@ -228,7 +230,10 @@ namespace SHEndevour.ViewModels
                 SelectedUser = null;
                 IsPopupOpen = false;
             }
+
         }
         #endregion
+
+        
     }
 }

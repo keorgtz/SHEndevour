@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using DevExpress.XtraRichEdit.Import.Doc;
 
 namespace SHEndevour.Models
 {
-    public class RoomModel: AuditableEntity
+    public class RoomModel : AuditableEntity
     {
         [Key]
         public int Id { get; set; }
@@ -25,9 +19,13 @@ namespace SHEndevour.Models
         public HousekeeperStatus HousekeeperStatus { get; set; }
 
         // Foreign key to RoomType
-        [ForeignKey("RoomTypeModel")]
+        [Required]
+        [ForeignKey("RoomType")]
         public int RoomTypeId { get; set; }
+
+        // Navigation property for RoomType
         public RoomTypeModel RoomType { get; set; }
+
         public bool IsSelected { get; set; }
     }
 
