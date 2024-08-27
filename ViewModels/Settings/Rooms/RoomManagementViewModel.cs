@@ -113,6 +113,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                         dbContext.SaveChanges();
                     }
 
+                    
                     LoadRooms();
                     MessageBox.Show("Habitación actualizada con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }

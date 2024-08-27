@@ -10,6 +10,8 @@
         WindowStartupLocation="CenterScreen"
         Background="#2d2d2d" Foreground="White">
 
+    
+
     <Grid>
         <StackPanel>
             <StackPanel>
@@ -32,7 +34,10 @@
                          VerticalAlignment="Top"
                          TextChanged="OnTextChanged" Height="30" Width="80"/>
 
-                    <ComboBox x:Name="RoomTypeComboBox" 
+                    <ComboBox x:Name="RoomTypComboBox" ItemsSource="{Binding RoomTypes}"
+                              DisplayMemberPath="RoomTypeKey"
+                              SelectedValuePath="Id"
+                              SelectedValue="{Binding RoomTypeId, Mode=TwoWay}" 
                           Padding="5" Margin="5,5,5,5" Width="130"
                           materialDesign:HintAssist.Hint="Tipo de Habitación"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}"

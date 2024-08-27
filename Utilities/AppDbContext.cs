@@ -34,6 +34,8 @@ namespace SHEndevour.Utilities
                 new RoleModel { Id = 5, Name = "User", Level = 5 }
             );
 
+            modelBuilder.Entity<RoomModel>().HasOne(r => r.RoomType).WithMany(rt => rt.Rooms).HasForeignKey(r => r.RoomTypeId).OnDelete(DeleteBehavior.Cascade);
+
 
         }
 

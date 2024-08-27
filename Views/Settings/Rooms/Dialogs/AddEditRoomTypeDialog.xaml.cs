@@ -66,7 +66,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                 return;
             }
 
-            RoomTypeD.IsSelected = false;
+            //RoomTypeD.IsSelected = false;
 
             // Actualizar solo los valores que han sido modificados
             RoomTypeD.RoomTypeKey = RoomTypeKeyTextBox.Text;
@@ -98,7 +98,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                                decimal.TryParse(QuadrupleMinTextBox.Text, out _);
 
             AddButton.IsEnabled = isFormValid;
-            RoomTypeD.IsSelected = false;
+            //RoomTypeD.IsSelected = false;
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)

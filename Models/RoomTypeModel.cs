@@ -11,11 +11,11 @@ namespace SHEndevour.Models
 
         [Required]
         [StringLength(10)]
-        public string RoomTypeKey { get; set; }
+        public string? RoomTypeKey { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Column(TypeName = "money")]
         public decimal SingleRate { get; set; }
@@ -42,7 +42,7 @@ namespace SHEndevour.Models
         public decimal MinQuadrupleRate { get; set; }
 
         // Navigation property for Rooms
-        public ICollection<RoomModel> Rooms { get; set; }
+        public ICollection<RoomModel>? Rooms { get; set; }
 
         public bool IsSelected { get; set; }
     }

@@ -6,6 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using MessageBox = System.Windows.MessageBox;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using ComboBox = System.Windows.Controls.ComboBox;
 
 namespace SHEndevour.Views.Settings.Rooms.Dialogs
 {
@@ -13,7 +16,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
     {
         public RoomModel Room { get; private set; }
 
-        public AddEditRoomDialog(RoomModel room = null)
+        public AddEditRoomDialog(RoomModel? room = null)
         {
             InitializeComponent();
             LoadRoomTypes();
@@ -26,7 +29,8 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                 PopulateFields();
                 Title = "Editar Habitación";
                 AddEditSubtitle.Text = "Edición de Habitación";
-                room.IsSelected = false;
+                Debug.WriteLine($"RoomTypeId antes de actualizar: {Room.RoomTypeId}");
+                //room.IsSelected = false;
             }
             else
             {
@@ -35,7 +39,10 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                 AddEditSubtitle.Text = "Agregar una Nueva Habitación";
             }
 
+            
+
             DataContext = Room;
+            Room.IsSelected = false;
             ValidateFields();
         }
 
@@ -44,12 +51,14 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
             using (var context = new AppDbContext())
             {
                 var roomTypes = context.RoomTypeTable.ToList();
-                RoomTypeComboBox.ItemsSource = roomTypes;
-                RoomTypeComboBox.DisplayMemberPath = "Description";
-                RoomTypeComboBox.SelectedValuePath = "Id";
+                RoomTypComboBox.ItemsSource = roomTypes;
+                RoomTypComboBox.DisplayMemberPath = "RoomTypeKey";
+                RoomTypComboBox.SelectedValuePath = "Id";
+                
             }
         }
 
+       
         private void LoadRoomStatuses()
         {
             RoomStatusComboBox.ItemsSource = Enum.GetValues(typeof(RoomStatus)).Cast<RoomStatus>();
@@ -63,7 +72,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
         private void PopulateFields()
         {
             RoomKeyTextBox.Text = Room.RoomKey;
-            RoomTypeComboBox.SelectedValue = Room.RoomTypeId;
+            RoomTypComboBox.SelectedValue = Room.RoomTypeId;
             RoomStatusComboBox.SelectedItem = Room.RoomStatus;
             HouseKeeperComboBox.SelectedItem = Room.HousekeeperStatus;
         }
@@ -76,7 +85,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                 return;
             }
 
-            if (RoomTypeComboBox.SelectedValue == null)
+            if (RoomTypComboBox.SelectedValue == null)
             {
                 MessageBox.Show("Debe seleccionar un tipo de habitación.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -88,27 +97,54 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                 return;
             }
 
+            Debug.WriteLine($"RoomTypeId antes de actualizar: {Room.RoomTypeId}");
+
+
             // Actualizar los valores del modelo
             Room.RoomKey = RoomKeyTextBox.Text;
-            Room.RoomTypeId = (int)RoomTypeComboBox.SelectedValue;
+            RoomTypComboBox.GetBindingExpression(ComboBox.SelectedValueProperty)?.UpdateSource();
+            Room.RoomTypeId = (int?)RoomTypComboBox.SelectedValue ?? 0; // Asegúrate de que RoomTypeId esté asignado correctamente
             Room.RoomStatus = (RoomStatus)RoomStatusComboBox.SelectedItem;
             Room.HousekeeperStatus = (HousekeeperStatus)HouseKeeperComboBox.SelectedItem;
 
+            Debug.WriteLine($"RoomTypeId Antes de guardar: {Room.RoomTypeId}");
+
+            // Guardar los cambios en la base de datos
+            using (var context = new AppDbContext())
+            {
+                if (Room.Id == 0) // Si es un nuevo registro
+                {
+                    context.RoomTable.Add(Room);
+                }
+                else // Si es una actualización de un registro existente
+                {
+                    context.RoomTable.Update(Room);
+                }
+
+                context.SaveChanges(); // Guardar los cambios en la base de datos
+            }
+
+            Debug.WriteLine($"RoomTypeId Despues de guardar: {Room.RoomTypeId}");
+
             DialogResult = true;
-            Room.IsSelected = false;
             Close();
         }
+
+
+
+
+
 
         private void ValidateFields()
         {
             bool isFormValid = !string.IsNullOrWhiteSpace(RoomKeyTextBox.Text) &&
-                               RoomTypeComboBox.SelectedValue != null &&
+                               RoomTypComboBox.SelectedValue != null &&
                                RoomStatusComboBox.SelectedItem != null &&
                                HouseKeeperComboBox.SelectedItem != null &&
                                RoomKeyTextBox.Text.Length <= 10;
 
             AddButton.IsEnabled = isFormValid;
-            Room.IsSelected = false;
+            
         }
 
         private void OnTextChanged(object sender, RoutedEventArgs e)
@@ -119,6 +155,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
         private void OnSelectionChanged(object sender, RoutedEventArgs e)
         {
             ValidateFields();
+            //ReloadRoomTypes();
         }
 
         private bool IsRoomKeyDuplicate(string roomKey)

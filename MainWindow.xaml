@@ -121,6 +121,12 @@
             </StackPanel>
         </materialDesign:ColorZone>
 
+        <Button Grid.Column="0" Content="{materialDesign:PackIcon Size=20,
+                        Kind= Logout}" Foreground="Red"
+                Margin="5"
+                Style="{StaticResource  MaterialDesignFlatButton}"
+                VerticalAlignment="Bottom" Click="LogoutButton_Click"/>
+
         <!-- Contenido Principal -->
             <ContentControl x:Name="MainContent" Grid.Column="1" Background="White"/>
 

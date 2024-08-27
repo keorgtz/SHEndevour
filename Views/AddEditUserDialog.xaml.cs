@@ -1,5 +1,4 @@
-﻿using DevExpress.XtraRichEdit.Layout;
-using SHEndevour.Models;
+﻿using SHEndevour.Models;
 using SHEndevour.Utilities;
 using System;
 using System.Collections.Generic;
@@ -145,9 +144,7 @@ namespace SHEndevour.Views
 
             
             DialogResult = true;
-            User.IsSelected = false;
             Close();
-            User.IsSelected = false;
         }
 
 

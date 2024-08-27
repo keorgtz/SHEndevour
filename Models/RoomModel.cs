@@ -10,7 +10,7 @@ namespace SHEndevour.Models
 
         [Required]
         [StringLength(10)]
-        public string RoomKey { get; set; }
+        public string? RoomKey { get; set; }
 
         [Required]
         public RoomStatus RoomStatus { get; set; }
@@ -19,12 +19,11 @@ namespace SHEndevour.Models
         public HousekeeperStatus HousekeeperStatus { get; set; }
 
         // Foreign key to RoomType
-        [Required]
         [ForeignKey("RoomType")]
         public int RoomTypeId { get; set; }
 
         // Navigation property for RoomType
-        public RoomTypeModel RoomType { get; set; }
+        public RoomTypeModel? RoomType { get; set; }
 
         public bool IsSelected { get; set; }
     }

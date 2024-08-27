@@ -82,5 +82,18 @@ namespace SHEndevour
             this.Close();
         }
 
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Limpia la información del usuario autenticado
+            App.CurrentUser = null;
+
+            // Abre la ventana de login
+            var loginWindow = new LoginWindow();
+            loginWindow.Show();
+
+            // Cierra la ventana principal
+            this.Close();
+        }
+
     }
 }
