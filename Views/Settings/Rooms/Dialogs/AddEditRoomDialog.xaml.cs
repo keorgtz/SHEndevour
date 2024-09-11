@@ -9,6 +9,7 @@ using MessageBox = System.Windows.MessageBox;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using ComboBox = System.Windows.Controls.ComboBox;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace SHEndevour.Views.Settings.Rooms.Dialogs
 {
@@ -29,7 +30,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                 PopulateFields();
                 Title = "Editar Habitación";
                 AddEditSubtitle.Text = "Edición de Habitación";
-                Debug.WriteLine($"RoomTypeId antes de actualizar: {Room.RoomTypeId}");
+                Debug.WriteLine($"RoomTypeIdDIALOG antes de actualizar: {Room.RoomTypeId}");
                 //room.IsSelected = false;
             }
             else
@@ -52,7 +53,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
             {
                 var roomTypes = context.RoomTypeTable.ToList();
                 RoomTypComboBox.ItemsSource = roomTypes;
-                RoomTypComboBox.DisplayMemberPath = "RoomTypeKey";
+                RoomTypComboBox.DisplayMemberPath = "Description";
                 RoomTypComboBox.SelectedValuePath = "Id";
                 
             }
@@ -97,34 +98,57 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                 return;
             }
 
-            Debug.WriteLine($"RoomTypeId antes de actualizar: {Room.RoomTypeId}");
+            Debug.WriteLine($"RoomTypeIdDIALOG antes de actualizar: {Room.RoomTypeId}");
 
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            // Actualizar los valores del modelo
-            Room.RoomKey = RoomKeyTextBox.Text;
-            RoomTypComboBox.GetBindingExpression(ComboBox.SelectedValueProperty)?.UpdateSource();
-            Room.RoomTypeId = (int?)RoomTypComboBox.SelectedValue ?? 0; // Asegúrate de que RoomTypeId esté asignado correctamente
-            Room.RoomStatus = (RoomStatus)RoomStatusComboBox.SelectedItem;
-            Room.HousekeeperStatus = (HousekeeperStatus)HouseKeeperComboBox.SelectedItem;
-
-            Debug.WriteLine($"RoomTypeId Antes de guardar: {Room.RoomTypeId}");
-
-            // Guardar los cambios en la base de datos
-            using (var context = new AppDbContext())
+            if (Room.RoomKey != RoomKeyTextBox.Text)
             {
-                if (Room.Id == 0) // Si es un nuevo registro
-                {
-                    context.RoomTable.Add(Room);
-                }
-                else // Si es una actualización de un registro existente
-                {
-                    context.RoomTable.Update(Room);
-                }
-
-                context.SaveChanges(); // Guardar los cambios en la base de datos
+                Room.RoomKey = RoomKeyTextBox.Text; // Almacenar el teléfono como cadena
             }
 
-            Debug.WriteLine($"RoomTypeId Despues de guardar: {Room.RoomTypeId}");
+            if (Room.RoomTypeId != (int)RoomTypComboBox.SelectedValue)
+            {
+                Room.RoomTypeId = (int)RoomTypComboBox.SelectedValue; // Guarda el Id del rol seleccionado
+            }
+
+            if (Room.RoomStatus != (RoomStatus)RoomStatusComboBox.SelectedItem)
+            {
+                Room.RoomStatus = (RoomStatus)RoomStatusComboBox.SelectedItem; // Guarda el Id del rol seleccionado
+            }
+
+            if (Room.HousekeeperStatus != (HousekeeperStatus)HouseKeeperComboBox.SelectedItem)
+            {
+                Room.HousekeeperStatus = (HousekeeperStatus)HouseKeeperComboBox.SelectedItem; // Guarda el Id del rol seleccionado
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // Actualizar los valores del modelo
+            //Room.RoomKey = RoomKeyTextBox.Text;
+            //RoomTypComboBox.GetBindingExpression(ComboBox.SelectedValueProperty)?.UpdateSource();
+            //Room.RoomTypeId = (int?)RoomTypComboBox.SelectedValue ?? 0; // Asegúrate de que RoomTypeId esté asignado correctamente
+            //Room.RoomStatus = (RoomStatus)RoomStatusComboBox.SelectedItem;
+            //Room.HousekeeperStatus = (HousekeeperStatus)HouseKeeperComboBox.SelectedItem;
+
+            Debug.WriteLine($"RoomTypeIdDIALOG Antes de guardar: {Room.RoomTypeId}");
+
+            // Guardar los cambios en la base de datos
+            //using (var context = new AppDbContext())
+            //{
+            //    if (Room.Id == 0) // Si es un nuevo registro
+            //    {
+            //        context.RoomTable.Add(Room);
+            //    }
+            //    else // Si es una actualización de un registro existente
+            //    {
+            //        context.RoomTable.Update(Room);
+            //    }
+            //
+            //    context.SaveChanges(); // Guardar los cambios en la base de datos
+            //}
+
+            Debug.WriteLine($"RoomTypeIdDIALOG Despues de guardar: {Room.RoomTypeId}");
 
             DialogResult = true;
             Close();

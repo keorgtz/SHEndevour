@@ -56,7 +56,14 @@
                     </StackPanel>
                 </Button>
 
-                
+                <Button Command="{Binding GenerateReportCommand}" Padding="7" Margin="0,0,5,0"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Width="20" Height="20" Kind="FileReport" />
+                    </StackPanel>
+                </Button>
+
+
 
                 <StackPanel Orientation="Vertical" Margin="5,0,5,0" 
                             Width="200">

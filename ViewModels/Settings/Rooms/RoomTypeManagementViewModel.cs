@@ -117,8 +117,6 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                     MessageBox.Show("Tipo de habitación actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
-                selectedRoomType.IsSelected = false;
-                SelectedRoomType = null;
             }
             else
             {
@@ -188,7 +186,6 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         {
             SelectedRoomType = null;
             SearchRoomType();
-            SelectedRoomType = null;
         }
 
         partial void OnSelectedRoomTypeChanged(RoomTypeModel roomType)
@@ -211,8 +208,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                     MessageBox.Show("Tipo de habitación actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                     
                 }
-                SelectedRoomType.IsSelected = false;
-                SelectedRoomType = null;
+                
                 IsPopupOpen = false;
             }
         }

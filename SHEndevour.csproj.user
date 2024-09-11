@@ -1,12 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>K:\0Dev\Code\Main\SHEndevour\SHEndevour\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AppReports\AllAppReports\AllRoomsReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="AppReports\AllAppReports\AllRoomTypesReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="AppReports\AllAppReports\AllUsersReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="AppReports\ReportSelectionWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="AppReports\ReportWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AddEditUserDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -19,7 +36,7 @@
     <Compile Update="Views\ReportDesignerWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ReportViewerWindow.xaml.cs">
+    <Compile Update="Views\Reports\Users\UserReportWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Settings\RoomSetting.xaml.cs">
@@ -45,6 +62,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="AppReports\ReportSelectionWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="AppReports\ReportWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -63,7 +86,7 @@
     <Page Update="Views\ReportDesignerWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ReportViewerWindow.xaml">
+    <Page Update="Views\Reports\Users\UserReportWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\RoomSetting.xaml">

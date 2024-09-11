@@ -11,6 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using SHEndevour.Utilities;
 using MessageBox = System.Windows.MessageBox;
 using Microsoft.VisualBasic.ApplicationServices;
+using SHEndevour.Repositories.Reports;
+using SHEndevour.Views.Reports.Users;
+using DevExpress.XtraReports.UI;
+using DevExpress.Xpf.Printing;
 
 namespace SHEndevour.ViewModels
 {
@@ -31,6 +35,7 @@ namespace SHEndevour.ViewModels
 
         [ObservableProperty]
         private UserModel selectedUser;
+
 
         // Comandos
         public ICommand AddUserCommand { get; }
@@ -71,6 +76,12 @@ namespace SHEndevour.ViewModels
             }
         }
 
+
+        #region UserReportsREGION
+        
+        #endregion
+
+
         #region AddUsersRegion
         private void AddUser()
         {
@@ -93,6 +104,8 @@ namespace SHEndevour.ViewModels
             }
         }
         #endregion
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
         #region ViewUsersRegion
         private void ViewUser()
@@ -120,8 +133,6 @@ namespace SHEndevour.ViewModels
                         dbContext.SaveChanges();
                     }
 
-                    selectedUser.IsSelected = false;
-                    selectedUser = null;
 
                     LoadUsers();
                     MessageBox.Show("Usuario actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -133,6 +144,8 @@ namespace SHEndevour.ViewModels
             }
         }
         #endregion
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
         #region DeleteUsersRegion
         private void DeleteUser()
@@ -216,18 +229,14 @@ namespace SHEndevour.ViewModels
                     using (var dbContext = new AppDbContext())
                     {
                         dbContext.Users.Update(user);
-                        SelectedUser.IsSelected = false;
                         dbContext.SaveChanges();
                     }
 
-                    SelectedUser.IsSelected = false;
 
                     LoadUsers();
                     MessageBox.Show("Usuario actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                     
                 }
-                SelectedUser.IsSelected = false;
-                SelectedUser = null;
                 IsPopupOpen = false;
             }
 

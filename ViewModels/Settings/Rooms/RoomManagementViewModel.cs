@@ -11,6 +11,7 @@ using MessageBox = System.Windows.MessageBox;
 using SHEndevour.Utilities;
 using SHEndevour.Views.Settings.Rooms.Dialogs;
 using DevExpress.XtraRichEdit.Import.Doc;
+using System.Diagnostics;
 
 namespace SHEndevour.ViewModels.Settings.Rooms
 {
@@ -94,36 +95,56 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         }
         #endregion
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
         #region ViewRoomRegion
         private void ViewRoom()
         {
             var selectedRoom = Rooms.FirstOrDefault(rt => rt.IsSelected);
+            Debug.WriteLine($"RoomTypeIdVIEWMODEL Entrando al ViewRoom: {selectedRoom.RoomTypeId}");
 
             if (selectedRoom != null)
             {
                 var editRoomDialog = new AddEditRoomDialog(selectedRoom);
+                Debug.WriteLine($"RoomTypeIdVIEWMODEL si se Selecciono un Room: {selectedRoom.RoomTypeId}");
 
                 if (editRoomDialog.ShowDialog() == true)
                 {
                     var updatedRoom = editRoomDialog.Room;
+                    Debug.WriteLine($"RoomTypeIdVIEWMODEL si el Dialogo de Update es Verdadero: {updatedRoom.RoomTypeId}");
 
                     using (var dbContext = new AppDbContext())
                     {
+                        // Busca en la tabla `RoomTypeTable` del contexto de base de datos (`dbContext`)
+                        // la entidad `RoomTypeModel` que tiene el mismo `Id` que la propiedad `RoomTypeId`
+                        // de la habitación actualizada (`updatedRoom`), y luego asigna esa entidad `RoomTypeModel`
+                        // encontrada a la propiedad `RoomType` de la habitación (`updatedRoom`).
+                        // Esto asegura que la propiedad de navegación `RoomType` esté correctamente
+                        // relacionada con la entidad `RoomTypeModel` correspondiente antes de guardar
+                        // los cambios en la base de datos.
+
+                        // Asociar la entidad RoomType  
+                        updatedRoom.RoomType = dbContext.RoomTypeTable.Find(updatedRoom.RoomTypeId);
+
+                        // Actualizar la habitación en la base de datos
                         dbContext.RoomTable.Update(updatedRoom);
                         dbContext.SaveChanges();
                     }
 
-                    
                     LoadRooms();
                     MessageBox.Show("Habitación actualizada con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                Debug.WriteLine($"RoomTypeIdVIEWMODEL Despues del Dialogo de Confirmacion: {selectedRoom.RoomTypeId}");
             }
             else
             {
                 MessageBox.Show("Por favor, seleccione una habitación para ver.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
         #endregion
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
         #region DeleteRoomRegion
         private void DeleteRoom()

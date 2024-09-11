@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SHEndevour"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Endevour" Height="450" Width="865" MinWidth="865" Background="#2d2d2d">
+        Title="Endevour" Height="510" Width="865" MinWidth="865" Background="#2d2d2d">
     
     
 
@@ -22,7 +22,15 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="35"/>
         </Style>
-        
+
+        <Style x:Key="RoundFlatB" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="35"/>
+        </Style>
+
         <Style x:Key="RoundBFlat" TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignFlatButton}">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Width" Value="60"/>
@@ -110,22 +118,19 @@
 
                 <RadioButton Content="{materialDesign:PackIcon Size=30,
                         Kind= FileExcel }"
-                        Click="ButtonReporting_Click" 
-                        Style="{StaticResource RoundBFlat}"/>
-
-                <RadioButton Content="{materialDesign:PackIcon Size=30,
-                        Kind= FileEye }"
                         Click="ViewReport_Click" 
                         Style="{StaticResource RoundBFlat}"/>
+
+                <Button Grid.Column="0" 
+                        Content="{materialDesign:PackIcon 
+                        Size=30, Kind= Logout}" Foreground="Red"
+                        Style="{StaticResource  RoundFlatB}"
+                        Click="LogoutButton_Click"/>
 
             </StackPanel>
         </materialDesign:ColorZone>
 
-        <Button Grid.Column="0" Content="{materialDesign:PackIcon Size=20,
-                        Kind= Logout}" Foreground="Red"
-                Margin="5"
-                Style="{StaticResource  MaterialDesignFlatButton}"
-                VerticalAlignment="Bottom" Click="LogoutButton_Click"/>
+
 
         <!-- Contenido Principal -->
             <ContentControl x:Name="MainContent" Grid.Column="1" Background="White"/>

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SHEndevour.Utilities;
 using SHEndevour.Views;
+using SHEndevour.AppReports;
 using System.Windows;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using Button = System.Windows.Controls.Button;
@@ -76,10 +77,9 @@ namespace SHEndevour
 
         private void ViewReport_Click(object sender, RoutedEventArgs e)
         {
-            ReportViewerWindow reportViewerWindow = new ReportViewerWindow();
-            reportViewerWindow.Show();
+            ReportSelectionWindow reportSelectionWindow = new ReportSelectionWindow();
+            reportSelectionWindow.Show();
 
-            this.Close();
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)

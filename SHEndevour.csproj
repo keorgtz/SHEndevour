@@ -33,11 +33,16 @@
   <ItemGroup>
     <Folder Include="Fonts\" />
     <Folder Include="Images\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\Endevour-Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
