@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:SHEndevour.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="620" Background="#3d3d3d">
+             d:DesignHeight="450" d:DesignWidth="620" 
+             Background="#F1f1f1">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -13,14 +15,21 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="10">
 
-            <RadioButton Content="Rooms" Tag="Rooms" 
+        <materialDesign:ColorZone Background="#334664" Margin="10" CornerRadius="5">
+
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+
+                <RadioButton Content="Rooms" Tag="Rooms" 
                          x:Name="RoomBTNSide"
                          Click="SettingButton_Click"
                          Style="{StaticResource MaterialDesignFlatButton}"/>
 
-        </StackPanel>
+            </StackPanel>
+
+        </materialDesign:ColorZone>
+
+
 
 
         <ContentControl x:Name="RoomConfigure" Grid.Column="1"/>

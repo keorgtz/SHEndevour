@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Añadir Habitación" Height="260" Width="300"
         WindowStartupLocation="CenterScreen"
-        Background="#2d2d2d" Foreground="White">
+        Background="#f1f1f1" materialDesign:ThemeAssist.Theme="Light">
 
     
 

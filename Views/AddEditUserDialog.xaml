@@ -4,7 +4,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Añadir Usuario" Height="370" Width="500"
         WindowStartupLocation="CenterScreen"
-        Background="#2d2d2d" Foreground="White">
+        Background="#F1F1F1" materialDesign:ThemeAssist.Theme="Light">
     
     <Grid>
 

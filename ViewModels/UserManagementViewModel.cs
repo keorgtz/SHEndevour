@@ -137,6 +137,11 @@ namespace SHEndevour.ViewModels
                     LoadUsers();
                     MessageBox.Show("Usuario actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                else
+                {
+                    LoadUsers();
+                    MessageBox.Show("Operacion Cancelada", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             else
             {
@@ -181,7 +186,10 @@ namespace SHEndevour.ViewModels
         }
         #endregion
 
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
         #region SearchUsersRegion
+
         private void SearchUser()
         {
             if (string.IsNullOrWhiteSpace(SearchText))
@@ -196,6 +204,8 @@ namespace SHEndevour.ViewModels
                 .Where(u => u.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
                             u.FirstName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
                             u.LastName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                            u.PhoneNumber.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                            u.Role.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
                             u.Email.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
@@ -205,6 +215,8 @@ namespace SHEndevour.ViewModels
             // Asegurarse de que no haya un usuario seleccionado accidentalmente al escribir
             SelectedUser = null;
         }
+
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
         partial void OnSearchTextChanged(string value)
         {

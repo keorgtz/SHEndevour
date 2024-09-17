@@ -105,5 +105,10 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
         {
             ValidateFields();
         }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

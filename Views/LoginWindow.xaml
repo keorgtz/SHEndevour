@@ -6,8 +6,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:SHEndevour.Views"
         mc:Ignorable="d"
-        Title="Acceso al sistema" Height="260" Width="350" materialDesign:ThemeAssist.Theme="Dark" Foreground="White"
-        WindowStartupLocation="CenterScreen" Style="{StaticResource MaterialDesignWindow}" Background="#2d2d2d">
+        Title="Acceso al sistema" Height="260" Width="350" materialDesign:ThemeAssist.Theme="Light" 
+        WindowStartupLocation="CenterScreen" Style="{StaticResource MaterialDesignWindow}" Background="#F1F1F1">
 
     <Grid>
             

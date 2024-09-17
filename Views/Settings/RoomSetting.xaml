@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:SHEndevour.Views.Settings"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="500" Background="#2d2d2d" Foreground="Gray">
+             mc:Ignorable="d" materialDesign:ThemeAssist.Theme="Light"
+             d:DesignHeight="450" d:DesignWidth="500" Background="#f1f1f1">
     <Grid>
 
         <Grid.RowDefinitions>

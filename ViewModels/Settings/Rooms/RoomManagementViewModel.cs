@@ -134,6 +134,13 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                     LoadRooms();
                     MessageBox.Show("Habitación actualizada con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                else
+                {
+                    LoadRooms();
+                    MessageBox.Show("Operacion Cancelada", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
+
                 Debug.WriteLine($"RoomTypeIdVIEWMODEL Despues del Dialogo de Confirmacion: {selectedRoom.RoomTypeId}");
             }
             else
@@ -192,7 +199,9 @@ namespace SHEndevour.ViewModels.Settings.Rooms
 
             var filteredRoomsList = Rooms
                 .Where(r => r.RoomKey.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                            r.RoomStatus.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+                            r.RoomStatus.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                            r.RoomType.RoomTypeKey.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                            r.RoomType.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
             FilteredRooms = new ObservableCollection<RoomModel>(filteredRoomsList);

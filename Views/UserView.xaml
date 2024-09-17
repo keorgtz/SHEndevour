@@ -28,11 +28,12 @@
                         ClipToBounds="False"
                         CornerRadius="5"
                         Foreground="White"
-                        Mode="PrimaryMid">
+                        Background="#013d5a">
 
             <StackPanel Orientation="Horizontal" Margin="10">
 
-                <Button Command="{Binding AddUserCommand}" Padding="7" Margin="0,0,5,0"
+                <Button Command="{Binding AddUserCommand}"  
+                        Padding="7" Margin="0,0,5,0" BorderThickness="0" Background="#374375"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="0,2,5,0" Kind="AccountPlus" />
@@ -40,15 +41,17 @@
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding ViewUserCommand}" Padding="7" Margin="0,0,5,0"
+                <Button Command="{Binding ViewUserCommand}" 
+                        Padding="7" Margin="0,0,5,0" BorderThickness="0" Background="#374375"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}" >
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="0,2,5,0" Kind="AccountDetails" />
-                        <TextBlock Text="Examinar" />
+                        <TextBlock Text="Examinar"/>
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding DeleteUserCommand}" Padding="7" Margin="0,0,5,0"
+                <Button Command="{Binding DeleteUserCommand}" 
+                        Padding="7" Margin="0,0,5,0" BorderThickness="0" Background="#374375"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}" >
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="0,2,5,0" Kind="AccountRemove" />
@@ -56,12 +59,6 @@
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding GenerateReportCommand}" Padding="7" Margin="0,0,5,0"
-                        Style="{StaticResource MaterialDesignRaisedDarkButton}" >
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Width="20" Height="20" Kind="FileReport" />
-                    </StackPanel>
-                </Button>
 
 
 
@@ -87,13 +84,23 @@
                                      SelectedItem="{Binding SelectedUser}"
                                      Width="200"
                                      MaxHeight="200"
-                                     Background="#2d2d2d"
+                                     materialDesign:ElevationAssist.Elevation="Dp3"
+                                     Foreground="White"
+                                     Background="#013d5a"
                                      
                                      Style="{StaticResource MaterialDesignListBox}">
 
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Username}" />
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Username}"/>
+                                            <TextBlock Text=": "/>
+                                            <TextBlock Text="{Binding FirstName}" />
+                                            <TextBlock Text=" "/>
+                                            <TextBlock Text="{Binding LastName}" />
+                                        </StackPanel>
+                                        
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
@@ -105,7 +112,7 @@
                     Command="{Binding SearchCommand}"
                     CommandParameter="{Binding Text, ElementName=SearchBox}"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    Padding="10"
+                    Padding="10" BorderThickness="0" Background="#374375"
                     Margin="10,0,0,0" />
             </StackPanel>
         </materialDesign:ColorZone>
@@ -118,8 +125,9 @@
                   SelectionMode="Single"
                   CanUserAddRows="False"
                   SelectionUnit="FullRow"
+                  Sorting="UserDataGrid_Sorting"
                   Margin="5"
-                  materialDesign:ThemeAssist.Theme="Dark"
+                  materialDesign:ThemeAssist.Theme="Light"
                   materialDesign:ElevationAssist.Elevation="Dp4"
                   Style="{StaticResource MaterialDesignDataGrid}">
 
@@ -128,7 +136,7 @@
                 <!-- Columna con CheckBox -->
                 <DataGridTemplateColumn Width="75">
                     <DataGridTemplateColumn.Header>
-                        <CheckBox Foreground="White" Content="{materialDesign:PackIcon Kind=AccountCheck }" 
+                        <CheckBox Content="{materialDesign:PackIcon Kind=AccountCheck }" 
                           Checked="HeaderCheckBox_Checked"
                           Unchecked="HeaderCheckBox_Unchecked"/>
                           

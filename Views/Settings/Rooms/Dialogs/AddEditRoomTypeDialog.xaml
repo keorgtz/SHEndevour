@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:SHEndevour.Views.Settings.Rooms.Dialogs"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Añadir Usuario" Height="450" Width="550"
+        Title="Añadir Tipo de Habitacion" Height="450" Width="550"
         WindowStartupLocation="CenterScreen"
-        Background="#2d2d2d" Foreground="White">
+        Background="#f1f1f1" materialDesign:ThemeAssist.Theme="Light">
 
     <Grid>
 
@@ -241,10 +241,8 @@
                 Margin="10"
                 HorizontalAlignment="Right">
 
-            <Button Content="Cancelar"
-                Foreground="Red"
-                IsCancel="True" 
-                Style="{StaticResource MaterialDesignFlatButton}" />
+            <Button Content="Cancelar" Foreground="Red" Click="CancelButton_Click"
+                IsCancel="True" Style="{StaticResource MaterialDesignFlatButton}" />
 
             <Button x:Name="AddButton" Content="Agregar" Click="OnAcceptClick" 
                 Style="{StaticResource MaterialDesignFlatButton}"

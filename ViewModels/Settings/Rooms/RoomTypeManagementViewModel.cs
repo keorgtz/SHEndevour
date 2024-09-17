@@ -116,6 +116,11 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                     LoadRoomTypes();
                     MessageBox.Show("Tipo de habitación actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                else
+                {
+                    LoadRoomTypes();
+                    MessageBox.Show("Operacion Cancelada", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
 
             }
             else
@@ -171,6 +176,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
 
             var filteredRoomTypesList = RoomTypes
                 .Where(rt => rt.RoomTypeKey.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                             rt.Id.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
                              rt.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 

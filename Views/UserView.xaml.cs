@@ -10,6 +10,7 @@ namespace SHEndevour.Views
 {
     public partial class UserView : UserControl
     {
+        private string _currentSearchColumn = "Username"; // Columna por defecto para la búsqueda
         public UserView()
         {
             InitializeComponent();
@@ -56,9 +57,13 @@ namespace SHEndevour.Views
         }
 
 
+
         #endregion
 
-        
+        private void UserDataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+            
+        }
     }
 
 }
