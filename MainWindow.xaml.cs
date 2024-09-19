@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using SHEndevour.Utilities;
 using SHEndevour.Views;
 using SHEndevour.AppReports;
+using SHEndevour.Models;
 using System.Windows;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using Button = System.Windows.Controls.Button;
 using MessageBox = System.Windows.MessageBox;
+using Application = System.Windows.Application;
 
 namespace SHEndevour
 {
@@ -21,6 +23,8 @@ namespace SHEndevour
             InitializeComponent();
             //Iniciamos al App cargando el HomeView
             MainContent.Content = new HomeView();
+            // Establecer el DataContext como la clase App
+            DataContext = this;
 
             // Cargar los datos del usuario logueado
             //if (App.CurrentUser != null)
@@ -33,6 +37,9 @@ namespace SHEndevour
             //}
 
         }
+
+        public string UserFirstname => App.CurrentUser.FirstName;
+        public string UserRolename => App.CurrentUser.Role.Name;
 
 
 

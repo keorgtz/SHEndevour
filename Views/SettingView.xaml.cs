@@ -27,7 +27,7 @@ namespace SHEndevour.Views
         public SettingView()
         {
             InitializeComponent();
-            RoomConfigure.Content = new RoomSetting();
+            settingScreen.Content = new RoomSetting();
             RoomBTNSide.IsChecked = true;
         }
 
@@ -40,7 +40,11 @@ namespace SHEndevour.Views
                 switch (tag)
                 {
                     case "Rooms":
-                        RoomConfigure.Content = new RoomSetting();
+                        settingScreen.Content = new RoomSetting();
+                        break;
+
+                    case "Generals":
+                        settingScreen.Content = new GeneralSetting();
                         break;
 
                     default:

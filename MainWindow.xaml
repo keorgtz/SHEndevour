@@ -6,9 +6,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:SHEndevour"
         mc:Ignorable="d"
+        WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         Title="Endevour" Height="510" Width="865" MinWidth="865" Background="#f1f1f1">
-    
+
     
 
     <Window.Resources>
@@ -21,7 +22,7 @@
             <Setter Property="Foreground" Value="#f1f1f1"/>
             <Setter Property="Background" Value="#013d5a"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="35"/>
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="15"/>
         </Style>
 
         <Style x:Key="RoundFlatB" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
@@ -29,7 +30,7 @@
             <Setter Property="Width" Value="60"/>
             <Setter Property="Height" Value="60"/>
             <Setter Property="Padding" Value="1"/>
-            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="35"/>
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="15"/>
         </Style>
 
         <Style x:Key="RoundBFlat" TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignFlatButton}">
@@ -39,7 +40,7 @@
             <Setter Property="Padding" Value="1"/>
             <Setter Property="Foreground" Value="#f1f1f1"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="35"/>
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="15"/>
             <!--#region -->
             <Setter Property="Template">
                 <Setter.Value>
@@ -78,6 +79,14 @@
     
     
     <Grid>
+
+        <!-- Aplicar LayoutTransform a la raíz para escalar toda la UI -->
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding Source={StaticResource GlobalScaleFactor}}"
+                            ScaleY="{Binding Source={StaticResource GlobalScaleFactor}}"/>
+        </Grid.LayoutTransform>
+
+
         <!-- Definimos dos columnas, la primera es el Sidebar, la segunda es el contenido -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -86,58 +95,141 @@
             <!-- Resto de la página -->
         </Grid.ColumnDefinitions>
 
-        <!-- Sidebar -->
 
         <materialDesign:ColorZone
                 Margin="10"
                 materialDesign:ElevationAssist.Elevation="Dp4"
                 ClipToBounds="False" Background="#013d5a"
-                CornerRadius="35">
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                CornerRadius="30">
 
-            <StackPanel Orientation="Vertical" >
+            <!-- Sidebar -->
+        <Grid Grid.Column="0">
 
-                <RadioButton Content="{materialDesign:PackIcon Size=30, 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
+
+
+                <StackPanel Orientation="Vertical" Grid.Row="0">
+
+                    <materialDesign:Card 
+                            materialDesign:ElevationAssist.Elevation="Dp4"
+                            ClipToBounds="False" Background="#013d5a"
+                            UniformCornerRadius="30"
+                            Width="220" Height="100">
+
+                        <StackPanel Orientation="Horizontal" Margin="20">
+
+                            <materialDesign:PackIcon Kind="AccountCircle"
+                                                     VerticalAlignment="Center"
+                                                     Width="55" Height="55"/>
+
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Nombre:" FontFamily="Microsoft YaHei" FontWeight="Bold" FontSize="12" Margin="2"/>
+                                    <TextBlock Text="{Binding UserFirstname}" FontFamily="Verdana" FontSize="12" Margin="2"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Rol:" FontFamily="Microsoft YaHei" FontWeight="Bold" FontSize="12" Margin="2"/>
+                                    <TextBlock Text="{Binding UserRolename}" FontFamily="Verdana" FontSize="12" Margin="2"/>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+                        
+                    </materialDesign:Card>
+                    
+                    <!-- RadioButton Content="{materialDesign:PackIcon Size=30, 
                         Kind= HomeVariantOutline}"
-                        Tag="Inicio" 
+                        Tag="Inicio" Margin="0,10,0,0"
                         materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                         Click="NavigationButton_Click" 
-                        Style="{StaticResource RoundB}">
-
-                </RadioButton>
+                        Style="{StaticResource RoundB}"/ -->
 
 
 
-                <Separator Margin="10"/>
+                    <Separator Margin="30,30,30,10"/>
 
-                <RadioButton Content="{materialDesign:PackIcon Size=30,
-                        Kind= AccountGroupOutline }" Tag="Usuarios"
-                        Click="NavigationButton_Click"
-                        Style="{StaticResource RoundBFlat}"/>
+                    <RadioButton Tag="Inicio" Width="180" Height="40"
+                             Click="NavigationButton_Click" Margin="10,5,10,5"
+                             Style="{StaticResource RoundBFlat}">
+                        <StackPanel Width="170" Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="18" Height="18" VerticalAlignment="Center" Kind="HomeVariantOutline"/>
+                            <TextBlock Text="Inicio" FontSize="18" 
+                                   Margin="5,0,0,0"
+                                   VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
 
-                <RadioButton Content="{materialDesign:PackIcon Size=30,
-                        Kind= CogOutline }" Tag="Configuracion"
-                        IsChecked="{x:Null}"
-                        Click="NavigationButton_Click"
-                        Style="{StaticResource RoundBFlat}"/>
+                    <RadioButton Tag="Usuarios" Width="180" Height="40" Margin="10,5,10,5"
+                             Click="NavigationButton_Click"
+                             Style="{StaticResource RoundBFlat}">
+                        <StackPanel Width="170" Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="18" Height="18" VerticalAlignment="Center" Kind="AccountGroupOutline"/>
+                            <TextBlock Text="Usuarios" FontSize="18" 
+                                   Margin="5,0,0,0"
+                                   VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
 
-                <RadioButton Content="{materialDesign:PackIcon Size=30,
-                        Kind= FileExcel }"
-                        Click="ViewReport_Click" 
-                        Style="{StaticResource RoundBFlat}"/>
+                    <RadioButton Tag="Configuracion" Width="180" Height="40" 
+                             Click="NavigationButton_Click" Margin="10,5,10,5"
+                             IsChecked="{x:Null}"
+                             Style="{StaticResource RoundBFlat}">
+                        <StackPanel Width="170" Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="18" Height="18" VerticalAlignment="Center" Kind="CogOutline"/>
+                            <TextBlock Text="Configuracion" FontSize="18" 
+                                   Margin="5,0,0,0"
+                                   VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
 
-                <Button Grid.Column="0" 
-                        Content="{materialDesign:PackIcon 
-                        Size=30, Kind= Logout}" Foreground="Red"
-                        Style="{StaticResource  RoundFlatB}"
-                        Click="LogoutButton_Click"/>
+                    <RadioButton Width="180" Height="40" Margin="10,5,10,5"
+                             Click="ViewReport_Click"
+                             Style="{StaticResource RoundBFlat}">
+                        <StackPanel Width="170" Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="18" Height="18" VerticalAlignment="Center" Kind="FileExcel"/>
+                            <TextBlock Text="Reportes" FontSize="18" 
+                                   Margin="5,0,0,0"
+                                   VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
 
-            </StackPanel>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="1">
+                    <Button Width="150" Height="30" Margin="0,10,0,10" BorderThickness="0"
+                        Style="{StaticResource  MaterialDesignFlatButton}" 
+                        VerticalAlignment="Bottom"
+                        Click="LogoutButton_Click">
+                        <StackPanel Width="140" Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="20" Height="20" Foreground="Red" VerticalAlignment="Center" Kind="Logout"/>
+                            <TextBlock Text="Cerrar Sesion" FontSize="15" 
+                                   Margin="5,0,0,0" Foreground="Red"
+                                   VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+        </Grid>
         </materialDesign:ColorZone>
 
 
 
-        <!-- Contenido Principal -->
+        
+        
+
+        <Grid Grid.Column="1">
+            <!-- Contenido Principal -->
             <ContentControl x:Name="MainContent" Grid.Column="1" Background="White"/>
+        </Grid>
+        
 
     </Grid>
     

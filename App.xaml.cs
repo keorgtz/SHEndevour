@@ -4,6 +4,8 @@ using SHEndevour.Models;
 using SHEndevour.Utilities;
 using SHEndevour.Views;
 using System.Windows;
+using System.Windows.Media;
+using System.Configuration;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
@@ -18,6 +20,15 @@ namespace SHEndevour
         {
             base.OnStartup(e);
 
+            // Leer el valor de escala desde App.config
+            string scaleFactorConfig = ConfigurationManager.AppSettings["ScaleFactor"];
+            double scaleFactor = double.TryParse(scaleFactorConfig, out double result) ? result : 1.0;
+
+            // Aplicar el valor globalmente
+            Application.Current.Resources["GlobalScaleFactor"] = scaleFactor;
+
+
+            // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
             // Crear el servicio y el contexto
@@ -37,6 +48,8 @@ namespace SHEndevour
                 }
             }
 
+            // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
             //Inicializador de Administracion
             AdminUserInitializer.EnsureAdminUser();
 
@@ -44,5 +57,9 @@ namespace SHEndevour
 
 
         }
+
+
+
+
     }
 }

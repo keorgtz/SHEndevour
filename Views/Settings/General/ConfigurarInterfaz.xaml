@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="SHEndevour.Views.Settings.General.ConfigurarInterfaz"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SHEndevour.Views.Settings.General"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="600" Background="#F1F1F1">
+    <Grid>
+
+        <StackPanel Margin="10">
+            
+            <TextBlock Text="Factor de Escala"/>
+            
+            <StackPanel Orientation="Horizontal">
+                <Slider Maximum="3.0" Minimum="0.5" TickFrequency="0.1" Width="300"
+                    Style="{StaticResource MaterialDesign3.MaterialDesignDiscreteSlider}"
+                    TickPlacement="Both" Value="{Binding ScaleValue, Mode=TwoWay}" />
+
+                <Button Content="{materialDesign:PackIcon Kind=CheckBold }" 
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Click="OnSaveClick"/>
+            </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

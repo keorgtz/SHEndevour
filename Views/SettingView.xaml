@@ -20,8 +20,13 @@
 
             <StackPanel Grid.Column="0" Orientation="Vertical">
 
-                <RadioButton Content="Rooms" Tag="Rooms" 
+                <RadioButton Content="Rooms" Tag="Rooms" Margin="5"
                          x:Name="RoomBTNSide"
+                         Click="SettingButton_Click"
+                         Style="{StaticResource MaterialDesignFlatButton}"/>
+
+                <RadioButton Content="General" Tag="Generals" Margin="5"
+                         x:Name="GeneralBTNSide"
                          Click="SettingButton_Click"
                          Style="{StaticResource MaterialDesignFlatButton}"/>
 
@@ -32,7 +37,7 @@
 
 
 
-        <ContentControl x:Name="RoomConfigure" Grid.Column="1"/>
+        <ContentControl x:Name="settingScreen" Grid.Column="1"/>
 
 
 

@@ -39,6 +39,12 @@
     <Compile Update="Views\Reports\Users\UserReportWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Settings\GeneralSetting.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\General\ConfigurarInterfaz.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Settings\RoomSetting.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -87,6 +93,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Reports\Users\UserReportWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\GeneralSetting.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\General\ConfigurarInterfaz.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\RoomSetting.xaml">
