@@ -1,0 +1,173 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SHEndevour.Views.Settings.Rooms"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    x:Class="SHEndevour.Views.Settings.Rooms.ConfigurarMantenimientoHabitacion"
+    mc:Ignorable="d"
+    Background="#f1f1f1" materialDesign:ThemeAssist.Theme="Light"
+    d:DesignHeight="450" d:DesignWidth="800">
+
+
+
+
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <materialDesign:ColorZone Margin="10"
+                                  materialDesign:ElevationAssist.Elevation="Dp4"
+                                  ClipToBounds="False"
+                                  CornerRadius="5"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  Height="40"
+                                  Foreground="White"
+                                  Mode="Custom"
+                                  materialDesign:ColorZoneAssist.Background="#001b48">
+
+
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+
+                <Button Grid.Column="0"
+                        Padding="7" Margin="0,0,5,0" Foreground="RoyalBlue"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="2" Kind="Plus"/>
+                        <TextBlock Text="Agregar"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Grid.Column="1"
+                        Padding="7" Margin="0,0,5,0" Foreground="Teal"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="2" Kind="Edit" />
+                        <TextBlock Text="Editar"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Grid.Column="2"
+                        Padding="7" Margin="0,0,5,0" Foreground="Red"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="2" Kind="Delete" />
+                        <TextBlock Text="Liberar"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Grid.Column="3"
+                        Padding="7" Margin="0,0,5,0" Foreground="Orange"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="2" Kind="History"/>
+                        <TextBlock Text="Historicos"/>
+                    </StackPanel>
+                </Button>
+
+
+
+            </Grid>
+
+
+        </materialDesign:ColorZone>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+
+        <dxg:GridControl Name="BlockedRoomsGrid" Grid.Row="1"
+                         ItemsSource="{Binding d}"
+                         Margin="10">
+
+            <dxg:GridControl.View>
+                <dxg:TableView AutoWidth="True" AllowSorting="True" />
+            </dxg:GridControl.View>
+
+            <!-- Definir las columnas del DataGrid -->
+            <dxg:GridColumn FieldName="RoomNumber" Header="Número de Cuarto" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="RoomType" Header="Tipo de Cuarto" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="BlockedDate" Header="Fecha de Bloqueo" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="BlockedBy" Header="Bloqueado Por" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="Reason" Header="Razón" ReadOnly="True"/>
+        </dxg:GridControl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--           DataGrid Grid.Row="1"
+        ItemsSource="{Binding Rooms}"
+        AutoGenerateColumns="False"
+        x:Name="RoomDataGrid"
+        SelectionMode="Single"
+        CanUserAddRows="False"
+        SelectionUnit="FullRow"
+        Margin="10"
+        materialDesign:ThemeAssist.Theme="Light"
+        materialDesign:ElevationAssist.Elevation="Dp8"
+        Style="{StaticResource MaterialDesignDataGrid}">
+
+        <DataGrid.Columns         -->
+
+        <!-- Columna con CheckBox -->
+
+        <!--            DataGridTemplateColumn Width="75">
+        <DataGridTemplateColumn.Header>
+        <CheckBox Content="{materialDesign:PackIcon Kind=AccountCheck }"
+        Checked="RoomGridCheck_Checked"
+        Unchecked="RoomGridCheck_Unchecked"/>
+        </DataGridTemplateColumn.Header>
+        <DataGridTemplateColumn.CellTemplate>
+        <DataTemplate>
+        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </DataTemplate>
+        </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True"/>
+        <DataGridTextColumn Header="Clave de Habitacion" Binding="{Binding RoomKey}" IsReadOnly="True"/>
+        <DataGridTextColumn Header="Tipo de Habitacion" Binding="{Binding RoomType.RoomTypeKey}" IsReadOnly="True"/>
+        <DataGridTextColumn Header="Descripcion del Tipo" Binding="{Binding RoomType.Description}" IsReadOnly="True"/>
+        </DataGrid.Columns>
+        </DataGrid           -->
+
+
+
+
+    </Grid>
+</UserControl>

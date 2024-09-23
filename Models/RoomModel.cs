@@ -31,8 +31,6 @@ namespace SHEndevour.Models
     // Enum for Room Status
     public enum RoomStatus
     {
-        Ocupado,
-        Vacio,
         Bloqueado,
         Mantenimiento,
         OcupadoLimpio,

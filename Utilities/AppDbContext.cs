@@ -23,6 +23,7 @@ namespace SHEndevour.Utilities
             optionsBuilder.UseSqlServer(_connectionSettings.GetConnectionString());
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuración inicial de los roles
@@ -62,5 +63,9 @@ namespace SHEndevour.Utilities
 
             return base.SaveChanges();
         }
+
+        
+
+
     }
 }

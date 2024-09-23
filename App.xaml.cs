@@ -20,6 +20,33 @@ namespace SHEndevour
         {
             base.OnStartup(e);
 
+
+
+
+            // Crear el servicio y el contexto
+            using (var context = new AppDbContext())
+            {
+                try
+                {
+                    // Crear la base de datos y las tablas si no existen
+                    context.Database.EnsureCreated();
+                    Console.WriteLine("Base de datos y tablas aseguradas.");
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al conectar con la base de datos: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    
+                    Environment.Exit(1);
+                }
+            }
+
+            //Inicializador de Administracion
+            AdminUserInitializer.EnsureAdminUser();
+
+            // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
             // Leer el valor de escala desde App.config
             string scaleFactorConfig = ConfigurationManager.AppSettings["ScaleFactor"];
             double scaleFactor = double.TryParse(scaleFactorConfig, out double result) ? result : 1.0;
@@ -31,29 +58,7 @@ namespace SHEndevour
             // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
-            // Crear el servicio y el contexto
-            using (var context = new AppDbContext())
-            {
-                try
-                {
-                    // Crear la base de datos y las tablas si no existen
-                    context.Database.EnsureCreated();
-                    Console.WriteLine("Base de datos y tablas aseguradas.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al conectar con la base de datos: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    
-                    Environment.Exit(1);
-                }
-            }
 
-            // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-            //Inicializador de Administracion
-            AdminUserInitializer.EnsureAdminUser();
-
-            
 
 
         }

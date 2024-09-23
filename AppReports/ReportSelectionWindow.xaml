@@ -8,17 +8,32 @@
         mc:Ignorable="d"
         Title="ReportSelectionWindow" 
         WindowStartupLocation="CenterScreen"
-        Height="250" Width="400" 
-        Background="#2d2d2d" Foreground="white">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Text="Selecciona la tabla para generar el reporte:"/>
-        <ComboBox Name="TableSelector" Width="200" Margin="10">
-            <ComboBoxItem Content="Users" />
-            <ComboBoxItem Content="Rooms" />
-            <ComboBoxItem Content="RoomTypes" />
-        </ComboBox>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Generar Reporte" Click="GenerateReport_Click" Width="150" Margin="5"/>
+        Height="250" Width="350" materialDesign:ThemeAssist.Theme="Light"
+        Background="#f1f1f1">
+
+    <Grid>
+       
+        
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+            <TextBlock Text="Selecciona el Reporte a Generar" 
+                       FontSize="16" Margin="10"
+                       FontFamily="Verdana"/>
+            
+            <ComboBox Name="TableSelector" Width="220" Margin="10" Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                <ComboBoxItem Content="Users" />
+                <ComboBoxItem Content="Rooms" />
+                <ComboBoxItem Content="RoomTypes" />
+            </ComboBox>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Generar Reporte" Click="GenerateReport_Click" Width="150" Margin="5"/>
+            </StackPanel>
+            
         </StackPanel>
-    </StackPanel>
+
+
+    </Grid>
+
 </Window>

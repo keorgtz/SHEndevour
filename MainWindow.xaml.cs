@@ -57,6 +57,9 @@ namespace SHEndevour
                     case "Usuarios":
                         MainContent.Content = new UserView();
                         break;
+                    case "Rack":
+                        MainContent.Content = new HotelRack();
+                        break;
                     case "Configuracion":
                         MainContent.Content = new SettingView();
                         break;

@@ -1,12 +1,12 @@
 ﻿<UserControl x:Class="SHEndevour.Views.Settings.RoomSetting"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:SHEndevour.Views.Settings"
              mc:Ignorable="d" materialDesign:ThemeAssist.Theme="Light"
-             d:DesignHeight="450" d:DesignWidth="500" Background="#f1f1f1">
+             d:DesignHeight="450" d:DesignWidth="600" Background="#f1f1f1">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -18,16 +18,22 @@
 
             <RadioButton Margin="4"
                          x:Name="HabitacionesNavButton"
-                        Content="Habitaciones"
-                        Tag="Habitaciones"
-                        Click="RoomSettingNav_Click"
-                        Style="{StaticResource MaterialDesignTabRadioButton}" />
+                         Content="Habitaciones"
+                         Tag="Habitaciones"
+                         Click="RoomSettingNav_Click"
+                         Style="{StaticResource MaterialDesignTabRadioButton}" />
 
             <RadioButton Margin="4"
-                        Content="Tipo de Habitacion"
-                        Tag="HabitacionesTipos"
+                         Content="Tipo de Habitacion"
+                         Tag="HabitacionesTipos"
                          Click="RoomSettingNav_Click"
-                        Style="{StaticResource MaterialDesignTabRadioButton}" />
+                         Style="{StaticResource MaterialDesignTabRadioButton}" />
+
+            <RadioButton Margin="4"
+                         Content="Mantenimiento"
+                         Tag="Mantenimientos"
+                         Click="RoomSettingNav_Click"
+                         Style="{StaticResource MaterialDesignTabRadioButton}" />
 
         </StackPanel>
 

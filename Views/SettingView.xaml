@@ -8,6 +8,44 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="620" 
              Background="#F1f1f1">
+
+    <UserControl.Resources>
+
+        <Style x:Key="RadioBFlat" TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Foreground" Value="#f1f1f1"/>
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="15"/>
+            <!--#region -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding materialDesign:ButtonAssist.CornerRadius}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True" >
+                                <Setter Property="Foreground" Value="#001b48"/>
+                                <Setter Property="Background" Value="#019abe"/>
+                                <Setter Property="Width" Value="60"/>
+                                <Setter Property="Height" Value="60"/>
+                                <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp5"/>
+
+
+
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+    
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -20,15 +58,15 @@
 
             <StackPanel Grid.Column="0" Orientation="Vertical">
 
-                <RadioButton Content="Rooms" Tag="Rooms" Margin="5"
-                         x:Name="RoomBTNSide"
+                <RadioButton Content="Rooms" Tag="Rooms" 
+                         x:Name="RoomBTNSide" 
                          Click="SettingButton_Click"
-                         Style="{StaticResource MaterialDesignFlatButton}"/>
+                         Style="{StaticResource RadioBFlat}"/>
 
-                <RadioButton Content="General" Tag="Generals" Margin="5"
+                <RadioButton Content="General" Tag="Generals" 
                          x:Name="GeneralBTNSide"
                          Click="SettingButton_Click"
-                         Style="{StaticResource MaterialDesignFlatButton}"/>
+                         Style="{StaticResource RadioBFlat}"/>
 
             </StackPanel>
 

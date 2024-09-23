@@ -11,10 +11,10 @@
 
         <StackPanel Margin="10">
             
-            <TextBlock Text="Factor de Escala"/>
+            <TextBlock Text="Tamaño de Interfaz"/>
             
             <StackPanel Orientation="Horizontal">
-                <Slider Maximum="3.0" Minimum="0.5" TickFrequency="0.1" Width="300"
+                <Slider Maximum="1.6" Minimum="1.0" TickFrequency="0.1" Width="250"
                     Style="{StaticResource MaterialDesign3.MaterialDesignDiscreteSlider}"
                     TickPlacement="Both" Value="{Binding ScaleValue, Mode=TwoWay}" />
 

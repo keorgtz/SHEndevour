@@ -30,6 +30,9 @@
     <Compile Update="Views\HomeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\HotelRack.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +52,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Settings\Rooms\ConfigurarHabitacion.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Rooms\ConfigurarMantenimientoHabitacion.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Settings\Rooms\ConfigurarTipoDeHabitacion.xaml.cs">
@@ -86,6 +92,9 @@
     <Page Update="Views\HomeView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\HotelRack.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -105,6 +114,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\Rooms\ConfigurarHabitacion.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Rooms\ConfigurarMantenimientoHabitacion.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\Rooms\ConfigurarTipoDeHabitacion.xaml">

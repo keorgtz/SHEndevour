@@ -46,6 +46,10 @@ namespace SHEndevour.Views.Settings
                         RoomConfigureView.Content = new ConfigurarTipoDeHabitacion();
                         break;
 
+                    case "Mantenimientos":
+                        RoomConfigureView.Content = new ConfigurarMantenimientoHabitacion();
+                        break;
+
                     default:
                         // Manejar un valor de tag no esperado si es necesario
                         break;

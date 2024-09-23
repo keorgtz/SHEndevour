@@ -5,7 +5,7 @@
         Title="Añadir Usuario" Height="370" Width="500"
         WindowStartupLocation="CenterScreen"
         Background="#F1F1F1" materialDesign:ThemeAssist.Theme="Light">
-    
+
     <Grid>
 
         <Grid.RowDefinitions>

@@ -6,13 +6,16 @@
         xmlns:local="clr-namespace:SHEndevour.Views.Settings.Rooms.Dialogs"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Añadir Habitación" Height="260" Width="300"
+        Title="Añadir Habitación" Height="300" Width="350"
         WindowStartupLocation="CenterScreen"
         Background="#f1f1f1" materialDesign:ThemeAssist.Theme="Light">
 
-    
+
 
     <Grid>
+
+
+
         <StackPanel>
             <StackPanel>
                 <TextBlock Text="ENDEVØUR" TextAlignment="Center"
@@ -27,11 +30,11 @@
             </StackPanel>
 
             <StackPanel  Margin="10" HorizontalAlignment="Center">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
                     <TextBox x:Name="RoomKeyTextBox" Padding="7" Margin="5,5,5,5"
                          materialDesign:HintAssist.Hint="Clave" 
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         VerticalAlignment="Top"
+                         VerticalAlignment="Top" MaxLength="10"
                          TextChanged="OnTextChanged" Height="30" Width="80"/>
 
                     <ComboBox x:Name="RoomTypComboBox" ItemsSource="{Binding RoomTypes}"
@@ -60,7 +63,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" 
-                    Margin="10,5,10,5"
+                    Margin="10,5,20,5"
                     HorizontalAlignment="Right">
 
                 <Button Content="Cancelar"

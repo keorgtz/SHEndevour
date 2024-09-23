@@ -10,7 +10,7 @@ namespace SHEndevour.Views
 {
     public partial class UserView : UserControl
     {
-        private string _currentSearchColumn = "Username"; // Columna por defecto para la búsqueda
+         // Columna por defecto para la búsqueda
         public UserView()
         {
             InitializeComponent();

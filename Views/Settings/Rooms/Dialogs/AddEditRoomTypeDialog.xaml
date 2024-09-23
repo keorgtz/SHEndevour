@@ -35,11 +35,11 @@
                 <TextBox x:Name="RoomTypeKeyTextBox" Padding="7" Margin="5"
                      materialDesign:HintAssist.Hint="Clave de Tipo" 
                      Style="{StaticResource MaterialDesignFilledTextBox}"
-                     VerticalAlignment="Top"
+                     VerticalAlignment="Top" MaxLength="5"
                      TextChanged="OnTextChanged" Height="30" Width="100"/>
 
                 <TextBox x:Name="RoomTypeDescriptionBox" 
-                         Padding="7" Margin="5"
+                         Padding="7" Margin="5" MaxLength="25"
                          AcceptsReturn="True"
                          VerticalScrollBarVisibility="Auto"
                          materialDesign:HintAssist.Hint="Description"
@@ -98,7 +98,8 @@
                                     <TextBox x:Name="SingleTextBox" Padding="5" Margin="5"
                                          materialDesign:HintAssist.Hint="Normal" 
                                          Style="{StaticResource MaterialDesignTextBox}"
-                                         VerticalAlignment="Top"
+                                         VerticalAlignment="Top" 
+                                         MaxLength="10"
                                          TextChanged="OnTextChanged"/>
 
                                 </StackPanel>
@@ -111,6 +112,7 @@
                                          materialDesign:HintAssist.Hint="Minima" 
                                          Style="{StaticResource MaterialDesignTextBox}"
                                          VerticalAlignment="Top"
+                                             MaxLength="10"
                                          TextChanged="OnTextChanged"/>
 
                                 </StackPanel>
@@ -134,7 +136,7 @@
                                     <TextBox x:Name="DoubleTextBox" Padding="5" Margin="5"
                                          materialDesign:HintAssist.Hint="Normal" 
                                          Style="{StaticResource MaterialDesignTextBox}"
-                                         VerticalAlignment="Top"
+                                         VerticalAlignment="Top" MaxLength="10"
                                          TextChanged="OnTextChanged"/>
 
                                 </StackPanel>
@@ -146,7 +148,7 @@
                                     <TextBox x:Name="DoubleMinTextBox" Padding="5" Margin="5"
                                          materialDesign:HintAssist.Hint="Minima" 
                                          Style="{StaticResource MaterialDesignTextBox}"
-                                         VerticalAlignment="Top"
+                                         VerticalAlignment="Top" MaxLength="10"
                                          TextChanged="OnTextChanged"/>
 
                                 </StackPanel>
@@ -170,7 +172,7 @@
                                     <TextBox x:Name="TripleTextBox" Padding="5" Margin="5"
                                          materialDesign:HintAssist.Hint="Normal" 
                                          Style="{StaticResource MaterialDesignTextBox}"
-                                         VerticalAlignment="Top"
+                                         VerticalAlignment="Top" MaxLength="10"
                                          TextChanged="OnTextChanged"/>
 
                                 </StackPanel>
@@ -182,7 +184,7 @@
                                     <TextBox x:Name="TripleMinTextBox" Padding="5" Margin="5"
                                          materialDesign:HintAssist.Hint="Minima" 
                                          Style="{StaticResource MaterialDesignTextBox}"
-                                         VerticalAlignment="Top"
+                                         VerticalAlignment="Top" MaxLength="10"
                                          TextChanged="OnTextChanged"/>
 
                                 </StackPanel>
@@ -206,7 +208,7 @@
                                     <TextBox x:Name="QuadrupleTextBox" Padding="5" Margin="5"
                                          materialDesign:HintAssist.Hint="Normal" 
                                          Style="{StaticResource MaterialDesignTextBox}"
-                                         VerticalAlignment="Top"
+                                         VerticalAlignment="Top" MaxLength="10"
                                          TextChanged="OnTextChanged"/>
 
                                 </StackPanel>
@@ -218,7 +220,7 @@
                                     <TextBox x:Name="QuadrupleMinTextBox" Padding="5" Margin="5"
                                          materialDesign:HintAssist.Hint="Minima" 
                                          Style="{StaticResource MaterialDesignTextBox}"
-                                         VerticalAlignment="Top"
+                                         VerticalAlignment="Top" MaxLength="10"
                                          TextChanged="OnTextChanged"/>
 
                                 </StackPanel>

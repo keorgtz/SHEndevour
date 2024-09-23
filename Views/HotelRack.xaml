@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="SHEndevour.Views.HotelRack"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:SHEndevour.ViewModels"
+             xmlns:local="clr-namespace:SHEndevour.Views"
+             xmlns:ColorConvert="clr-namespace:SHEndevour"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:RackHotelViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800" Background="#f1f1f1">
+
+
+    <UserControl.DataContext>
+        <vm:RackHotelViewModel />
+    </UserControl.DataContext>
+
+
+    <UserControl.Resources>
+        <ColorConvert:RoomStatusToColorConverter x:Key="RoomStatusToColorConverter" />
+    </UserControl.Resources>
+
+
+
+
+    <StackPanel>
+        <!-- Botón para habilitar la edición de posiciones -->
+        <Button Content="Editar Posiciones"
+                HorizontalAlignment="Right"
+                Width="200" Margin="10"
+                Command="{Binding EditRoomPositionsCommand}" />
+
+        <!-- Grid de cuartos -->
+        <ItemsControl ItemsSource="{Binding Rooms}">
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="8" />
+                    <!-- Ajusta el número de columnas -->
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+
+            <!-- Plantilla para cada cuarto -->
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Width="100" Height="100" Margin="5"
+                            BorderBrush="Black" BorderThickness="1"
+                            Background="{Binding RoomStatus, Converter={StaticResource RoomStatusToColorConverter}}">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <!-- Clave de la habitación -->
+                            <TextBlock Text="{Binding RoomKey}" 
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Bold" />
+                            <TextBlock Text="{Binding RoomType.RoomTypeKey}" 
+                                       HorizontalAlignment="Center"
+                                       FontWeight="DemiBold" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+
+        </ItemsControl>
+    </StackPanel>
+
+</UserControl>

@@ -15,9 +15,7 @@
             <!-- Definir el valor de GlobalScaleFactor -->
             <sys:Double x:Key="GlobalScaleFactor">1.0</sys:Double>
 
+
         </ResourceDictionary>
-        
-        
-        
     </Application.Resources>
 </Application>

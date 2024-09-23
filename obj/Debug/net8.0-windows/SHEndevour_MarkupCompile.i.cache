@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 K:\0Dev\Code\Main\SHEndevour\SHEndevour\App.xaml
-181192176000
+20-1588786947
 
-431921772654
+461517859171
 300-559736091
-AppReports\ReportSelectionWindow.xaml;AppReports\ReportWindow.xaml;MainWindow.xaml;Resources\Styles.xaml;Views\AddEditUserDialog.xaml;Views\HomeView.xaml;Views\LoginWindow.xaml;Views\ReportDesignerWindow.xaml;Views\Reports\Users\UserReportWindow.xaml;Views\Settings\GeneralSetting.xaml;Views\Settings\General\ConfigurarInterfaz.xaml;Views\Settings\RoomSetting.xaml;Views\Settings\Rooms\ConfigurarHabitacion.xaml;Views\Settings\Rooms\ConfigurarTipoDeHabitacion.xaml;Views\Settings\Rooms\Dialogs\AddEditRoomDialog.xaml;Views\Settings\Rooms\Dialogs\AddEditRoomTypeDialog.xaml;Views\SettingView.xaml;Views\UserView.xaml;
+AppReports\ReportSelectionWindow.xaml;AppReports\ReportWindow.xaml;MainWindow.xaml;Resources\Styles.xaml;Views\AddEditUserDialog.xaml;Views\HomeView.xaml;Views\HotelRack.xaml;Views\LoginWindow.xaml;Views\ReportDesignerWindow.xaml;Views\Reports\Users\UserReportWindow.xaml;Views\Settings\GeneralSetting.xaml;Views\Settings\General\ConfigurarInterfaz.xaml;Views\Settings\RoomSetting.xaml;Views\Settings\Rooms\ConfigurarHabitacion.xaml;Views\Settings\Rooms\ConfigurarMantenimientoHabitacion.xaml;Views\Settings\Rooms\ConfigurarTipoDeHabitacion.xaml;Views\Settings\Rooms\Dialogs\AddEditRoomDialog.xaml;Views\Settings\Rooms\Dialogs\AddEditRoomTypeDialog.xaml;Views\SettingView.xaml;Views\UserView.xaml;
 
-False
+True
 

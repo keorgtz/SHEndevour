@@ -1,5 +1,6 @@
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\bin\Debug\net8.0-windows\SHEndevour.exe
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\bin\Debug\net8.0-windows\appsettings.json
+D:\0Dev\Code\Main\SHEndevour\SHEndevour\bin\Debug\net8.0-windows\SHEndevour.dll.config
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\bin\Debug\net8.0-windows\SHEndevour.deps.json
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\bin\Debug\net8.0-windows\SHEndevour.runtimeconfig.json
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\bin\Debug\net8.0-windows\SHEndevour.dll
@@ -253,11 +254,15 @@ D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\AppReports\Repo
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\MainWindow.g.cs
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\AddEditUserDialog.g.cs
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\HomeView.g.cs
+D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\HotelRack.g.cs
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\LoginWindow.g.cs
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\ReportDesignerWindow.g.cs
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Reports\Users\UserReportWindow.g.cs
+D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\GeneralSetting.g.cs
+D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\General\ConfigurarInterfaz.g.cs
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\RoomSetting.g.cs
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\Rooms\ConfigurarHabitacion.g.cs
+D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\Rooms\ConfigurarMantenimientoHabitacion.g.cs
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\Rooms\ConfigurarTipoDeHabitacion.g.cs
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\Rooms\Dialogs\AddEditRoomDialog.g.cs
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\Rooms\Dialogs\AddEditRoomTypeDialog.g.cs
@@ -272,11 +277,15 @@ D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\AppReports\Repo
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\AppReports\ReportWindow.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\MainWindow.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\HomeView.baml
+D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\HotelRack.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\LoginWindow.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\ReportDesignerWindow.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Reports\Users\UserReportWindow.baml
+D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\GeneralSetting.baml
+D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\General\ConfigurarInterfaz.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\RoomSetting.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\Rooms\ConfigurarHabitacion.baml
+D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\Rooms\ConfigurarMantenimientoHabitacion.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\Rooms\ConfigurarTipoDeHabitacion.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\Rooms\Dialogs\AddEditRoomDialog.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\Settings\Rooms\Dialogs\AddEditRoomTypeDialog.baml
@@ -284,6 +293,7 @@ D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\SettingVi
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\Views\UserView.baml
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\SHEndevour.g.resources
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\SHEndevour.AppReports.AllAppReports.AllRoomsReport.resources
+D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\SHEndevour.AppReports.AllAppReports.AllRoomTypesReport.resources
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\SHEndevour.AppReports.AllAppReports.AllUsersReport.resources
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\SHEndevour.csproj.GenerateResource.cache
 D:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\SHEndevour.GeneratedMSBuildEditorConfig.editorconfig
