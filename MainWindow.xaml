@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
-        Title="Endevour" Height="510" Width="865" MinWidth="865" Background="#f1f1f1">
+        Title="Endevour" Height="600" Width="865" MinWidth="865" Background="#f1f1f1">
 
 
 
@@ -55,8 +55,8 @@
                             <Trigger Property="IsChecked" Value="True" >
                                 <Setter Property="Foreground" Value="#001b48"/>
                                 <Setter Property="Background" Value="#019abe"/>
-                                <Setter Property="Width" Value="60"/>
-                                <Setter Property="Height" Value="60"/>
+                                <Setter Property="Width" Value="70"/>
+                                <Setter Property="Height" Value="70"/>
                                 <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp5"/>
 
 
@@ -89,7 +89,7 @@
 
         <!-- Definimos dos columnas, la primera es el Sidebar, la segunda es el contenido -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto" x:Name="SidebarColumn"/>
             <!-- Ancho del Sidebar -->
             <ColumnDefinition Width="*"/>
             <!-- Resto de la página -->
@@ -101,10 +101,10 @@
             materialDesign:ElevationAssist.Elevation="Dp4"
             ClipToBounds="False" Background="#013d5a"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-            CornerRadius="30">
+            CornerRadius="15">
 
             <!-- Sidebar -->
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" x:Name="SideGridAligment">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -113,12 +113,13 @@
 
 
 
-                <StackPanel Orientation="Vertical" Grid.Row="0">
+                <StackPanel Orientation="Vertical">
 
                     <materialDesign:Card
                         materialDesign:ElevationAssist.Elevation="Dp4"
                         ClipToBounds="False" Background="#013d5a"
-                        UniformCornerRadius="30"
+                        UniformCornerRadius="15"
+                        x:Name="LoggedUserField"
                         Width="220" Height="100">
 
                         <StackPanel Orientation="Horizontal" Margin="20">
@@ -151,77 +152,95 @@
 
 
 
-                    <RadioButton Tag="Inicio" Width="180" Height="40"
-                                 Click="NavigationButton_Click" Margin="10,5,10,5"
+                    <RadioButton Tag="Inicio" Width="auto" Height="auto" Padding="0" Margin="6"
+                                 Click="NavigationButton_Click" HorizontalAlignment="Left"
                                  Style="{StaticResource RoundBFlat}">
-                        <StackPanel Width="170" Orientation="Horizontal">
-                            <materialDesign:PackIcon Width="18" Height="18" VerticalAlignment="Center" Kind="HomeVariantOutline"/>
-                            <TextBlock Text="Inicio" FontSize="18"
-                                       Margin="5,0,0,0"
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="HomeVariantOutline"/>
+                            <TextBlock Text="Inicio" FontSize="18" 
+                                       Margin="15,0,110,0" x:Name="TextInicio"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
                     </RadioButton>
 
-                    <RadioButton Tag="Usuarios" Width="180" Height="40" Margin="10,5,10,5"
-                                 Click="NavigationButton_Click"
+                    <RadioButton Tag="Usuarios" Width="auto" Height="auto" Padding="0" Margin="6"
+                                 Click="NavigationButton_Click" HorizontalAlignment="Left"
                                  Style="{StaticResource RoundBFlat}">
-                        <StackPanel Width="170" Orientation="Horizontal">
-                            <materialDesign:PackIcon Width="18" Height="18" VerticalAlignment="Center" Kind="AccountGroupOutline"/>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="AccountGroupOutline"/>
                             <TextBlock Text="Usuarios" FontSize="18"
-                                       Margin="5,0,0,0"
+                                       Margin="15,0,85,0" x:Name="TextUsuarios"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
                     </RadioButton>
 
-                    <RadioButton Tag="Rack" Width="180" Height="40"
-                                 Click="NavigationButton_Click" Margin="10,5,10,5"
+                    <RadioButton Tag="Rack" Width="auto" Height="auto" Padding="0" Margin="6"
+                                 Click="NavigationButton_Click"  HorizontalAlignment="Left"
                                  IsChecked="{x:Null}"
                                  Style="{StaticResource RoundBFlat}">
-                        <StackPanel Width="170" Orientation="Horizontal">
-                            <materialDesign:PackIcon Width="18" Height="18" VerticalAlignment="Center" Kind="RoomService"/>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="RoomService"/>
                             <TextBlock Text="Rack" FontSize="18"
-                                       Margin="5,0,0,0"
+                                       Margin="15,0,115,0" x:Name="TextRack"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
                     </RadioButton>
 
-                    <RadioButton Tag="Configuracion" Width="180" Height="40"
-                                 Click="NavigationButton_Click" Margin="10,5,10,5"
+                    <RadioButton Tag="Configuracion" Width="auto" Height="auto" Padding="0" Margin="6"
+                                 Click="NavigationButton_Click" HorizontalAlignment="Left"
                                  IsChecked="{x:Null}"
                                  Style="{StaticResource RoundBFlat}">
-                        <StackPanel Width="170" Orientation="Horizontal">
-                            <materialDesign:PackIcon Width="18" Height="18" VerticalAlignment="Center" Kind="CogOutline"/>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="CogOutline"/>
                             <TextBlock Text="Configuracion" FontSize="18"
-                                       Margin="5,0,0,0"
+                                       Margin="15,0,37,0" x:Name="TextConfig"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
                     </RadioButton>
 
-                    <RadioButton Width="180" Height="40" Margin="10,5,10,5"
-                                 Click="ViewReport_Click"
+                    <RadioButton Width="auto" Height="auto" Padding="0" Margin="6"
+                                 Click="ViewReport_Click" HorizontalAlignment="Left"
                                  Style="{StaticResource RoundBFlat}">
-                        <StackPanel Width="170" Orientation="Horizontal">
-                            <materialDesign:PackIcon Width="18" Height="18" VerticalAlignment="Center" Kind="FileExcel"/>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="FileExcel"/>
                             <TextBlock Text="Reportes" FontSize="18"
-                                       Margin="5,0,0,0"
+                                       Margin="15,0,80,0" x:Name="TextReportes"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
                     </RadioButton>
+
+                    
 
                 </StackPanel>
 
+                
+
                 <StackPanel Grid.Row="1">
-                    <Button Width="150" Height="30" Margin="0,10,0,10" BorderThickness="0"
-                            Style="{StaticResource  MaterialDesignFlatButton}"
-                            VerticalAlignment="Bottom"
-                            Click="LogoutButton_Click">
-                        <StackPanel Width="140" Orientation="Horizontal">
-                            <materialDesign:PackIcon Width="20" Height="20" Foreground="Red" VerticalAlignment="Center" Kind="Logout"/>
-                            <TextBlock Text="Cerrar Sesion" FontSize="15"
-                                       Margin="5,0,0,0" Foreground="Red"
+                    <Button  Width="auto" Height="auto" Padding="0" Margin="6" 
+                            Style="{StaticResource RoundFlatB}"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                            Click="ToggleSidebar_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="25" Height="25" Margin="10" Kind="ChevronDoubleLeft" VerticalAlignment="Center" x:Name="ToggleIcon"/>
+                            <TextBlock Text="Colapsar" FontSize="15"
+                                       Margin="15,0,95,0" x:Name="TextColapsar"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
+
+                    <Button  Width="auto" Height="auto" Padding="0" Margin="6,5,6,10" 
+                            Style="{StaticResource RoundFlatB}"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                            Click="LogoutButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="25" Height="25" Margin="6" Padding="0" Foreground="Red" VerticalAlignment="Center" Kind="Logout"/>
+                            <TextBlock Text="Cerrar Sesion" FontSize="15"
+                                       Margin="15,0,65,0" Foreground="Red" 
+                                       x:Name="TextLogout"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
                 </StackPanel>
 
             </Grid>

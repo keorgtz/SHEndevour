@@ -9,12 +9,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using Button = System.Windows.Controls.Button;
 using MessageBox = System.Windows.MessageBox;
 using Application = System.Windows.Application;
+using System.Windows.Media.Animation;
 
 namespace SHEndevour
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
 
@@ -26,15 +25,7 @@ namespace SHEndevour
             // Establecer el DataContext como la clase App
             DataContext = this;
 
-            // Cargar los datos del usuario logueado
-            //if (App.CurrentUser != null)
-            //{
-            //    UsernameTextBlock.Text = $"Username: {App.CurrentUser.Username}";
-            //}
-            //else
-            //{
-            //    UsernameTextBlock.Text = "No user logged in";
-            //}
+           
 
         }
 
@@ -104,6 +95,56 @@ namespace SHEndevour
             // Cierra la ventana principal
             this.Close();
         }
+
+
+
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+        private bool isSidebarCollapsed = false;
+
+        private void ToggleSidebar_Click(object sender, RoutedEventArgs e)
+        {
+            if (isSidebarCollapsed)
+            {
+                // Expande el sidebar
+                SidebarColumn.Width = GridLength.Auto; // Tamaño original
+                TextInicio.Visibility = Visibility.Visible; // Mostrar texto
+                TextUsuarios.Visibility = Visibility.Visible; // Mostrar texto
+                TextRack.Visibility = Visibility.Visible; // Mostrar texto
+                TextConfig.Visibility = Visibility.Visible; // Mostrar texto
+                TextReportes.Visibility = Visibility.Visible; // Mostrar texto
+                TextColapsar.Visibility = Visibility.Visible; // Mostrar texto
+                TextLogout.Visibility = Visibility.Visible; // Mostrar texto
+                LoggedUserField.Visibility = Visibility.Visible; // Mostrar texto
+
+                ToggleIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ChevronDoubleLeft;
+            }
+            else
+            {
+                // Colapsa el sidebar
+                SidebarColumn.Width = GridLength.Auto; // Solo mostrar iconos
+                TextInicio.Visibility = Visibility.Collapsed; // Ocultar texto
+                TextUsuarios.Visibility = Visibility.Collapsed; // Mostrar texto
+                TextRack.Visibility = Visibility.Collapsed; // Mostrar texto
+                TextConfig.Visibility = Visibility.Collapsed; // Mostrar texto
+                TextReportes.Visibility = Visibility.Collapsed; // Mostrar texto
+                TextColapsar.Visibility = Visibility.Collapsed; // Mostrar texto
+                TextLogout.Visibility = Visibility.Collapsed; // Mostrar texto
+                LoggedUserField.Visibility = Visibility.Collapsed; // Mostrar texto
+
+                ToggleIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ChevronDoubleRight;
+            }
+
+            isSidebarCollapsed = !isSidebarCollapsed; // Alternar estado
+        }
+
+
+
+
+
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
 
     }
 }

@@ -21,48 +21,176 @@
         <ColorConvert:RoomStatusToColorConverter x:Key="RoomStatusToColorConverter" />
     </UserControl.Resources>
 
+    <Grid>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
 
+        <Grid Grid.Column="0">
 
-    <StackPanel>
-        <!-- Botón para habilitar la edición de posiciones -->
-        <Button Content="Editar Posiciones"
-                HorizontalAlignment="Right"
-                Width="200" Margin="10"
-                Command="{Binding EditRoomPositionsCommand}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-        <!-- Grid de cuartos -->
-        <ItemsControl ItemsSource="{Binding Rooms}">
+            <materialDesign:ColorZone Grid.Row="0" 
+                                      Margin="5"
+                                      CornerRadius="10"
+                                      Background="#013d5a"
+                                      materialDesign:ElevationAssist.Elevation="Dp1"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch">
+                <StackPanel>
 
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="8" />
-                    <!-- Ajusta el número de columnas -->
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+                    <TextBlock Text="Rack de Habitaciones" 
+                               HorizontalAlignment="Center" 
+                               FontFamily="Montserrat"
+                               Margin="5"
+                               FontWeight="Bold"
+                               FontSize="20"/>
 
+                </StackPanel>
+            </materialDesign:ColorZone>
 
-            <!-- Plantilla para cada cuarto -->
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border Width="100" Height="100" Margin="5"
-                            BorderBrush="Black" BorderThickness="1"
-                            Background="{Binding RoomStatus, Converter={StaticResource RoomStatusToColorConverter}}">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <!-- Clave de la habitación -->
-                            <TextBlock Text="{Binding RoomKey}" 
-                                       HorizontalAlignment="Center"
-                                       FontWeight="Bold" />
-                            <TextBlock Text="{Binding RoomType.RoomTypeKey}" 
-                                       HorizontalAlignment="Center"
-                                       FontWeight="DemiBold" />
+                    <Grid Grid.Row="1" Margin="5,0,5,0">
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        
+
+                        <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal">
+                            <TextBlock Text="Vacias Limpias" FontFamily="Montserrat" FontWeight="Bold" Foreground="Green"/>
+                            <TextBlock Text="{Binding VLRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="Green"/>
                         </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
+
+                        <StackPanel Grid.Column="1" Margin="5" Orientation="Horizontal">
+                            <TextBlock Text="Vacias Sucias" FontFamily="Montserrat" FontWeight="Bold" Foreground="Orange"/>
+                            <TextBlock Text="{Binding VSRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="Orange"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Margin="5" Orientation="Horizontal">
+                            <TextBlock Text="Ocupadas Limpias" FontFamily="Montserrat" FontWeight="Bold" Foreground="#00589B"/>
+                            <TextBlock Text="{Binding OLRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="#00589B"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="3" Margin="5" Orientation="Horizontal">
+                            <TextBlock Text="Ocupadas Sucias" FontFamily="Montserrat" FontWeight="Bold" Foreground="Cyan"/>
+                            <TextBlock Text="{Binding OSRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="Cyan"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4" Margin="5" Orientation="Horizontal">
+                            <TextBlock Text="En Mantenimiento" FontFamily="Montserrat" FontWeight="Bold" Foreground="MediumPurple"/>
+                            <TextBlock Text="{Binding MRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="MediumPurple"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="5" Margin="5" Orientation="Horizontal">
+                            <TextBlock Text="Bloqueadas" FontFamily="Montserrat" FontWeight="Bold" Foreground="Purple"/>
+                            <TextBlock Text="{Binding BRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="Purple"/>
+                        </StackPanel>
 
 
-        </ItemsControl>
-    </StackPanel>
+                    </Grid>
+
+
+            <materialDesign:ColorZone Grid.Row="2"
+                                      Background="#FFFFFF"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch"
+                                      Margin="5"
+                                      CornerRadius="2"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                      materialDesign:ElevationAssist.Elevation="Dp2">
+
+                
+                
+                <StackPanel>
+
+                    <!-- Grid de cuartos -->
+                    <ItemsControl ItemsSource="{Binding RoomsView}">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="8" />
+                                <!-- Ajusta el número de columnas -->
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+
+                        <!-- Plantilla para cada cuarto -->
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="10">
+                                    <materialDesign:ColorZone materialDesign:ElevationAssist.Elevation="Dp2" 
+                                                 Width="auto" Height="60" Margin="5"
+                                                 CornerRadius="5"
+                                                 Background="{Binding RoomStatus, Converter={StaticResource RoomStatusToColorConverter}}"
+                                                 Foreground="{Binding RoomStatus, Converter={StaticResource RoomStatusToColorConverter}, ConverterParameter='Foreground'}"
+                                                 materialDesign:ThemeAssist.Theme="Light">
+
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                                            <!-- Clave de la habitación -->
+                                            <TextBlock Text="{Binding RoomKey}" 
+                                      HorizontalAlignment="Center"
+                                      FontWeight="Bold" FontSize="16" FontFamily="Montserrat"/>
+
+                                            <TextBlock Text="{Binding RoomType.RoomTypeKey}" 
+                                      HorizontalAlignment="Center"
+                                      FontWeight="DemiBold" FontSize="16" FontFamily="Montserrat"/>
+
+                                        </StackPanel>
+
+                                    </materialDesign:ColorZone>
+
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+
+                    </ItemsControl>
+                </StackPanel>
+
+            </materialDesign:ColorZone>
+
+
+
+            <materialDesign:ColorZone Grid.Row="3"
+                                      Background="Teal"
+                                      Margin="5"
+                                      CornerRadius="2"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch">
+                
+                <StackPanel Margin="10,5,10,5">
+
+                    
+                    
+                </StackPanel>
+                
+            </materialDesign:ColorZone>
+
+            
+            
+            
+
+        </Grid>
+
+ 
+
+    </Grid>
+
+
+
 
 </UserControl>

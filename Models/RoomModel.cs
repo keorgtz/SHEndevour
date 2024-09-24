@@ -26,6 +26,9 @@ namespace SHEndevour.Models
         public RoomTypeModel? RoomType { get; set; }
 
         public bool IsSelected { get; set; }
+
+        public double X { get; set; }
+        public double Y { get; set; }
     }
 
     // Enum for Room Status

@@ -4,7 +4,9 @@ using SHEndevour.Models;
 using SHEndevour.Utilities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,32 +16,79 @@ namespace SHEndevour.ViewModels
     {
         private readonly AppDbContext _context;
 
-        private ObservableCollection<RoomModel> _rooms;
-        public ObservableCollection<RoomModel> Rooms
+        // Propiedades para las cantidades de cuartos por estado
+        private int _cleanVacantRoomCount;
+        public int VLRoomCount
         {
-            get => _rooms;
-            set => SetProperty(ref _rooms, value);
+            get => _cleanVacantRoomCount;
+            set => SetProperty(ref _cleanVacantRoomCount, value);
+        }
+
+        private int _dirtyVacantRoomCount;
+        public int VSRoomCount
+        {
+            get => _dirtyVacantRoomCount;
+            set => SetProperty(ref _dirtyVacantRoomCount, value);
+        }
+
+        private int _occupiedCleanRoomCount;
+        public int OLRoomCount
+        {
+            get => _occupiedCleanRoomCount;
+            set => SetProperty(ref _occupiedCleanRoomCount, value);
+        }
+
+        private int _occupiedDirtyRoomCount;
+        public int OSRoomCount
+        {
+            get => _occupiedDirtyRoomCount;
+            set => SetProperty(ref _occupiedDirtyRoomCount, value);
+        }
+
+        private int _maintenanceRoomCount;
+        public int MRoomCount
+        {
+            get => _maintenanceRoomCount;
+            set => SetProperty(ref _maintenanceRoomCount, value);
+        }
+
+        private int _blockedRoomCount;
+        public int BRoomCount
+        {
+            get => _blockedRoomCount;
+            set => SetProperty(ref _blockedRoomCount, value);
+        }
+
+        // Cambiamos a ICollectionView para poder ordenar
+        private ICollectionView _roomsView;
+        public ICollectionView RoomsView
+        {
+            get => _roomsView;
+            set => SetProperty(ref _roomsView, value);
         }
 
         public ICommand ChangeRoomStatusCommand { get; }
-        public ICommand EditRoomPositionsCommand { get; }
 
         public RackHotelViewModel()
         {
             // Inicializar AppDbContext
             _context = new AppDbContext();
 
-            // Cargar los cuartos desde la base de datos
-            Rooms = new ObservableCollection<RoomModel>(LoadRoomsFromDatabase());
+            // Cargar y ordenar los cuartos desde la base de datos
+            var roomsList = LoadRoomsFromDatabase();
+
+            // Crear la vista ordenada de los cuartos
+            RoomsView = CollectionViewSource.GetDefaultView(roomsList);
+            RoomsView.SortDescriptions.Add(new SortDescription(nameof(RoomModel.RoomKey), ListSortDirection.Ascending));
+
+            // Calcular las cantidades de cuartos por estado
+            CalculateRoomStatusCounts(roomsList);
 
             // Comandos
             ChangeRoomStatusCommand = new RelayCommand<RoomModel>(OnChangeRoomStatus);
-            EditRoomPositionsCommand = new RelayCommand(OnEditRoomPositions);
         }
 
-        /// <summary>
         /// Cargar los cuartos desde la base de datos
-        /// </summary>
         private IEnumerable<RoomModel> LoadRoomsFromDatabase()
         {
             try
@@ -55,10 +104,18 @@ namespace SHEndevour.ViewModels
             }
         }
 
-        /// <summary>
+        /// Función para calcular la cantidad de cuartos en cada estado
+        private void CalculateRoomStatusCounts(IEnumerable<RoomModel> rooms)
+        {
+            VLRoomCount = rooms.Count(r => r.RoomStatus == RoomStatus.VacioLimpio);
+            VSRoomCount = rooms.Count(r => r.RoomStatus == RoomStatus.VacioSucio);
+            OLRoomCount = rooms.Count(r => r.RoomStatus == RoomStatus.OcupadoLimpio);
+            OSRoomCount = rooms.Count(r => r.RoomStatus == RoomStatus.OcupadoSucio);
+            MRoomCount = rooms.Count(r => r.RoomStatus == RoomStatus.Mantenimiento);
+            BRoomCount = rooms.Count(r => r.RoomStatus == RoomStatus.Bloqueado);
+        }
+
         /// Cambiar el estatus de la habitación
-        /// </summary>
-        /// <param name="room"></param>
         private void OnChangeRoomStatus(RoomModel room)
         {
             try
@@ -76,22 +133,16 @@ namespace SHEndevour.ViewModels
                 // Guardar los cambios en la base de datos
                 _context.RoomTable.Update(room);
                 _context.SaveChanges();
+
+                // Volver a calcular las cantidades de cuartos por estado
+                var roomsList = LoadRoomsFromDatabase();
+                CalculateRoomStatusCounts(roomsList);
             }
             catch (System.Exception ex)
             {
                 // Manejar errores al cambiar el estatus
                 System.Console.WriteLine($"Error cambiando estatus de la habitación: {ex.Message}");
             }
-        }
-
-        /// <summary>
-        /// Habilitar la edición de posiciones visuales de los cuartos
-        /// </summary>
-        private void OnEditRoomPositions()
-        {
-            // Aquí puedes añadir la lógica que permita habilitar la reubicación visual de los cuartos
-            // Por ejemplo, podrías cambiar un flag en la UI para habilitar el "arrastrar y soltar"
-            System.Console.WriteLine("Modo de edición de posiciones habilitado.");
         }
     }
 }
