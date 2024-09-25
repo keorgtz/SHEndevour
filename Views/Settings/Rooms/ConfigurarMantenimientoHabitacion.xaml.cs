@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SHEndevour.ViewModels;
+using SHEndevour.ViewModels.Settings.Rooms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

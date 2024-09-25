@@ -33,6 +33,8 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         [ObservableProperty]
         private bool isPopupOpen;
 
+
+
         // Comandos
         public ICommand AddRoomCommand { get; }
         public ICommand ViewRoomCommand { get; }
@@ -115,12 +117,12 @@ namespace SHEndevour.ViewModels.Settings.Rooms
 
                     using (var dbContext = new AppDbContext())
                     {
-                        // Busca en la tabla `RoomTypeTable` del contexto de base de datos (`dbContext`)
-                        // la entidad `RoomTypeModel` que tiene el mismo `Id` que la propiedad `RoomTypeId`
-                        // de la habitación actualizada (`updatedRoom`), y luego asigna esa entidad `RoomTypeModel`
-                        // encontrada a la propiedad `RoomType` de la habitación (`updatedRoom`).
-                        // Esto asegura que la propiedad de navegación `RoomType` esté correctamente
-                        // relacionada con la entidad `RoomTypeModel` correspondiente antes de guardar
+                        // Busca en la tabla RoomTypeTable del contexto de base de datos (dbContext)
+                        // la entidad RoomTypeModel que tiene el mismo Id que la propiedad RoomTypeId
+                        // de la habitación actualizada (updatedRoom), y luego asigna esa entidad RoomTypeModel
+                        // encontrada a la propiedad RoomType de la habitación (updatedRoom).
+                        // Esto asegura que la propiedad de navegación RoomType esté correctamente
+                        // relacionada con la entidad RoomTypeModel correspondiente antes de guardar
                         // los cambios en la base de datos.
 
                         // Asociar la entidad RoomType  
@@ -248,14 +250,14 @@ namespace SHEndevour.ViewModels.Settings.Rooms
 
                     LoadRooms();
                     MessageBox.Show("Habitación actualizada con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    
+
                 }
-                
+
                 IsPopupOpen = false;
 
             }
 
-            
+
         }
         #endregion
     }

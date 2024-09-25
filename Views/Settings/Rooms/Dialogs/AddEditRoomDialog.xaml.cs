@@ -40,7 +40,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                 AddEditSubtitle.Text = "Agregar una Nueva Habitación";
             }
 
-            
+
 
             DataContext = Room;
             Room.IsSelected = false;
@@ -55,11 +55,11 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                 RoomTypComboBox.ItemsSource = roomTypes;
                 RoomTypComboBox.DisplayMemberPath = "Description";
                 RoomTypComboBox.SelectedValuePath = "Id";
-                
+
             }
         }
 
-       
+
         private void LoadRoomStatuses()
         {
             RoomStatusComboBox.ItemsSource = Enum.GetValues(typeof(RoomStatus)).Cast<RoomStatus>();
@@ -168,7 +168,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                                RoomKeyTextBox.Text.Length <= 10;
 
             AddButton.IsEnabled = isFormValid;
-            
+
         }
 
         private void OnTextChanged(object sender, RoutedEventArgs e)

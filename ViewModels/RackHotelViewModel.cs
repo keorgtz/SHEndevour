@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using SHEndevour.Models;
 using SHEndevour.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -16,7 +17,29 @@ namespace SHEndevour.ViewModels
     {
         private readonly AppDbContext _context;
 
+        // Propiedad para el filtro de RoomStatus
+        private RoomStatus? _roomStatusFilter;
+        public RoomStatus? RoomStatusFilter
+        {
+            get => _roomStatusFilter;
+            set
+            {
+                if (SetProperty(ref _roomStatusFilter, value))
+                {
+                    // Aplica el filtro cuando se cambia la selección
+                    ApplyRoomStatusFilter();
+                }
+            }
+        }
+
+        // Lista para los estados del ComboBox (sin la opción "Todos")
+        public ObservableCollection<RoomStatus> RoomStatusOptions { get; }
+
+        // Lista para almacenar y mostrar los cuartos
+        public ObservableCollection<RoomModel> Rooms { get; }
+
         // Propiedades para las cantidades de cuartos por estado
+        // (sin cambios aquí)
         private int _cleanVacantRoomCount;
         public int VLRoomCount
         {
@@ -59,7 +82,7 @@ namespace SHEndevour.ViewModels
             set => SetProperty(ref _blockedRoomCount, value);
         }
 
-        // Cambiamos a ICollectionView para poder ordenar
+        // Cambiamos a ICollectionView para poder ordenar y filtrar
         private ICollectionView _roomsView;
         public ICollectionView RoomsView
         {
@@ -68,25 +91,92 @@ namespace SHEndevour.ViewModels
         }
 
         public ICommand ChangeRoomStatusCommand { get; }
+        public ICommand ClearFiltersCommand { get; }  // Nuevo comando
+
+
+
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
 
         public RackHotelViewModel()
         {
-            // Inicializar AppDbContext
             _context = new AppDbContext();
 
-            // Cargar y ordenar los cuartos desde la base de datos
-            var roomsList = LoadRoomsFromDatabase();
+            // Inicializar la lista de opciones de RoomStatus (sin "Todos")
+            RoomStatusOptions = new ObservableCollection<RoomStatus>(Enum.GetValues(typeof(RoomStatus)).Cast<RoomStatus>());
 
-            // Crear la vista ordenada de los cuartos
-            RoomsView = CollectionViewSource.GetDefaultView(roomsList);
+            // Inicializar la lista de cuartos
+            Rooms = new ObservableCollection<RoomModel>(LoadRoomsFromDatabase());
+
+            // Crear la vista ordenada y filtrada de los cuartos
+            RoomsView = CollectionViewSource.GetDefaultView(Rooms);
             RoomsView.SortDescriptions.Add(new SortDescription(nameof(RoomModel.RoomKey), ListSortDirection.Ascending));
 
             // Calcular las cantidades de cuartos por estado
-            CalculateRoomStatusCounts(roomsList);
+            CalculateRoomStatusCounts(Rooms);
 
             // Comandos
             ChangeRoomStatusCommand = new RelayCommand<RoomModel>(OnChangeRoomStatus);
+            ClearFiltersCommand = new RelayCommand(OnClearFilters);  // Nuevo comando
+
+            // Inicializar el filtro a 'null'
+            RoomStatusFilter = null;
         }
+
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+
+        /// Aplicar el filtro basado en el RoomStatus seleccionado
+        private void ApplyRoomStatusFilter()
+        {
+            if (RoomsView != null)
+            {
+                if (RoomStatusFilter == null)
+                {
+                    // Eliminar cualquier filtro si RoomStatusFilter es null
+                    RoomsView.Filter = null;
+                }
+                else
+                {
+                    // Aplicar el filtro para el RoomStatus seleccionado
+                    RoomsView.Filter = roomObj =>
+                    {
+                        var room = roomObj as RoomModel;
+                        return room != null && room.RoomStatus == RoomStatusFilter;
+                    };
+                }
+
+                // Refrescar la vista para que los cambios tengan efecto
+                RoomsView.Refresh();
+            }
+        }
+
+        // Nuevo método para limpiar filtros y mostrar todas las habitaciones
+        private void OnClearFilters()
+        {
+            RoomStatusFilter = null;  // Restablecer el filtro
+            ApplyRoomStatusFilter();  // Aplicar el cambio de filtro
+            RoomsView.SortDescriptions.Clear();  // Limpiar cualquier orden anterior
+            RoomsView.SortDescriptions.Add(new SortDescription(nameof(RoomModel.RoomKey), ListSortDirection.Ascending));  // Ordenar por RoomKey
+            RoomsView.Refresh();  // Refrescar la vista
+        }
+
+        // Función para cargar los estados disponibles para el ComboBox (modificado para no incluir null)
+        private IEnumerable<RoomStatus> GetRoomStatusOptions()
+        {
+            return Enum.GetValues(typeof(RoomStatus)).Cast<RoomStatus>();
+        }
+
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+
+
+
+
+
+
+
 
         /// Cargar los cuartos desde la base de datos
         private IEnumerable<RoomModel> LoadRoomsFromDatabase()
@@ -134,9 +224,15 @@ namespace SHEndevour.ViewModels
                 _context.RoomTable.Update(room);
                 _context.SaveChanges();
 
+                // Refrescar la lista de cuartos
+                Rooms.Clear();
+                foreach (var newRoom in LoadRoomsFromDatabase())
+                {
+                    Rooms.Add(newRoom);
+                }
+
                 // Volver a calcular las cantidades de cuartos por estado
-                var roomsList = LoadRoomsFromDatabase();
-                CalculateRoomStatusCounts(roomsList);
+                CalculateRoomStatusCounts(Rooms);
             }
             catch (System.Exception ex)
             {

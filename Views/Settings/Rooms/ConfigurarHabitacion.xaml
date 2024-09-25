@@ -8,11 +8,12 @@
              xmlns:vm="clr-namespace:SHEndevour.ViewModels.Settings.Rooms"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=vm:RoomManagementViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="450" d:DesignWidth="600" Background="#F1F1F1">
+             d:DesignHeight="450" d:DesignWidth="800" Background="#F1F1F1">
 
     <UserControl.DataContext>
         <vm:RoomManagementViewModel />
     </UserControl.DataContext>
+
 
     <Grid>
 
@@ -167,6 +168,7 @@
                 <DataGridTextColumn Header="Clave de Habitacion" Binding="{Binding RoomKey}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Tipo de Habitacion" Binding="{Binding RoomType.RoomTypeKey}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Descripcion del Tipo" Binding="{Binding RoomType.Description}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Estado" Binding="{Binding RoomStatus}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

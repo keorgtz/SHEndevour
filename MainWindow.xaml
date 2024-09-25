@@ -95,8 +95,13 @@
             <!-- Resto de la página -->
         </Grid.ColumnDefinitions>
 
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Style="{StaticResource MaterialDesignScrollViewer}"
+                      materialDesign:ScrollBarAssist.ThumbCornerRadius="5"
+                      materialDesign:ScrollBarAssist.ButtonsVisibility="Collapsed"
+                      HorizontalScrollBarVisibility="Disabled">
 
-        <materialDesign:ColorZone
+            <materialDesign:ColorZone
             Margin="10"
             materialDesign:ElevationAssist.Elevation="Dp4"
             ClipToBounds="False" Background="#013d5a"
@@ -104,7 +109,10 @@
             CornerRadius="15">
 
             <!-- Sidebar -->
-            <Grid Grid.Column="0" x:Name="SideGridAligment">
+
+
+                
+                <Grid Grid.Column="0" x:Name="SideGridAligment">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -233,7 +241,7 @@
                             VerticalAlignment="Bottom" HorizontalAlignment="Left"
                             Click="LogoutButton_Click">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Width="25" Height="25" Margin="6" Padding="0" Foreground="Red" VerticalAlignment="Center" Kind="Logout"/>
+                            <materialDesign:PackIcon Width="25" Height="25" Margin="10" Foreground="Red" VerticalAlignment="Center" Kind="Logout"/>
                             <TextBlock Text="Cerrar Sesion" FontSize="15"
                                        Margin="15,0,65,0" Foreground="Red" 
                                        x:Name="TextLogout"
@@ -244,8 +252,9 @@
                 </StackPanel>
 
             </Grid>
+            
         </materialDesign:ColorZone>
-
+     </ScrollViewer>
 
 
 

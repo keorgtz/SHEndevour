@@ -6,22 +6,20 @@
     xmlns:local="clr-namespace:SHEndevour.Views.Settings.Rooms"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:vm="clr-namespace:SHEndevour.ViewModels.Settings.Rooms"
     x:Class="SHEndevour.Views.Settings.Rooms.ConfigurarMantenimientoHabitacion"
     mc:Ignorable="d"
     Background="#f1f1f1" materialDesign:ThemeAssist.Theme="Light"
     d:DesignHeight="450" d:DesignWidth="800">
 
 
-
-
-
     <Grid>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Zona superior con los botones -->
         <materialDesign:ColorZone Margin="10"
                                   materialDesign:ElevationAssist.Elevation="Dp4"
                                   ClipToBounds="False"
@@ -33,8 +31,6 @@
                                   Mode="Custom"
                                   materialDesign:ColorZoneAssist.Background="#001b48">
 
-
-
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -43,131 +39,68 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-
-
+                <!-- Botón Agregar -->
                 <Button Grid.Column="0"
                         Padding="7" Margin="0,0,5,0" Foreground="RoyalBlue"
-                        Style="{StaticResource MaterialDesignFlatButton}">
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding AddRoomCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="2" Kind="Plus"/>
                         <TextBlock Text="Agregar"/>
                     </StackPanel>
                 </Button>
 
+                <!-- Botón Editar -->
                 <Button Grid.Column="1"
                         Padding="7" Margin="0,0,5,0" Foreground="Teal"
-                        Style="{StaticResource MaterialDesignFlatButton}">
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding EditRoomCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="2" Kind="Edit" />
                         <TextBlock Text="Editar"/>
                     </StackPanel>
                 </Button>
 
+                <!-- Botón Liberar -->
                 <Button Grid.Column="2"
                         Padding="7" Margin="0,0,5,0" Foreground="Red"
-                        Style="{StaticResource MaterialDesignFlatButton}">
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding ReleaseRoomCommand}"
+                        IsEnabled="{Binding CanReleaseRoom}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="2" Kind="Delete" />
                         <TextBlock Text="Liberar"/>
                     </StackPanel>
                 </Button>
 
+                <!-- Botón Históricos -->
                 <Button Grid.Column="3"
                         Padding="7" Margin="0,0,5,0" Foreground="Orange"
-                        Style="{StaticResource MaterialDesignFlatButton}">
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding ShowRoomHistoryCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="2" Kind="History"/>
-                        <TextBlock Text="Historicos"/>
+                        <TextBlock Text="Históricos"/>
                     </StackPanel>
                 </Button>
-
-
-
             </Grid>
-
-
         </materialDesign:ColorZone>
 
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-
-
+        <!-- DataGrid para mostrar los movimientos de habitaciones -->
         <dxg:GridControl Name="BlockedRoomsGrid" Grid.Row="1"
-                         ItemsSource="{Binding d}"
+                         ItemsSource="{Binding RoomMovements}"
                          Margin="10">
-
             <dxg:GridControl.View>
                 <dxg:TableView AutoWidth="True" AllowSorting="True" />
             </dxg:GridControl.View>
 
-            <!-- Definir las columnas del DataGrid -->
-            <dxg:GridColumn FieldName="RoomNumber" Header="Número de Cuarto" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="RoomType" Header="Tipo de Cuarto" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="BlockedDate" Header="Fecha de Bloqueo" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="BlockedBy" Header="Bloqueado Por" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="Reason" Header="Razón" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="RoomKey" Binding="{Binding RoomKey}" Header="Habitación" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="MovementDate" Binding="{Binding MovementDate}" Header="Fecha" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="PreviousStatus" Binding="{Binding PreviousStatus}" Header="Estatus Anterior" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="NewStatus" Binding="{Binding NewStatus}" Header="Nuevo Estatus" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="ReleasedBy" Binding="{Binding ReleasedBy}" Header="Liberado Por" ReadOnly="True"/>
         </dxg:GridControl>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!--           DataGrid Grid.Row="1"
-        ItemsSource="{Binding Rooms}"
-        AutoGenerateColumns="False"
-        x:Name="RoomDataGrid"
-        SelectionMode="Single"
-        CanUserAddRows="False"
-        SelectionUnit="FullRow"
-        Margin="10"
-        materialDesign:ThemeAssist.Theme="Light"
-        materialDesign:ElevationAssist.Elevation="Dp8"
-        Style="{StaticResource MaterialDesignDataGrid}">
-
-        <DataGrid.Columns         -->
-
-        <!-- Columna con CheckBox -->
-
-        <!--            DataGridTemplateColumn Width="75">
-        <DataGridTemplateColumn.Header>
-        <CheckBox Content="{materialDesign:PackIcon Kind=AccountCheck }"
-        Checked="RoomGridCheck_Checked"
-        Unchecked="RoomGridCheck_Unchecked"/>
-        </DataGridTemplateColumn.Header>
-        <DataGridTemplateColumn.CellTemplate>
-        <DataTemplate>
-        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        </DataTemplate>
-        </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-
-        <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True"/>
-        <DataGridTextColumn Header="Clave de Habitacion" Binding="{Binding RoomKey}" IsReadOnly="True"/>
-        <DataGridTextColumn Header="Tipo de Habitacion" Binding="{Binding RoomType.RoomTypeKey}" IsReadOnly="True"/>
-        <DataGridTextColumn Header="Descripcion del Tipo" Binding="{Binding RoomType.Description}" IsReadOnly="True"/>
-        </DataGrid.Columns>
-        </DataGrid           -->
-
-
-
-
+        
     </Grid>
 </UserControl>

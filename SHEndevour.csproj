@@ -33,6 +33,8 @@
   <ItemGroup>
     <Folder Include="Fonts\" />
     <Folder Include="Images\" />
+    <Folder Include="ViewModels\Settings\Rooms\Dialogs\" />
+    <Folder Include="Views\History\" />
   </ItemGroup>
 
   <ItemGroup>

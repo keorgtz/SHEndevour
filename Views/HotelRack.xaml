@@ -6,7 +6,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vm="clr-namespace:SHEndevour.ViewModels"
              xmlns:local="clr-namespace:SHEndevour.Views"
-             xmlns:ColorConvert="clr-namespace:SHEndevour"
+             xmlns:RootRack="clr-namespace:SHEndevour"
+             xmlns:NullaEnum="clr-namespace:SHEndevour"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=vm:RackHotelViewModel}"
              d:DesignHeight="450" d:DesignWidth="800" Background="#f1f1f1">
@@ -18,7 +19,8 @@
 
 
     <UserControl.Resources>
-        <ColorConvert:RoomStatusToColorConverter x:Key="RoomStatusToColorConverter" />
+        <RootRack:RoomStatusToColorConverter x:Key="RoomStatusToColorConverter" />
+        <NullaEnum:NullableEnumConverter x:Key="NullableEnumConverter" />
     </UserControl.Resources>
 
     <Grid>
@@ -53,6 +55,20 @@
                                FontWeight="Bold"
                                FontSize="20"/>
 
+                    <ComboBox 
+                             ItemsSource="{Binding RoomStatusOptions}" 
+                             SelectedItem="{Binding RoomStatusFilter, Mode=TwoWay}"
+                             Width="200" 
+                             HorizontalAlignment="Left" 
+                             Margin="10">
+                    </ComboBox>
+
+                    <Button Content="Limpiar Filtros" Width="200" 
+                            HorizontalAlignment="Left" 
+                            Margin="10" 
+                            Command="{Binding ClearFiltersCommand}" />
+
+
                 </StackPanel>
             </materialDesign:ColorZone>
 
@@ -69,40 +85,47 @@
                         
                         
 
-                        <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal">
-                            <TextBlock Text="Vacias Limpias" FontFamily="Montserrat" FontWeight="Bold" Foreground="Green"/>
+                        <StackPanel Grid.Column="0" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="⚫ Vacias Limpias" FontFamily="Montserrat" FontWeight="Bold" Foreground="Green"/>
                             <TextBlock Text="{Binding VLRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="Green"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="1" Margin="5" Orientation="Horizontal">
-                            <TextBlock Text="Vacias Sucias" FontFamily="Montserrat" FontWeight="Bold" Foreground="Orange"/>
+                        <StackPanel Grid.Column="1" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="⚫ Vacias Sucias" FontFamily="Montserrat" FontWeight="Bold" Foreground="Orange"/>
                             <TextBlock Text="{Binding VSRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="Orange"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="2" Margin="5" Orientation="Horizontal">
-                            <TextBlock Text="Ocupadas Limpias" FontFamily="Montserrat" FontWeight="Bold" Foreground="#00589B"/>
+                        <StackPanel Grid.Column="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="⚫ Ocupadas Limpias" FontFamily="Montserrat" FontWeight="Bold" Foreground="#00589B"/>
                             <TextBlock Text="{Binding OLRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="#00589B"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="3" Margin="5" Orientation="Horizontal">
-                            <TextBlock Text="Ocupadas Sucias" FontFamily="Montserrat" FontWeight="Bold" Foreground="Cyan"/>
+                        <StackPanel Grid.Column="3" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="⚫ Ocupadas Sucias" FontFamily="Montserrat" FontWeight="Bold" Foreground="Cyan"/>
                             <TextBlock Text="{Binding OSRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="Cyan"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="4" Margin="5" Orientation="Horizontal">
-                            <TextBlock Text="En Mantenimiento" FontFamily="Montserrat" FontWeight="Bold" Foreground="MediumPurple"/>
+                        <StackPanel Grid.Column="4" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="⚫ En Mantenimiento" FontFamily="Montserrat" FontWeight="Bold" Foreground="MediumPurple"/>
                             <TextBlock Text="{Binding MRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="MediumPurple"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="5" Margin="5" Orientation="Horizontal">
-                            <TextBlock Text="Bloqueadas" FontFamily="Montserrat" FontWeight="Bold" Foreground="Purple"/>
+                        <StackPanel Grid.Column="5" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="⚫ Bloqueadas" FontFamily="Montserrat" FontWeight="Bold" Foreground="Purple"/>
                             <TextBlock Text="{Binding BRoomCount}" Margin="5,0,0,0" FontFamily="Montserrat" FontWeight="Bold" Foreground="Purple"/>
                         </StackPanel>
 
 
                     </Grid>
 
-
+            <ScrollViewer Grid.Row="2" 
+                          VerticalScrollBarVisibility="Auto"
+                          Style="{StaticResource MaterialDesignScrollViewer}"
+                          materialDesign:ScrollBarAssist.ThumbCornerRadius="5"
+                          materialDesign:ScrollBarAssist.ButtonsVisibility="Collapsed"
+                          HorizontalScrollBarVisibility="Disabled">
+                
+            
             <materialDesign:ColorZone Grid.Row="2"
                                       Background="#FFFFFF"
                                       VerticalAlignment="Stretch"
@@ -162,6 +185,7 @@
                 </StackPanel>
 
             </materialDesign:ColorZone>
+        </ScrollViewer>
 
 
 
