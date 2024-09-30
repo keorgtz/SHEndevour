@@ -30,12 +30,12 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
                 PopulateFields();
                 Title = "Editar Habitación";
                 AddEditSubtitle.Text = "Edición de Habitación";
-                Debug.WriteLine($"RoomTypeIdDIALOG antes de actualizar: {Room.RoomTypeId}");
                 //room.IsSelected = false;
             }
             else
             {
                 Room = new RoomModel();
+                Room.RoomStatus = RoomStatus.VacioLimpio; // Asignar el valor predeterminado
                 Title = "Añadir Habitación";
                 AddEditSubtitle.Text = "Agregar una Nueva Habitación";
             }
@@ -80,18 +80,21 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
 
         private void OnAcceptClick(object sender, RoutedEventArgs e)
         {
+            // Validar la longitud de la clave
             if (RoomKeyTextBox.Text.Length > 10)
             {
                 MessageBox.Show("La clave de la habitación no puede tener más de 10 caracteres.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
+            // Validar si se ha seleccionado un tipo de habitación
             if (RoomTypComboBox.SelectedValue == null)
             {
                 MessageBox.Show("Debe seleccionar un tipo de habitación.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
+            // Validar si la clave de la habitación ya existe
             if (Room.RoomKey != RoomKeyTextBox.Text && IsRoomKeyDuplicate(RoomKeyTextBox.Text))
             {
                 MessageBox.Show("La clave de la habitación ya existe.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -100,55 +103,35 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
 
             Debug.WriteLine($"RoomTypeIdDIALOG antes de actualizar: {Room.RoomTypeId}");
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+            // Asignar la clave de la habitación si ha cambiado
             if (Room.RoomKey != RoomKeyTextBox.Text)
             {
-                Room.RoomKey = RoomKeyTextBox.Text; // Almacenar el teléfono como cadena
+                Room.RoomKey = RoomKeyTextBox.Text;
             }
 
+            // Asignar el tipo de habitación si ha cambiado
             if (Room.RoomTypeId != (int)RoomTypComboBox.SelectedValue)
             {
-                Room.RoomTypeId = (int)RoomTypComboBox.SelectedValue; // Guarda el Id del rol seleccionado
+                Room.RoomTypeId = (int)RoomTypComboBox.SelectedValue;
             }
 
-            if (Room.RoomStatus != (RoomStatus)RoomStatusComboBox.SelectedItem)
+            // Asignar el RoomStatus: si no se selecciona, asignar 'VacioLimpio' por defecto
+            if (RoomStatusComboBox.SelectedItem != null)
             {
-                Room.RoomStatus = (RoomStatus)RoomStatusComboBox.SelectedItem; // Guarda el Id del rol seleccionado
+                Room.RoomStatus = (RoomStatus)RoomStatusComboBox.SelectedItem;
+            }
+            else
+            {
+                Room.RoomStatus = RoomStatus.VacioLimpio; // Asignar 'VacioLimpio' por defecto
             }
 
+            // Asignar el HousekeeperStatus si ha cambiado
             if (Room.HousekeeperStatus != (HousekeeperStatus)HouseKeeperComboBox.SelectedItem)
             {
-                Room.HousekeeperStatus = (HousekeeperStatus)HouseKeeperComboBox.SelectedItem; // Guarda el Id del rol seleccionado
+                Room.HousekeeperStatus = (HousekeeperStatus)HouseKeeperComboBox.SelectedItem;
             }
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            // Actualizar los valores del modelo
-            //Room.RoomKey = RoomKeyTextBox.Text;
-            //RoomTypComboBox.GetBindingExpression(ComboBox.SelectedValueProperty)?.UpdateSource();
-            //Room.RoomTypeId = (int?)RoomTypComboBox.SelectedValue ?? 0; // Asegúrate de que RoomTypeId esté asignado correctamente
-            //Room.RoomStatus = (RoomStatus)RoomStatusComboBox.SelectedItem;
-            //Room.HousekeeperStatus = (HousekeeperStatus)HouseKeeperComboBox.SelectedItem;
-
             Debug.WriteLine($"RoomTypeIdDIALOG Antes de guardar: {Room.RoomTypeId}");
-
-            // Guardar los cambios en la base de datos
-            //using (var context = new AppDbContext())
-            //{
-            //    if (Room.Id == 0) // Si es un nuevo registro
-            //    {
-            //        context.RoomTable.Add(Room);
-            //    }
-            //    else // Si es una actualización de un registro existente
-            //    {
-            //        context.RoomTable.Update(Room);
-            //    }
-            //
-            //    context.SaveChanges(); // Guardar los cambios en la base de datos
-            //}
-
-            Debug.WriteLine($"RoomTypeIdDIALOG Despues de guardar: {Room.RoomTypeId}");
 
             DialogResult = true;
             Close();
@@ -159,11 +142,12 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
 
 
 
+
         private void ValidateFields()
         {
             bool isFormValid = !string.IsNullOrWhiteSpace(RoomKeyTextBox.Text) &&
                                RoomTypComboBox.SelectedValue != null &&
-                               RoomStatusComboBox.SelectedItem != null &&
+                               //RoomStatusComboBox.SelectedItem != null &&
                                HouseKeeperComboBox.SelectedItem != null &&
                                RoomKeyTextBox.Text.Length <= 10;
 

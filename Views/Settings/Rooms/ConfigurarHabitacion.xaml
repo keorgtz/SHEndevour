@@ -144,6 +144,7 @@
                   CanUserAddRows="False"
                   SelectionUnit="FullRow"
                   Margin="10"
+                  SelectedItem="{Binding SelectedRoom, Mode=TwoWay}"
                   materialDesign:ThemeAssist.Theme="Light"
                   materialDesign:ElevationAssist.Elevation="Dp8"
                   Style="{StaticResource MaterialDesignDataGrid}">

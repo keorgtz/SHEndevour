@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DevExpress.Xpf.Printing;
+using DevExpress.Xpf.Grid;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace SHEndevour.Views.Settings.Rooms
@@ -26,6 +28,19 @@ namespace SHEndevour.Views.Settings.Rooms
         public ConfigurarMantenimientoHabitacion()
         {
             InitializeComponent();
+            this.DataContext = new RoomMaintenanceViewModel();
         }
+
+        private void OnPrintPreviewClick(object sender, RoutedEventArgs e)
+        {
+            // Crear un enlace a los datos del GridControl para la impresión
+            var link = new PrintableControlLink(MaintenanceRoomsGrid.View as TableView);
+
+            // Mostrar la vista previa de impresión
+            link.ShowPrintPreview(this);
+        }
+
+
+
     }
 }

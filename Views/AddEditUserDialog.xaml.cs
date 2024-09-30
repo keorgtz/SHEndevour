@@ -148,6 +148,23 @@ namespace SHEndevour.Views
         }
 
 
+        // Método para actualizar el RoomStatus del cuarto asociado al mantenimiento
+        private void UpdateRoomStatus(string roomKey, RoomStatus newStatus)
+        {
+            using (var context = new AppDbContext())
+            {
+                // Buscar el cuarto con la RoomKey proporcionada
+                var room = context.RoomTable.FirstOrDefault(r => r.RoomKey == roomKey);
+                if (room != null)
+                {
+                    room.RoomStatus = newStatus; // Actualizar el estado de la habitación
+                    context.SaveChanges(); // Guardar los cambios en la base de datos
+                }
+            }
+        }
+
+
+
         private void ValidateFields()
         {
             bool isFormValid = !string.IsNullOrWhiteSpace(UsernameTextBox.Text) &&

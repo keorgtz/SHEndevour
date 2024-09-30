@@ -162,6 +162,23 @@ namespace SHEndevour.ViewModels.Settings.Rooms
 
             if (selectedRooms.Any())
             {
+                // Filtrar cuartos que NO estén en el estado permitido
+                var invalidRooms = selectedRooms
+                    .Where(r => r.RoomStatus != RoomStatus.VacioLimpio && r.RoomStatus != RoomStatus.VacioSucio)
+                    .ToList();
+
+                // Verificar si hay cuartos que no cumplen la condición de eliminación
+                if (invalidRooms.Any())
+                {
+                    // Mostrar advertencia para los cuartos que no pueden ser eliminados
+                    MessageBox.Show("Algunos cuartos seleccionados no pueden ser eliminados \nprimero deben ser liberados y estar vacios",
+                                    "Advertencia",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Confirmar la eliminación si todos los cuartos seleccionados son válidos
                 var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar {selectedRooms.Count} habitación(es)?",
                                              "Confirmar eliminación",
                                              MessageBoxButton.YesNo,
@@ -188,6 +205,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
             }
         }
         #endregion
+
 
         #region SearchRoomRegion
         private void SearchRoom()
@@ -257,6 +275,9 @@ namespace SHEndevour.ViewModels.Settings.Rooms
 
             }
 
+
+            //(ViewRoomCommand as RelayCommand)?.NotifyCanExecuteChanged();
+            //(DeleteRoomCommand as RelayCommand)?.NotifyCanExecuteChanged();
 
         }
         #endregion

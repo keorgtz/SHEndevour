@@ -6,12 +6,24 @@
     xmlns:local="clr-namespace:SHEndevour.Views.Settings.Rooms"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxpr="http://schemas.devexpress.com/winfx/2008/xaml/printing"
     xmlns:vm="clr-namespace:SHEndevour.ViewModels.Settings.Rooms"
     x:Class="SHEndevour.Views.Settings.Rooms.ConfigurarMantenimientoHabitacion"
+    xmlns:NullBool="clr-namespace:SHEndevour"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=vm:RoomMaintenanceViewModel, IsDesignTimeCreatable=True}"
     Background="#f1f1f1" materialDesign:ThemeAssist.Theme="Light"
     d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.DataContext>
+        <vm:RoomMaintenanceViewModel />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <NullBool:NullToBoolConverter x:Key="NullToBoolConverter" />
+    </UserControl.Resources>
+    
+    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -37,13 +49,14 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Botón Agregar -->
                 <Button Grid.Column="0"
                         Padding="7" Margin="0,0,5,0" Foreground="RoyalBlue"
                         Style="{StaticResource MaterialDesignFlatButton}"
-                        Command="{Binding AddRoomCommand}">
+                        Command="{Binding AddMaintenanceCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="2" Kind="Plus"/>
                         <TextBlock Text="Agregar"/>
@@ -54,7 +67,8 @@
                 <Button Grid.Column="1"
                         Padding="7" Margin="0,0,5,0" Foreground="Teal"
                         Style="{StaticResource MaterialDesignFlatButton}"
-                        Command="{Binding EditRoomCommand}">
+                        Command="{Binding ViewMaintenanceCommand}"
+                        IsEnabled="{Binding SelectedMaintenance, Converter={StaticResource NullToBoolConverter}}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="2" Kind="Edit" />
                         <TextBlock Text="Editar"/>
@@ -65,8 +79,8 @@
                 <Button Grid.Column="2"
                         Padding="7" Margin="0,0,5,0" Foreground="Red"
                         Style="{StaticResource MaterialDesignFlatButton}"
-                        Command="{Binding ReleaseRoomCommand}"
-                        IsEnabled="{Binding CanReleaseRoom}">
+                        Command="{Binding ReleaseMaintenanceCommand}"
+                        IsEnabled="{Binding SelectedMaintenance, Converter={StaticResource NullToBoolConverter}}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="2" Kind="Delete" />
                         <TextBlock Text="Liberar"/>
@@ -74,33 +88,46 @@
                 </Button>
 
                 <!-- Botón Históricos -->
-                <Button Grid.Column="3"
+                <Button Grid.Column="3" 
                         Padding="7" Margin="0,0,5,0" Foreground="Orange"
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Command="{Binding ShowRoomHistoryCommand}">
+                        Style="{StaticResource MaterialDesignFlatButton}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="2" Kind="History"/>
                         <TextBlock Text="Históricos"/>
                     </StackPanel>
                 </Button>
+
+                <Button Grid.Column="4"
+                        Padding="7" Margin="0,0,5,0" Foreground="Green"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Click="OnPrintPreviewClick">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="2" Kind="Printer"/>
+                        <TextBlock Text="Imprimir"/>
+                    </StackPanel>
+                </Button>
+
+
+
             </Grid>
         </materialDesign:ColorZone>
 
         <!-- DataGrid para mostrar los movimientos de habitaciones -->
-        <dxg:GridControl Name="BlockedRoomsGrid" Grid.Row="1"
-                         ItemsSource="{Binding RoomMovements}"
-                         Margin="10">
+        <dxg:GridControl x:Name="MaintenanceRoomsGrid" Grid.Row="1"
+                         ItemsSource="{Binding Maintenances}"
+                         Margin="10"
+                         SelectionMode="MultipleRow"
+                         SelectedItem="{Binding SelectedMaintenance}">
             <dxg:GridControl.View>
                 <dxg:TableView AutoWidth="True" AllowSorting="True" />
             </dxg:GridControl.View>
 
-            <dxg:GridColumn FieldName="RoomKey" Binding="{Binding RoomKey}" Header="Habitación" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="MovementDate" Binding="{Binding MovementDate}" Header="Fecha" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="PreviousStatus" Binding="{Binding PreviousStatus}" Header="Estatus Anterior" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="NewStatus" Binding="{Binding NewStatus}" Header="Nuevo Estatus" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="ReleasedBy" Binding="{Binding ReleasedBy}" Header="Liberado Por" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="RoomKey" Header="Habitación" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="RoomStatus" Header="Razon del Bloqueo" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="CauseDescription" Header="Descripción" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="BlockType" Header="Tipo de Bloqueo" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="EndDate" Header="Fecha Limite" ReadOnly="True"/>
         </dxg:GridControl>
 
-        
     </Grid>
 </UserControl>

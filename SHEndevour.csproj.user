@@ -60,10 +60,16 @@
     <Compile Update="Views\Settings\Rooms\ConfigurarTipoDeHabitacion.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Settings\Rooms\Dialogs\AddEditMaintenanceDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Settings\Rooms\Dialogs\AddEditRoomDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Settings\Rooms\Dialogs\AddEditRoomTypeDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Rooms\Dialogs\SelectMaintenanceRoom.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\SettingView.xaml.cs">
@@ -119,10 +125,16 @@
     <Page Update="Views\Settings\Rooms\ConfigurarTipoDeHabitacion.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Settings\Rooms\Dialogs\AddEditMaintenanceDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Settings\Rooms\Dialogs\AddEditRoomDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\Rooms\Dialogs\AddEditRoomTypeDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Rooms\Dialogs\SelectMaintenanceRoom.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SettingView.xaml">
