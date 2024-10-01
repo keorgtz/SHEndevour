@@ -60,60 +60,6 @@
                 </Button>
 
 
-
-
-                <StackPanel Orientation="Vertical" Margin="5,0,5,0" 
-                            Width="200">
-
-                    <TextBox x:Name="SearchBox" Width="190"
-                             Padding="8"
-                             materialDesign:HintAssist.Foreground="White"
-                             materialDesign:TextFieldAssist.UnderlineBrush="White"
-                             materialDesign:HintAssist.Hint="Buscar Usuario"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <!-- Popup para mostrar los resultados filtrados -->
-                    <Popup IsOpen="{Binding IsPopupOpen}"
-                           Placement="Bottom"
-                           StaysOpen="False"
-                           PlacementTarget="{Binding ElementName=SearchBox}">
-
-                        <Border Background="White" CornerRadius="5" BorderBrush="Gray" BorderThickness="1">
-                            <ListBox ItemsSource="{Binding FilteredUsers}"
-                                     SelectedItem="{Binding SelectedUser}"
-                                     Width="200"
-                                     MaxHeight="200"
-                                     materialDesign:ElevationAssist.Elevation="Dp3"
-                                     Foreground="White"
-                                     Background="#013d5a"
-                                     
-                                     Style="{StaticResource MaterialDesignListBox}">
-
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Username}"/>
-                                            <TextBlock Text=": "/>
-                                            <TextBlock Text="{Binding FirstName}" />
-                                            <TextBlock Text=" "/>
-                                            <TextBlock Text="{Binding LastName}" />
-                                        </StackPanel>
-                                        
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Border>
-                    </Popup>
-                </StackPanel>
-
-                <Button Content="{materialDesign:PackIcon Kind= Magnify }"
-                    Command="{Binding SearchCommand}"
-                    CommandParameter="{Binding Text, ElementName=SearchBox}"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    Padding="10" BorderThickness="0" Background="#374375"
-                    Margin="10,0,0,0" />
             </StackPanel>
         </materialDesign:ColorZone>
 
@@ -125,6 +71,7 @@
                   SelectionMode="Single"
                   CanUserAddRows="False"
                   SelectionUnit="FullRow"
+                  SelectedItem="{Binding SelectedUser}"
                   Sorting="UserDataGrid_Sorting"
                   Margin="5"
                   materialDesign:ThemeAssist.Theme="Light"
@@ -132,22 +79,7 @@
                   Style="{StaticResource MaterialDesignDataGrid}">
 
             <DataGrid.Columns>
-
-                <!-- Columna con CheckBox -->
-                <DataGridTemplateColumn Width="75">
-                    <DataGridTemplateColumn.Header>
-                        <CheckBox Content="{materialDesign:PackIcon Kind=AccountCheck }" 
-                          Checked="HeaderCheckBox_Checked"
-                          Unchecked="HeaderCheckBox_Unchecked"/>
-                          
-                    </DataGridTemplateColumn.Header>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Usuario" Binding="{Binding Username}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding FirstName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Apellido" Binding="{Binding LastName}" IsReadOnly="True"/>

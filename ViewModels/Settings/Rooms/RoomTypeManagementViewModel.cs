@@ -19,14 +19,6 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         [ObservableProperty]
         private ObservableCollection<RoomTypeModel> roomTypes;
 
-        [ObservableProperty]
-        private string searchText;
-
-        [ObservableProperty]
-        private ObservableCollection<RoomTypeModel> filteredRoomTypes;
-
-        [ObservableProperty]
-        private bool isPopupOpen; // Para manejar la visibilidad del popup
 
         [ObservableProperty]
         private RoomTypeModel selectedRoomType;
@@ -35,22 +27,21 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         public ICommand AddRoomTypeCommand { get; }
         public ICommand ViewRoomTypeCommand { get; }
         public ICommand DeleteRoomTypeCommand { get; }
-        public ICommand SearchCommand { get; }
+
 
         public RoomTypeManagementViewModel()
         {
             RoomTypes = new ObservableCollection<RoomTypeModel>();
-            FilteredRoomTypes = new ObservableCollection<RoomTypeModel>();
-            IsPopupOpen = false;
+
 
             // Cargar los tipos de habitación desde la base de datos
             LoadRoomTypes();
 
             // Inicializa los comandos
             AddRoomTypeCommand = new RelayCommand(AddRoomType);
-            ViewRoomTypeCommand = new RelayCommand(ViewRoomType);
-            DeleteRoomTypeCommand = new RelayCommand(DeleteRoomType);
-            SearchCommand = new RelayCommand(SearchRoomType);
+            ViewRoomTypeCommand = new RelayCommand(ViewRoomType, CanEditOrDelete);
+            DeleteRoomTypeCommand = new RelayCommand(DeleteRoomType, CanEditOrDelete);
+
         }
 
         private void LoadRoomTypes()
@@ -96,11 +87,11 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         #region ViewRoomTypeRegion
         private void ViewRoomType()
         {
-            var selectedRoomType = RoomTypes.FirstOrDefault(rt => rt.IsSelected);
+            //var selectedRoomType = RoomTypes.FirstOrDefault(rt => rt.IsSelected);
 
-            if (selectedRoomType != null)
+            if (SelectedRoomType != null)
             {
-                var editRoomTypeDialog = new AddEditRoomTypeDialog(selectedRoomType);
+                var editRoomTypeDialog = new AddEditRoomTypeDialog(SelectedRoomType);
 
                 if (editRoomTypeDialog.ShowDialog() == true)
                 {
@@ -131,93 +122,58 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         #endregion
 
         #region DeleteRoomTypeRegion
+
         private void DeleteRoomType()
         {
-            var selectedRoomTypes = RoomTypes.Where(rt => rt.IsSelected).ToList();
-
-            if (selectedRoomTypes.Any())
+            if (SelectedRoomType != null)
             {
-                var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar {selectedRoomTypes.Count} tipo(s) de habitación?",
-                                             "Confirmar eliminación",
-                                             MessageBoxButton.YesNo,
-                                             MessageBoxImage.Warning);
-
-                if (result == MessageBoxResult.Yes)
+                using (var dbContext = new AppDbContext())
                 {
-                    using (var dbContext = new AppDbContext())
+                    // Verificar si existen habitaciones asociadas a este RoomType
+                    bool hasAssociatedRooms = dbContext.RoomTable.Any(room => room.RoomTypeId == SelectedRoomType.Id);
+
+                    if (hasAssociatedRooms)
                     {
-                        foreach (var roomType in selectedRoomTypes)
-                        {
-                            dbContext.RoomTypeTable.Remove(roomType);
-                        }
-                        dbContext.SaveChanges();
+                        MessageBox.Show("No se puede eliminar este tipo de habitación porque existen habitaciones asociadas.",
+                                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
 
-                    LoadRoomTypes();
-                    MessageBox.Show("Tipo(s) de habitación eliminado(s) con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar el tipo de habitación '{SelectedRoomType.RoomTypeKey}'?",
+                                                 "Confirmar eliminación",
+                                                 MessageBoxButton.YesNo,
+                                                 MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        dbContext.RoomTypeTable.Remove(SelectedRoomType);
+                        dbContext.SaveChanges();
+
+                        LoadRoomTypes();
+                        MessageBox.Show("Tipo de habitación eliminado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("Por favor, seleccione al menos un tipo de habitación para eliminar.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Por favor, seleccione un tipo de habitación para eliminar.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+
+
         #endregion
 
-        #region SearchRoomTypeRegion
-        private void SearchRoomType()
+        private bool CanEditOrDelete()
         {
-            if (string.IsNullOrWhiteSpace(SearchText))
-            {
-                FilteredRoomTypes.Clear();
-                IsPopupOpen = false;
-                return;
-            }
-
-            var filteredRoomTypesList = RoomTypes
-                .Where(rt => rt.RoomTypeKey.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                             rt.Id.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                             rt.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            FilteredRoomTypes = new ObservableCollection<RoomTypeModel>(filteredRoomTypesList);
-            IsPopupOpen = FilteredRoomTypes.Any(); // Mostrar el Popup solo si hay resultados
-
-            // Asegurarse de que no haya un tipo de habitación seleccionado accidentalmente al escribir
-            SelectedRoomType = null;
-            //SelectedRoomType.IsSelected = false;
+            return SelectedRoomType != null;
         }
 
-        partial void OnSearchTextChanged(string value)
+        partial void OnSelectedRoomTypeChanged(RoomTypeModel value)
         {
-            SelectedRoomType = null;
-            SearchRoomType();
+            (ViewRoomTypeCommand as RelayCommand)?.NotifyCanExecuteChanged();
+            (DeleteRoomTypeCommand as RelayCommand)?.NotifyCanExecuteChanged();
         }
-
-        partial void OnSelectedRoomTypeChanged(RoomTypeModel roomType)
-        {
-            if (roomType != null)
-            {
-                var editRoomTypeDialog = new AddEditRoomTypeDialog(roomType);
-
-                if (editRoomTypeDialog.ShowDialog() == true)
-                {
-                    using (var dbContext = new AppDbContext())
-                    {
-                        dbContext.RoomTypeTable.Update(roomType);
-                        SelectedRoomType.IsSelected = false;
-                        dbContext.SaveChanges();
-                    }
-
-                    SelectedRoomType.IsSelected = false;
-                    LoadRoomTypes();
-                    MessageBox.Show("Tipo de habitación actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    
-                }
-                
-                IsPopupOpen = false;
-            }
-        }
-        #endregion
+       
     }
 }

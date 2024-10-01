@@ -24,14 +24,6 @@ namespace SHEndevour.ViewModels
         [ObservableProperty]
         private ObservableCollection<UserModel> users;
 
-        [ObservableProperty]
-        private string searchText;
-
-        [ObservableProperty]
-        private ObservableCollection<UserModel> filteredUsers;
-
-        [ObservableProperty]
-        private bool isPopupOpen; // Ahora es un bool en lugar de Visibility
 
         [ObservableProperty]
         private UserModel selectedUser;
@@ -41,22 +33,21 @@ namespace SHEndevour.ViewModels
         public ICommand AddUserCommand { get; }
         public ICommand ViewUserCommand { get; }
         public ICommand DeleteUserCommand { get; }
-        public ICommand SearchCommand { get; }
+
 
         public UserManagementViewModel()
         {
             Users = new ObservableCollection<UserModel>();
-            FilteredUsers = new ObservableCollection<UserModel>();
-            IsPopupOpen = false;
+
 
             // Cargar los usuarios desde la base de datos
             LoadUsers();
 
             // Inicializa los comandos
             AddUserCommand = new RelayCommand(AddUser);
-            ViewUserCommand = new RelayCommand(ViewUser);
-            DeleteUserCommand = new RelayCommand(DeleteUser);
-            SearchCommand = new RelayCommand(SearchUser);
+            ViewUserCommand = new RelayCommand(ViewUser, CanEditOrDelete);
+            DeleteUserCommand = new RelayCommand(DeleteUser, CanEditOrDelete);
+
         }
 
         private void LoadUsers()
@@ -77,9 +68,7 @@ namespace SHEndevour.ViewModels
         }
 
 
-        #region UserReportsREGION
-        
-        #endregion
+       
 
 
         #region AddUsersRegion
@@ -105,17 +94,15 @@ namespace SHEndevour.ViewModels
         }
         #endregion
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
         #region ViewUsersRegion
         private void ViewUser()
         {
-            var selectedUser = Users.FirstOrDefault(u => u.IsSelected);
-
-            if (selectedUser != null)
+            if (SelectedUser != null)
             {
-                var editUserDialog = new AddEditUserDialog(selectedUser);
-                var originalPassword = selectedUser.Password;
+                var editUserDialog = new AddEditUserDialog(SelectedUser);
+                var originalPassword = SelectedUser.Password;
 
                 if (editUserDialog.ShowDialog() == true)
                 {
@@ -133,14 +120,13 @@ namespace SHEndevour.ViewModels
                         dbContext.SaveChanges();
                     }
 
-
                     LoadUsers();
                     MessageBox.Show("Usuario actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
                     LoadUsers();
-                    MessageBox.Show("Operacion Cancelada", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Operación Cancelada", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
@@ -150,110 +136,62 @@ namespace SHEndevour.ViewModels
         }
         #endregion
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
         #region DeleteUsersRegion
         private void DeleteUser()
         {
-            var selectedUsers = Users.Where(u => u.IsSelected).ToList();
-
-            if (selectedUsers.Any())
+            if (SelectedUser != null)
             {
-                var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar {selectedUsers.Count} usuario(s)?",
+                if (SelectedUser.Username != App.CurrentUser.Username)
+                {
+                    var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar el usuario '{SelectedUser.Username}'?",
                                              "Confirmar eliminación",
                                              MessageBoxButton.YesNo,
                                              MessageBoxImage.Warning);
 
-                if (result == MessageBoxResult.Yes)
-                {
-                    using (var dbContext = new AppDbContext())
+                    if (result == MessageBoxResult.Yes)
                     {
-                        foreach (var user in selectedUsers)
+                        using (var dbContext = new AppDbContext())
                         {
-                            dbContext.Users.Remove(user);
+                            dbContext.Users.Remove(SelectedUser);
+                            dbContext.SaveChanges();
                         }
-                        dbContext.SaveChanges();
-                    }
 
-                    LoadUsers();
-                    MessageBox.Show("Usuario(s) eliminado(s) con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LoadUsers();
+                        MessageBox.Show("Usuario eliminado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"No Puedes Eliminar el Usuario '{SelectedUser.Username}' \nDebes Eliminarlo desde Otra Cuenta",
+                                             "Advertencia",
+                                             MessageBoxButton.OK,
+                                             MessageBoxImage.Warning);
                 }
             }
             else
             {
-                MessageBox.Show("Por favor, seleccione al menos un usuario para eliminar.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Por favor, seleccione un usuario para eliminar.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
         #endregion
 
-        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-        #region SearchUsersRegion
-
-        private void SearchUser()
+        private bool CanEditOrDelete()
         {
-            if (string.IsNullOrWhiteSpace(SearchText))
-            {
-                FilteredUsers.Clear();
-                IsPopupOpen = false;
-                return;
-                
-            }
-
-            var filteredUsersList = Users
-                .Where(u => u.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                            u.FirstName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                            u.LastName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                            u.PhoneNumber.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                            u.Role.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                            u.Email.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            FilteredUsers = new ObservableCollection<UserModel>(filteredUsersList);
-            IsPopupOpen = FilteredUsers.Any(); // Mostrar el Popup solo si hay resultados
-
-            // Asegurarse de que no haya un usuario seleccionado accidentalmente al escribir
-            SelectedUser = null;
+            return SelectedUser != null;
         }
 
-        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-        partial void OnSearchTextChanged(string value)
+        partial void OnSelectedUserChanged(UserModel value)
         {
-            SelectedUser = null;
-            SearchUser();
-        }
 
-        partial void OnSelectedUserChanged(UserModel user)
-        {
-            if (user != null)
-            {
-                var editUserDialog = new AddEditUserDialog(user);
-
-                if (editUserDialog.ShowDialog() == true)
-                {
-                    // Solo cifrar si la contraseña ha cambiado
-                    if (user.Password != PasswordHelper.HashPassword(user.Password))
-                    {
-                        user.Password = PasswordHelper.HashPassword(user.Password);
-                    }
-
-                    using (var dbContext = new AppDbContext())
-                    {
-                        dbContext.Users.Update(user);
-                        dbContext.SaveChanges();
-                    }
-
-
-                    LoadUsers();
-                    MessageBox.Show("Usuario actualizado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    
-                }
-                IsPopupOpen = false;
-            }
+            (ViewUserCommand as RelayCommand)?.NotifyCanExecuteChanged();
+            (DeleteUserCommand as RelayCommand)?.NotifyCanExecuteChanged();
 
         }
-        #endregion
+       
 
         
     }

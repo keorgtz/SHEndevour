@@ -6,12 +6,9 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
-using SHEndevour.Views;
 using MessageBox = System.Windows.MessageBox;
 using SHEndevour.Utilities;
 using SHEndevour.Views.Settings.Rooms.Dialogs;
-using DevExpress.XtraRichEdit.Import.Doc;
-using System.Diagnostics;
 
 namespace SHEndevour.ViewModels.Settings.Rooms
 {
@@ -22,39 +19,24 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         private ObservableCollection<RoomModel> rooms;
 
         [ObservableProperty]
-        private ObservableCollection<RoomModel> filteredRooms;
-
-        [ObservableProperty]
         private RoomModel selectedRoom;
-
-        [ObservableProperty]
-        private string searchText;
-
-        [ObservableProperty]
-        private bool isPopupOpen;
-
-
 
         // Comandos
         public ICommand AddRoomCommand { get; }
         public ICommand ViewRoomCommand { get; }
         public ICommand DeleteRoomCommand { get; }
-        public ICommand SearchCommand { get; }
 
         public RoomManagementViewModel()
         {
             Rooms = new ObservableCollection<RoomModel>();
-            FilteredRooms = new ObservableCollection<RoomModel>();
-            IsPopupOpen = false;
 
             // Cargar las habitaciones desde la base de datos
             LoadRooms();
 
             // Inicializar los comandos
             AddRoomCommand = new RelayCommand(AddRoom);
-            ViewRoomCommand = new RelayCommand(ViewRoom);
-            DeleteRoomCommand = new RelayCommand(DeleteRoom);
-            SearchCommand = new RelayCommand(SearchRoom);
+            ViewRoomCommand = new RelayCommand(ViewRoom, CanEditOrDelete);
+            DeleteRoomCommand = new RelayCommand(DeleteRoom, CanEditOrDelete);
         }
 
         private void LoadRooms()
@@ -71,8 +53,6 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                 {
                     Rooms.Add(room);
                 }
-
-                FilterRooms(); // Filtra las habitaciones inmediatamente después de cargarlas
             }
         }
 
@@ -97,34 +77,19 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         }
         #endregion
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
         #region ViewRoomRegion
         private void ViewRoom()
         {
-            var selectedRoom = Rooms.FirstOrDefault(rt => rt.IsSelected);
-            Debug.WriteLine($"RoomTypeIdVIEWMODEL Entrando al ViewRoom: {selectedRoom.RoomTypeId}");
-
-            if (selectedRoom != null)
+            if (SelectedRoom != null)
             {
-                var editRoomDialog = new AddEditRoomDialog(selectedRoom);
-                Debug.WriteLine($"RoomTypeIdVIEWMODEL si se Selecciono un Room: {selectedRoom.RoomTypeId}");
+                var editRoomDialog = new AddEditRoomDialog(SelectedRoom);
 
                 if (editRoomDialog.ShowDialog() == true)
                 {
                     var updatedRoom = editRoomDialog.Room;
-                    Debug.WriteLine($"RoomTypeIdVIEWMODEL si el Dialogo de Update es Verdadero: {updatedRoom.RoomTypeId}");
 
                     using (var dbContext = new AppDbContext())
                     {
-                        // Busca en la tabla RoomTypeTable del contexto de base de datos (dbContext)
-                        // la entidad RoomTypeModel que tiene el mismo Id que la propiedad RoomTypeId
-                        // de la habitación actualizada (updatedRoom), y luego asigna esa entidad RoomTypeModel
-                        // encontrada a la propiedad RoomType de la habitación (updatedRoom).
-                        // Esto asegura que la propiedad de navegación RoomType esté correctamente
-                        // relacionada con la entidad RoomTypeModel correspondiente antes de guardar
-                        // los cambios en la base de datos.
-
                         // Asociar la entidad RoomType  
                         updatedRoom.RoomType = dbContext.RoomTypeTable.Find(updatedRoom.RoomTypeId);
 
@@ -136,150 +101,50 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                     LoadRooms();
                     MessageBox.Show("Habitación actualizada con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                else
-                {
-                    LoadRooms();
-                    MessageBox.Show("Operacion Cancelada", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-
-
-                Debug.WriteLine($"RoomTypeIdVIEWMODEL Despues del Dialogo de Confirmacion: {selectedRoom.RoomTypeId}");
-            }
-            else
-            {
-                MessageBox.Show("Por favor, seleccione una habitación para ver.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
         #endregion
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
         #region DeleteRoomRegion
         private void DeleteRoom()
         {
-            var selectedRooms = Rooms.Where(r => r.IsSelected).ToList();
-
-            if (selectedRooms.Any())
+            if (SelectedRoom != null)
             {
-                // Filtrar cuartos que NO estén en el estado permitido
-                var invalidRooms = selectedRooms
-                    .Where(r => r.RoomStatus != RoomStatus.VacioLimpio && r.RoomStatus != RoomStatus.VacioSucio)
-                    .ToList();
-
-                // Verificar si hay cuartos que no cumplen la condición de eliminación
-                if (invalidRooms.Any())
+                // Verificar si el RoomStatus es VacioLimpio o VacioSucio
+                if (SelectedRoom.RoomStatus == RoomStatus.VacioLimpio || SelectedRoom.RoomStatus == RoomStatus.VacioSucio)
                 {
-                    // Mostrar advertencia para los cuartos que no pueden ser eliminados
-                    MessageBox.Show("Algunos cuartos seleccionados no pueden ser eliminados \nprimero deben ser liberados y estar vacios",
-                                    "Advertencia",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
-                    return;
-                }
-
-                // Confirmar la eliminación si todos los cuartos seleccionados son válidos
-                var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar {selectedRooms.Count} habitación(es)?",
-                                             "Confirmar eliminación",
-                                             MessageBoxButton.YesNo,
-                                             MessageBoxImage.Warning);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    using (var dbContext = new AppDbContext())
+                    // Confirmar eliminación
+                    if (MessageBox.Show("¿Estás seguro de que deseas eliminar esta habitación?", "Confirmar eliminación", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
-                        foreach (var room in selectedRooms)
+                        using (var dbContext = new AppDbContext())
                         {
-                            dbContext.RoomTable.Remove(room);
+                            dbContext.RoomTable.Remove(SelectedRoom);
+                            dbContext.SaveChanges();
                         }
-                        dbContext.SaveChanges();
-                    }
 
-                    LoadRooms();
-                    MessageBox.Show("Habitación(es) eliminada(s) con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Rooms.Remove(SelectedRoom);
+                        MessageBox.Show("Habitación eliminada con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else
+                {
+                    // Mostrar un mensaje de error si el estado no es VacioLimpio o VacioSucio
+                    MessageBox.Show($"No se puede Eliminar Esta Habitacion \nSu Estado esta en {SelectedRoom.RoomStatus}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
-            {
-                MessageBox.Show("Por favor, seleccione al menos una habitación para eliminar.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
+
         #endregion
 
-
-        #region SearchRoomRegion
-        private void SearchRoom()
+        private bool CanEditOrDelete()
         {
-            if (string.IsNullOrWhiteSpace(SearchText))
-            {
-                FilteredRooms.Clear();
-                IsPopupOpen = false;
-                return;
-            }
-
-            var filteredRoomsList = Rooms
-                .Where(r => r.RoomKey.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                            r.RoomStatus.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                            r.RoomType.RoomTypeKey.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                            r.RoomType.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            FilteredRooms = new ObservableCollection<RoomModel>(filteredRoomsList);
-            IsPopupOpen = FilteredRooms.Any(); // Mostrar el Popup solo si hay resultados
-
-            SelectedRoom = null; // Asegurarse de que no haya una habitación seleccionada accidentalmente al escribir
+            return SelectedRoom != null;
         }
 
-        private void FilterRooms()
+        partial void OnSelectedRoomChanged(RoomModel value)
         {
-            if (!string.IsNullOrWhiteSpace(SearchText))
-            {
-                SearchRoom();
-            }
-            else
-            {
-                FilteredRooms.Clear();
-                foreach (var room in Rooms)
-                {
-                    FilteredRooms.Add(room);
-                }
-            }
+            (ViewRoomCommand as RelayCommand)?.NotifyCanExecuteChanged();
+            (DeleteRoomCommand as RelayCommand)?.NotifyCanExecuteChanged();
         }
-
-        partial void OnSearchTextChanged(string value)
-        {
-            SelectedRoom = null;
-            SearchRoom();
-        }
-
-        partial void OnSelectedRoomChanged(RoomModel room)
-        {
-            if (room != null)
-            {
-                var editRoomDialog = new AddEditRoomDialog(room);
-
-                if (editRoomDialog.ShowDialog() == true)
-                {
-                    using (var dbContext = new AppDbContext())
-                    {
-                        dbContext.RoomTable.Update(room);
-                        dbContext.SaveChanges();
-                    }
-
-                    LoadRooms();
-                    MessageBox.Show("Habitación actualizada con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                }
-
-                IsPopupOpen = false;
-
-            }
-
-
-            //(ViewRoomCommand as RelayCommand)?.NotifyCanExecuteChanged();
-            //(DeleteRoomCommand as RelayCommand)?.NotifyCanExecuteChanged();
-
-        }
-        #endregion
     }
 }

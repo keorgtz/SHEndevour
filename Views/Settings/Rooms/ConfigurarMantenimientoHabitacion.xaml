@@ -116,7 +116,7 @@
         <dxg:GridControl x:Name="MaintenanceRoomsGrid" Grid.Row="1"
                          ItemsSource="{Binding Maintenances}"
                          Margin="10"
-                         SelectionMode="MultipleRow"
+                         SelectionMode="Row"
                          SelectedItem="{Binding SelectedMaintenance}">
             <dxg:GridControl.View>
                 <dxg:TableView AutoWidth="True" AllowSorting="True" />

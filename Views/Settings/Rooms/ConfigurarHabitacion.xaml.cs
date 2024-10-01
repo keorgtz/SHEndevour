@@ -28,43 +28,7 @@ namespace SHEndevour.Views.Settings.Rooms
             this.DataContext = new RoomManagementViewModel();
         }
 
-        // Evento para cuando el CheckBox en el encabezado se chequea
-        private void RoomGridCheck_Checked(object sender, RoutedEventArgs e)
-        {
-            // Obtén la colección de usuarios desde el DataContext
-            var viewModel = DataContext as RoomManagementViewModel;
-
-            if (viewModel != null)
-            {
-                foreach (var room in viewModel.Rooms)
-                {
-                    room.IsSelected = true;
-                }
-
-                // Forzar la actualización visual del DataGrid
-                RoomDataGrid.Items.Refresh();
-
-            }
-        }
-
-        // Evento para cuando el CheckBox en el encabezado se deschequea
-        private void RoomGridCheck_Unchecked(object sender, RoutedEventArgs e)
-        {
-            // Obtén la colección de usuarios desde el DataContext
-            var viewModel = DataContext as RoomManagementViewModel;
-
-            if (viewModel != null)
-            {
-                foreach (var room in viewModel.Rooms)
-                {
-                    room.IsSelected = false;
-                }
-
-                // Forzar la actualización visual del DataGrid
-                RoomDataGrid.Items.Refresh();
-
-            }
-        }
+        
 
     }
 }

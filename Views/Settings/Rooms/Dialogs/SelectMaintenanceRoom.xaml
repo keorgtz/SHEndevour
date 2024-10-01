@@ -36,9 +36,9 @@
             </dxg:GridControl.View>
 
             <dxg:GridColumn FieldName="RoomKey" Header="Habitación" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="RoomStatus" Header="Razon del Bloqueo" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="RoomType.RoomTypeKey" Header="Descripción" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="RoomType.Description" Header="Tipo de Bloqueo" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="RoomStatus" Header="Estado" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="RoomType.RoomTypeKey" Header="Clave de Tipo" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="RoomType.Description" Header="Tipo" ReadOnly="True"/>
         </dxg:GridControl>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="5">

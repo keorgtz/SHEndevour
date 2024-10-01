@@ -17,53 +17,6 @@ namespace SHEndevour.Views
             this.DataContext = new UserManagementViewModel();
         }
 
-
-        #region CheckAllUsers-Region
-
-        private void HeaderCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            // Obtén la colección de usuarios desde el DataContext
-            var viewModel = DataContext as UserManagementViewModel;
-
-            if (viewModel != null)
-            {
-                foreach (var user in viewModel.Users)
-                {
-                    user.IsSelected = true;
-                }
-
-                // Forzar la actualización visual del DataGrid
-                UserDataGrid.Items.Refresh();
-
-            }
-        }
-
-        private void HeaderCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            // Obtén la colección de usuarios desde el DataContext
-            var viewModel = DataContext as UserManagementViewModel;
-
-            if (viewModel != null)
-            {
-                foreach (var user in viewModel.Users)
-                {
-                    user.IsSelected = false;
-                }
-
-                // Forzar la actualización visual del DataGrid
-                UserDataGrid.Items.Refresh();
-
-            }
-        }
-
-
-
-        #endregion
-
-        private void UserDataGrid_Sorting(object sender, DataGridSortingEventArgs e)
-        {
-            
-        }
     }
 
 }
