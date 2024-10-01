@@ -35,7 +35,6 @@
     <Folder Include="Images\" />
     <Folder Include="ViewModels\Settings\Rooms\Dialogs\" />
     <Folder Include="ViewModels\Settings\Rooms\History\" />
-    <Folder Include="Views\History\" />
   </ItemGroup>
 
   <ItemGroup>

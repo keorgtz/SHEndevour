@@ -27,6 +27,9 @@
     <Compile Update="Views\AddEditUserDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\History\MaintenanceActionsHistory.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\HomeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -90,6 +93,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AddEditUserDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\History\MaintenanceActionsHistory.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\HomeView.xaml">

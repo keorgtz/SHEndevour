@@ -1,4 +1,6 @@
-﻿using SHEndevour.ViewModels;
+﻿using DevExpress.Xpf.Grid;
+using DevExpress.Xpf.Printing;
+using DevExpress.XtraPrinting;
 using SHEndevour.ViewModels.Settings.Rooms;
 using System;
 using System.Collections.Generic;
@@ -12,21 +14,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DevExpress.Xpf.Printing;
-using DevExpress.Xpf.Grid;
-using UserControl = System.Windows.Controls.UserControl;
-using SHEndevour.Views.History;
+using SHEndevour.AppReports;
 
-namespace SHEndevour.Views.Settings.Rooms
+namespace SHEndevour.Views.History
 {
     /// <summary>
-    /// Lógica de interacción para ConfigurarMantenimientoHabitacion.xaml
+    /// Lógica de interacción para MaintenanceActionsHistory.xaml
     /// </summary>
-    public partial class ConfigurarMantenimientoHabitacion : UserControl
+    public partial class MaintenanceActionsHistory : Window
     {
-        public ConfigurarMantenimientoHabitacion()
+        public MaintenanceActionsHistory()
         {
             InitializeComponent();
             this.DataContext = new RoomMaintenanceViewModel();
@@ -35,16 +33,20 @@ namespace SHEndevour.Views.Settings.Rooms
         private void OnPrintPreviewClick(object sender, RoutedEventArgs e)
         {
             // Crear un enlace a los datos del GridControl para la impresión
-            var link = new PrintableControlLink(MaintenanceRoomsGrid.View as TableView);
+            var link = new PrintableControlLink(MaintenanceHistoryGrid.View as TableView);
 
-            // Mostrar la vista previa de impresión
+
+            // Suscribirse al evento para personalizar la barra de herramientas
+            link.CreateDocument();
+
+            // Mostrar la vista previa de impresión con opciones limitadas
             link.ShowPrintPreview(this);
         }
 
-        private void HistoryButton_Click(object sender, RoutedEventArgs e)
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            var HistoryWindow = new MaintenanceActionsHistory();
-            HistoryWindow.Show();
+            this.Close(); // Cierra la ventana actual
         }
     }
 }

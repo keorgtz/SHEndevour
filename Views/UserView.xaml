@@ -72,7 +72,6 @@
                   CanUserAddRows="False"
                   SelectionUnit="FullRow"
                   SelectedItem="{Binding SelectedUser}"
-                  Sorting="UserDataGrid_Sorting"
                   Margin="5"
                   materialDesign:ThemeAssist.Theme="Light"
                   materialDesign:ElevationAssist.Elevation="Dp4"
