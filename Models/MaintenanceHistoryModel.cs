@@ -11,6 +11,7 @@ namespace SHEndevour.Models
         public int Id { get; set; } // Campo de clave primaria
         public string? RoomKey { get; set; } // Clave de la habitación
         public string? MaintenanceAction { get; set; } // Acción realizada (Agregar, Editar, Liberar)
+        public string? MaintenanceActionBy { get; set; } // Quien Realizo la Accion
         public string? MaintenanceDescription { get; set; } // Descripción del mantenimiento o causa
         public string? BlockType { get; set; } // Tipo de bloqueo
         public string? RoomStatus { get; set; } // Estado de la habitación

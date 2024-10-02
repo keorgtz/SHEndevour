@@ -19,6 +19,9 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         private ObservableCollection<RoomModel> rooms;
 
         [ObservableProperty]
+        private ObservableCollection<RoomModel> notblockeds; 
+
+        [ObservableProperty]
         private RoomModel selectedRoom;
 
         // Comandos
@@ -29,9 +32,11 @@ namespace SHEndevour.ViewModels.Settings.Rooms
         public RoomManagementViewModel()
         {
             Rooms = new ObservableCollection<RoomModel>();
+            Notblockeds = new ObservableCollection<RoomModel>();
 
             // Cargar las habitaciones desde la base de datos
             LoadRooms();
+            LoadAvailableRooms();
 
             // Inicializar los comandos
             AddRoomCommand = new RelayCommand(AddRoom);
@@ -39,6 +44,8 @@ namespace SHEndevour.ViewModels.Settings.Rooms
             DeleteRoomCommand = new RelayCommand(DeleteRoom, CanEditOrDelete);
         }
 
+
+        //Cargar las Habitaciones (Todas y las No Bloqueadas)
         private void LoadRooms()
         {
             using (var dbContext = new AppDbContext())
@@ -55,6 +62,31 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                 }
             }
         }
+
+        // Método que carga solo las habitaciones cuyo RoomStatus no esté en "Bloqueado" o "Mantenimiento"
+        private void LoadAvailableRooms()
+        {
+            using (var dbContext = new AppDbContext())
+            {
+                // Filtrar habitaciones que no estén en los estados Bloqueado o Mantenimiento
+                var availableRoomsFromDb = dbContext.RoomTable
+                                                    .Include(r => r.RoomType)
+                                                    .Where(r => r.RoomStatus != RoomStatus.Bloqueado &&
+                                                                r.RoomStatus != RoomStatus.Mantenimiento)
+                                                    .ToList();
+
+                Notblockeds.Clear();
+
+                foreach (var nblock in availableRoomsFromDb)
+                {
+                    Notblockeds.Add(nblock);
+                }
+            }
+        }
+
+
+
+
 
         #region AddRoomRegion
         private void AddRoom()

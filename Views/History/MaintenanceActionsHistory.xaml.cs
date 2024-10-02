@@ -35,13 +35,17 @@ namespace SHEndevour.Views.History
             // Crear un enlace a los datos del GridControl para la impresión
             var link = new PrintableControlLink(MaintenanceHistoryGrid.View as TableView);
 
+            // Configurar la orientación de la página a horizontal
+            link.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4; // Ajustar tamaño de papel
+            link.Landscape = true; // Establecer en horizontal
 
-            // Suscribirse al evento para personalizar la barra de herramientas
+            // Crear el documento para la impresión
             link.CreateDocument();
 
-            // Mostrar la vista previa de impresión con opciones limitadas
+            // Mostrar la vista previa de impresión con orientación horizontal y personalizado
             link.ShowPrintPreview(this);
         }
+
 
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

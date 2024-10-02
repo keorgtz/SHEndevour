@@ -130,7 +130,7 @@ namespace SHEndevour.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SHEndevour;V1.0.0.0;component/views/addedituserdialog.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SHEndevour;component/views/addedituserdialog.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\AddEditUserDialog.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

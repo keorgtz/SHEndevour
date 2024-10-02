@@ -14,7 +14,7 @@
         WindowStyle="None"
         d:DataContext="{d:DesignInstance Type=vm:RoomMaintenanceViewModel, IsDesignTimeCreatable=True}"
         Background="#f1f1f1" materialDesign:ThemeAssist.Theme="Light"
-        Title="Historial de Movimientos de Mantenimientos" Height="450" Width="800">
+        Title="Historial de Movimientos de Mantenimientos" Height="450" Width="1000">
 
     <Window.DataContext>
         <vm:RoomMaintenanceViewModel />
@@ -64,6 +64,7 @@
 
             <dxg:GridColumn FieldName="RoomKey" Header="Habitación" ReadOnly="True"/>
             <dxg:GridColumn FieldName="MaintenanceAction" Header="Movimiento" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="MaintenanceActionBy" Header="Realizado Por" ReadOnly="True"/>
             <dxg:GridColumn FieldName="MaintenanceDescription" Header="Descripcion de Mantenimiento" ReadOnly="True"/>
             <dxg:GridColumn FieldName="BlockType" Header="Tipo de Bloqueo" ReadOnly="True"/>
             <dxg:GridColumn FieldName="RoomStatus" Header="Razon del Bloqueo" ReadOnly="True"/>
@@ -72,7 +73,9 @@
             <dxg:GridColumn FieldName="UpdatedbyUser" Header="Editado Por" ReadOnly="True"/>
             <dxg:GridColumn FieldName="CreatedOnDate" Header="Creado El" ReadOnly="True"/>
             <dxg:GridColumn FieldName="UpdatedOnDate" Header="Editado El" ReadOnly="True"/>
-            <dxg:GridColumn FieldName="ActionDate" Header="Fecha del Movimiento" ReadOnly="True"/>
+            
+            <dxg:GridColumn FieldName="ActionDate"  Header="Fecha del Movimiento" ReadOnly="True"/>
+            
         </dxg:GridControl>
 
     </Grid>

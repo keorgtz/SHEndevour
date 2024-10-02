@@ -114,8 +114,7 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SHEndevour;V1.0.0.0;component/views/settings/rooms/dialogs/addeditmaintenancedia" +
-                    "log.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SHEndevour;component/views/settings/rooms/dialogs/addeditmaintenancedialog.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\..\Views\Settings\Rooms\Dialogs\AddEditMaintenanceDialog.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

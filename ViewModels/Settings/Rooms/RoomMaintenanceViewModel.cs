@@ -64,6 +64,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
             }
         }
 
+        //Carga el Historial de la Base de Datos a la Variable 'Historys' como una coleccion
         private void LoadHistorys()
         {
             using (var dbContext = new AppDbContext())
@@ -94,11 +95,16 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                     {
                         room.RoomStatus = RoomStatus.VacioLimpio; // Cambiar el estatus de la habitación.
                         dbContext.RoomTable.Update(room);
+
                         dbContext.RoomMaintenanceTable.Remove(maintenance); // Eliminar el mantenimiento cumplido.
+                        dbContext.SaveChanges(); // Guardar los cambios.
+
+                        // Código de liberar mantenimiento
+                        SaveMaintenanceHistory("Liberar", "SYSTEM", maintenance); // Guardar historial
                     }
                 }
 
-                dbContext.SaveChanges(); // Guardar los cambios.
+                //dbContext.SaveChanges(); // Guardar los cambios.
 
                 // Actualiza la colección local.
                 LoadMaintenances();
@@ -109,12 +115,15 @@ namespace SHEndevour.ViewModels.Settings.Rooms
 
 
         //Metodo que Crea el Historial
-        private void SaveMaintenanceHistory(string action, RoomMaintenanceModel maintenance)
+        private void SaveMaintenanceHistory(string action, string? actionBy, RoomMaintenanceModel maintenance)
         {
+            //var maintenanceActionBy = App.CurrentUser.Id >= 1 ? App.CurrentUser.Username : "SYSTEM";
+
             var historyRecord = new MaintenanceHistoryModel
             {
                 RoomKey = maintenance.RoomKey,
                 MaintenanceAction = action,
+                MaintenanceActionBy = actionBy,
                 MaintenanceDescription = maintenance.CauseDescription,
                 BlockType = maintenance.BlockType.ToString(),
                 RoomStatus = maintenance.RoomStatus.ToString(),
@@ -123,6 +132,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                 UpdatedbyUser = maintenance.UpdatedBy.ToString(),
                 UpdatedOnDate = maintenance.UpdatedAt.ToString(),
                 ActionDate = DateTime.Now
+
             };
 
             using (var dbContext = new AppDbContext())
@@ -156,8 +166,9 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                         dbContext.RoomMaintenanceTable.Add(newMaintenance);
                         dbContext.SaveChanges();
 
+                        
                         // Agregar registro al historial
-                        SaveMaintenanceHistory("Agregar", newMaintenance);
+                        SaveMaintenanceHistory("Agregar", App.CurrentUser.Username, newMaintenance);
 
                         Maintenances.Add(newMaintenance);
                         MessageBox.Show("Mantenimiento añadido con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -205,7 +216,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                             }
 
                             // Código de editar mantenimiento
-                            SaveMaintenanceHistory("Editar", SelectedMaintenance); // Guardar historial
+                            SaveMaintenanceHistory("Editar", App.CurrentUser.Username, SelectedMaintenance); // Guardar historial
 
                             dbContext.SaveChanges();
 
@@ -248,7 +259,7 @@ namespace SHEndevour.ViewModels.Settings.Rooms
                 }
 
                 // Código de liberar mantenimiento
-                SaveMaintenanceHistory("Liberar", SelectedMaintenance); // Guardar historial
+                SaveMaintenanceHistory("Liberar", App.CurrentUser.Username, SelectedMaintenance); // Guardar historial
 
                 Maintenances.Remove(SelectedMaintenance);
 

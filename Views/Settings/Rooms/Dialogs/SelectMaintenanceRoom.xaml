@@ -28,7 +28,7 @@
         
         <!-- DataGrid para mostrar los movimientos de habitaciones -->
         <dxg:GridControl x:Name="MaintenanceRoomsGrid" Grid.Row="0"
-                         ItemsSource="{Binding Rooms}"
+                         ItemsSource="{Binding Notblockeds}"
                          Margin="10"
                          SelectedItem="{Binding SelectedRoom}">
             <dxg:GridControl.View>
