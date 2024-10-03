@@ -48,10 +48,6 @@ namespace SHEndevour.ViewModels.Settings.Rooms
             LoadMaintenances();
             LoadHistorys();
 
-            // Inicializa y configura el temporizador para verificar los mantenimientos.
-            _maintenanceCheckTimer = new Timer(60000); // Verificar cada minuto (60000 ms).
-            _maintenanceCheckTimer.Elapsed += CheckMaintenanceStatus;
-            _maintenanceCheckTimer.Start();
         }
 
         #region Cargar Mantenimientos, RoomStatus y BlockTypes / Cargar Historial
@@ -74,42 +70,6 @@ namespace SHEndevour.ViewModels.Settings.Rooms
             }
         }
 
-        #endregion
-
-
-
-        #region Método para Verificar Mantenimientos Programados
-        private void CheckMaintenanceStatus(object sender, ElapsedEventArgs e)
-        {
-            using (var dbContext = new AppDbContext())
-            {
-                // Obtener los mantenimientos que son de tipo Programado y cuya fecha de finalización ha pasado.
-                var expiredMaintenances = dbContext.RoomMaintenanceTable
-                    .Where(m => m.BlockType == BlockType.Programado && m.EndDate <= DateTime.Now)
-                    .ToList();
-
-                foreach (var maintenance in expiredMaintenances)
-                {
-                    var room = dbContext.RoomTable.FirstOrDefault(r => r.RoomKey == maintenance.RoomKey);
-                    if (room != null)
-                    {
-                        room.RoomStatus = RoomStatus.VacioLimpio; // Cambiar el estatus de la habitación.
-                        dbContext.RoomTable.Update(room);
-
-                        dbContext.RoomMaintenanceTable.Remove(maintenance); // Eliminar el mantenimiento cumplido.
-                        dbContext.SaveChanges(); // Guardar los cambios.
-
-                        // Código de liberar mantenimiento
-                        SaveMaintenanceHistory("Liberar", "SYSTEM", maintenance); // Guardar historial
-                    }
-                }
-
-                //dbContext.SaveChanges(); // Guardar los cambios.
-
-                // Actualiza la colección local.
-                LoadMaintenances();
-            }
-        }
         #endregion
 
 

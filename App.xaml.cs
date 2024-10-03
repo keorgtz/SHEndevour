@@ -8,13 +8,16 @@ using System.Windows.Media;
 using System.Configuration;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
+using SHEndevour.Services.Maintenance;
 
 namespace SHEndevour
 {
     public partial class App : Application
     {
 
-        public static UserModel CurrentUser { get; set; }
+        public static UserModel? CurrentUser { get; set; }
+
+        private MaintenanceService _maintenanceService;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -45,10 +48,10 @@ namespace SHEndevour
             AdminUserInitializer.EnsureAdminUser();
 
             // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
+            //Escalado de la APP
 
             // Leer el valor de escala desde App.config
-            string scaleFactorConfig = ConfigurationManager.AppSettings["ScaleFactor"];
+            string? scaleFactorConfig = ConfigurationManager.AppSettings["ScaleFactor"];
             double scaleFactor = double.TryParse(scaleFactorConfig, out double result) ? result : 1.0;
 
             // Aplicar el valor globalmente
@@ -57,13 +60,19 @@ namespace SHEndevour
 
             // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-
-
+            //SERVICIO DE MANTENIMIENTO
+            // Inicia el servicio de mantenimiento al iniciar la aplicación
+            _maintenanceService = new MaintenanceService();
 
 
         }
 
-
+        protected override void OnExit(ExitEventArgs e)
+        {
+            // Detener el Timer antes de que la aplicación cierre
+            _maintenanceService.StopTimer();
+            base.OnExit(e);
+        }
 
 
     }
