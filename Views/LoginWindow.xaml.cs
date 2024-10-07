@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SHEndevour.Models;
 using MessageBox = System.Windows.MessageBox;
 using SHEndevour.Utilities;
+using SHEndevour.Views.DatabaseView;
 
 
 namespace SHEndevour.Views
@@ -16,7 +17,28 @@ namespace SHEndevour.Views
         {
             InitializeComponent();
             _context = new AppDbContext();
+
+            // Cargar la configuración de conexión
+            var connectionSettings = DbConnectionSettings.LoadConnections();
+
+            // Obtener el servidor predeterminado
+            var defaultConnection = connectionSettings.FirstOrDefault(c => c.IsDefault);
+            if (defaultConnection != null)
+            {
+                // Obtener el nombre del servidor
+                string serverName = defaultConnection.GetServerName();
+
+                // Establecer el título de la ventana con el nombre del servidor
+                SubTitle.Text = $"[{serverName}]";
+            }
+            else
+            {
+                SubTitle.Text = "Sin Conexión";
+            }
+
         }
+
+        
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
@@ -51,6 +73,12 @@ namespace SHEndevour.Views
         {
             // Aquí debes verificar la contraseña hasheada
             return inputPassword == storedPassword; // Reemplaza con la verificación de hash real
+        }
+
+        private void DbView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var dbConnectView = new DbConnectionView(); // Cambia MainWindow por el nombre de tu ventana principal
+            dbConnectView.Show();
         }
     }
 }

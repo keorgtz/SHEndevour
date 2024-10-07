@@ -27,6 +27,12 @@
     <Compile Update="Views\AddEditUserDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\DatabaseView\DatabaseConnectionDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DatabaseView\DbConnectionView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\History\MaintenanceActionsHistory.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +99,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AddEditUserDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DatabaseView\DatabaseConnectionDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DatabaseView\DbConnectionView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\History\MaintenanceActionsHistory.xaml">

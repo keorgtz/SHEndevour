@@ -31,9 +31,8 @@ namespace SHEndevour
             {
                 try
                 {
-                    // Crear la base de datos y las tablas si no existen
-                    context.Database.EnsureCreated();
-                    Console.WriteLine("Base de datos y tablas aseguradas.");
+                    // Solo se conecta a la base de datos sin intentar crearla
+                    Console.WriteLine("Conexión a la base de datos establecida.");
                     
                 }
                 catch (Exception ex)

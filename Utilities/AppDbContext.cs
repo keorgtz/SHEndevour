@@ -13,19 +13,30 @@ namespace SHEndevour.Utilities
         public DbSet<RoomModel> RoomTable { get; set; }
         public DbSet<RoomMaintenanceModel> RoomMaintenanceTable { get; set; }
         public DbSet<MaintenanceHistoryModel> MaintenanceHistoryTable { get; set; }
-
         public DbSet<RoomTypeModel> RoomTypeTable { get; set; }
 
-        //public DbSet<ProductModel> Products { get; set; }  ---------  // Si tienes más modelos, añádelos aquí
+        //public DbSet<ProductModel> Products { get; set; }  // Si tienes más modelos, añádelos aquí
 
-        // Instancia de ConnectionSettings
-        private readonly DbConectionSettings _connectionSettings = new DbConectionSettings();
+        // Instancia para la configuración de conexiones
+        private readonly DbConnectionSettings _connectionSettings;
+
+        public AppDbContext()
+        {
+            // Cargar la configuración de conexiones desde el archivo .config
+            var allConnections = DbConnectionSettings.LoadConnections();
+            _connectionSettings = allConnections.FirstOrDefault(c => c.IsDefault); // Usar la conexión por defecto
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (_connectionSettings == null)
+            {
+                throw new InvalidOperationException("No se ha definido una conexión por defecto.");
+            }
+
+            // Configurar la cadena de conexión predeterminada
             optionsBuilder.UseSqlServer(_connectionSettings.GetConnectionString());
         }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,14 +49,16 @@ namespace SHEndevour.Utilities
                 new RoleModel { Id = 5, Name = "User", Level = 5 }
             );
 
-            modelBuilder.Entity<RoomModel>().HasOne(r => r.RoomType).WithMany(rt => rt.Rooms).HasForeignKey(r => r.RoomTypeId).OnDelete(DeleteBehavior.Cascade);
-
-
+            modelBuilder.Entity<RoomModel>()
+                .HasOne(r => r.RoomType)
+                .WithMany(rt => rt.Rooms)
+                .HasForeignKey(r => r.RoomTypeId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public override int SaveChanges()
         {
-            // Identifica las entidades que heredan de AuditableEntity
+            // Identificar las entidades que heredan de AuditableEntity
             var entries = ChangeTracker.Entries()
                 .Where(e => e.Entity is AuditableEntity &&
                             (e.State == EntityState.Added || e.State == EntityState.Modified));
@@ -66,9 +79,5 @@ namespace SHEndevour.Utilities
 
             return base.SaveChanges();
         }
-
-        
-
-
     }
 }
