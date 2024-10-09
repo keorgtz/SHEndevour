@@ -26,6 +26,13 @@ namespace SHEndevour.Views.DatabaseView
             this.DataContext = new DbConnectionViewModel();
         }
 
+        private void Aceptar_Click(object sender, RoutedEventArgs e)
+        {
+            // Aquí puedes agregar lógica para guardar la conexión o hacer validaciones si es necesario.
+            this.Close();
+
+        }
+
         private void UnlockButton_Click(object sender, RoutedEventArgs e)
         {
 

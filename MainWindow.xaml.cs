@@ -116,6 +116,7 @@ namespace SHEndevour
                 TextColapsar.Visibility = Visibility.Visible; // Mostrar texto
                 TextLogout.Visibility = Visibility.Visible; // Mostrar texto
                 LoggedUserField.Visibility = Visibility.Visible; // Mostrar texto
+                SeparatorSidebar.Visibility = Visibility.Visible; // Mostrar separador
 
                 ToggleIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ChevronDoubleLeft;
             }
@@ -131,6 +132,7 @@ namespace SHEndevour
                 TextColapsar.Visibility = Visibility.Collapsed; // Mostrar texto
                 TextLogout.Visibility = Visibility.Collapsed; // Mostrar texto
                 LoggedUserField.Visibility = Visibility.Collapsed; // Mostrar texto
+                SeparatorSidebar.Visibility = Visibility.Collapsed; // Mostrar separador
 
                 ToggleIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ChevronDoubleRight;
             }

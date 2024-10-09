@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:SHEndevour.ViewModels"
         xmlns:local="clr-namespace:SHEndevour.Views.DatabaseView"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None"
         d:DataContext="{d:DesignInstance Type=vm:DbConnectionViewModel, IsDesignTimeCreatable=True}"
         Background="#2d2d2d"
         Title="Endevour - Servidores" Height="370" Width="550">
@@ -14,7 +14,7 @@
     <Window.DataContext>
         <vm:DbConnectionViewModel/>
     </Window.DataContext>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -29,9 +29,9 @@
                   SelectionMode="Single"
                   CanUserAddRows="False"
                   SelectionUnit="FullRow"
-                  Margin="10" 
-                  ItemsSource="{Binding Connections}" 
-                  SelectedItem="{Binding SelectedConnection, Mode=TwoWay}"   
+                  Margin="10"
+                  ItemsSource="{Binding Connections}"
+                  SelectedItem="{Binding SelectedConnection, Mode=TwoWay}"
                   materialDesign:ThemeAssist.Theme="Dark"
                   materialDesign:ElevationAssist.Elevation="Dp4"
                   Style="{StaticResource MaterialDesignDataGrid}">
@@ -46,7 +46,7 @@
 
         <Grid Grid.Column="1" Margin="10,10,10,10">
 
-            <materialDesign:ColorZone CornerRadius="5">
+            <materialDesign:ColorZone CornerRadius="5" Background="#323232">
                 <StackPanel Orientation="Vertical" Margin="10">
 
 
@@ -67,7 +67,7 @@
                     <Separator Margin="5,15,5,15"/>
 
                     <!-- PasswordBox para ingresar la contraseña -->
-                    <PasswordBox x:Name="PasswordBox" Margin="0,5,0,5" 
+                    <PasswordBox x:Name="PasswordBox" Margin="0,5,0,5"
                                  Padding="5" materialDesign:HintAssist.Hint="CreateDB Pass"
                                  Style="{StaticResource MaterialDesignOutlinedPasswordBox}"/>
 
@@ -75,9 +75,13 @@
                             Style="{StaticResource MaterialDesignOutlinedButton}"
                             BorderBrush="HotPink" Foreground="HotPink" Margin="0,5,0,5"/>
 
-                    <Button Content="Create DB" IsEnabled="False" Command="{Binding CreateDatabaseCommand}"
+                    <Button Content="Create DB" IsEnabled="True" Command="{Binding CreateDatabaseCommand}"
                             Style="{StaticResource MaterialDesignOutlinedButton}"
                             BorderBrush="DarkOrange" Foreground="DarkOrange" Margin="0,5,0,5"/>
+
+                    <Button Content="Cerrar" Click="Aceptar_Click"
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
+                            BorderBrush="Teal" Foreground="Teal" Margin="0,5,0,5"/>
 
                 </StackPanel>
             </materialDesign:ColorZone>

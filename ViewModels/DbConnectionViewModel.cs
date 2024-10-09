@@ -97,6 +97,8 @@ namespace SHEndevour.ViewModels
                     MessageBox.Show($"Error al conectar con la base de datos: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+
+            
         }
 
 
