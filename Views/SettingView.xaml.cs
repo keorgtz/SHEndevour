@@ -47,6 +47,10 @@ namespace SHEndevour.Views
                         settingScreen.Content = new GeneralSetting();
                         break;
 
+                    case "License":
+                        settingScreen.Content = new LicenseSettings();
+                        break;
+
                     default:
                         // Manejar un valor de tag no esperado si es necesario
                         break;

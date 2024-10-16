@@ -16,7 +16,7 @@
             <Setter Property="Width" Value="70"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Foreground" Value="#f1f1f1"/>
-            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="15"/>
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="12"/>
             <!--#region -->
             <Setter Property="Template">
                 <Setter.Value>
@@ -54,17 +54,29 @@
         </Grid.ColumnDefinitions>
 
 
-        <materialDesign:ColorZone Background="#334664" Margin="10" CornerRadius="5">
+        <materialDesign:ColorZone Background="#334664" 
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  Margin="10" CornerRadius="10">
 
             <StackPanel Grid.Column="0" Orientation="Vertical">
 
-                <RadioButton Content="Rooms" Tag="Rooms" 
+                <RadioButton Content="Cuartos" Tag="Rooms" 
                          x:Name="RoomBTNSide" 
                          Click="SettingButton_Click"
                          Style="{StaticResource RadioBFlat}"/>
 
+                <Separator Margin="10,5,10,5"/>
+
                 <RadioButton Content="General" Tag="Generals" 
                          x:Name="GeneralBTNSide"
+                         Click="SettingButton_Click"
+                         Style="{StaticResource RadioBFlat}"/>
+
+                <Separator Margin="10,5,10,5"/>
+
+                <RadioButton Content="Licencia" Tag="License" 
+                         x:Name="LicenseBTNSide"
                          Click="SettingButton_Click"
                          Style="{StaticResource RadioBFlat}"/>
 

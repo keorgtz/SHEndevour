@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SHEndevour.Models;
+using SHEndevour.Models.License;
 
 namespace SHEndevour.Utilities
 {
@@ -11,9 +12,15 @@ namespace SHEndevour.Utilities
         public DbSet<UserModel> Users { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
         public DbSet<RoomModel> RoomTable { get; set; }
+        public DbSet<RoomTypeModel> RoomTypeTable { get; set; }
         public DbSet<RoomMaintenanceModel> RoomMaintenanceTable { get; set; }
         public DbSet<MaintenanceHistoryModel> MaintenanceHistoryTable { get; set; }
-        public DbSet<RoomTypeModel> RoomTypeTable { get; set; }
+
+        // = = = = = = = = = = = = =  LicenseModel  = = = = = = = = = = = = = = = = = = 
+
+        public DbSet<LicenseModel> LicenseTable { get; set; }
+
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
 
         //public DbSet<ProductModel> Products { get; set; }  // Si tienes más modelos, añádelos aquí
 

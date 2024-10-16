@@ -55,18 +55,7 @@
                                FontWeight="Bold"
                                FontSize="20"/>
 
-                    <ComboBox 
-                             ItemsSource="{Binding RoomStatusOptions}" 
-                             SelectedItem="{Binding RoomStatusFilter, Mode=TwoWay}"
-                             Width="200" 
-                             HorizontalAlignment="Left" 
-                             Margin="10">
-                    </ComboBox>
 
-                    <Button Content="Limpiar Filtros" Width="200" 
-                            HorizontalAlignment="Left" 
-                            Margin="10" 
-                            Command="{Binding ClearFiltersCommand}" />
 
 
                 </StackPanel>
@@ -198,8 +187,23 @@
                 
                 <StackPanel Margin="10,5,10,5">
 
-                    
-                    
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox ItemsSource="{Binding RoomStatusOptions}" 
+                                  SelectedItem="{Binding RoomStatusFilter, Mode=TwoWay}"
+                                  Width="150" Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                  Padding="5" Background="#005555"
+                                  materialDesign:HintAssist.IsFloating="False"
+                                  materialDesign:HintAssist.Hint="Filtros" FontSize="16"
+                                  HorizontalAlignment="Left" 
+                                  Margin="10,5,0,5"/>
+
+                        <Button Content="{materialDesign:PackIcon Kind=CloseBox,Size=30}" Width="35" 
+                            HorizontalAlignment="Left" Padding="0"
+                            Margin="5" Foreground="Red"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Command="{Binding ClearFiltersCommand}" />
+                    </StackPanel>
+
                 </StackPanel>
                 
             </materialDesign:ColorZone>

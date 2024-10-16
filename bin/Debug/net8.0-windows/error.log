@@ -1,6 +1,9 @@
-System.InvalidOperationException: DialogResult sólo se puede establecer después de haber creado Window y una vez mostrada como cuadro de diálogo.
-   at System.Windows.Window.set_DialogResult(Nullable`1 value)
-   at SHEndevour.Views.DatabaseView.DbConnectionView.Aceptar_Click(Object sender, RoutedEventArgs e) in K:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\DatabaseView\DbConnectionView.xaml.cs:line 34
+System.FormatException: The input string '' was not in a correct format.
+   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)
+   at System.Int64.Parse(String s)
+   at SHEndevour.Views.Settings.LicenseSettings.GenerateRFCSeed(String rfc) in K:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\LicenseSettings.xaml.cs:line 207
+   at SHEndevour.Views.Settings.LicenseSettings.ValidateLicense() in K:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\LicenseSettings.xaml.cs:line 125
+   at SHEndevour.Views.Settings.LicenseSettings.SaveButton_Click(Object sender, RoutedEventArgs e) in K:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\LicenseSettings.xaml.cs:line 97
    at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
    at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
    at System.Windows.Controls.Primitives.ButtonBase.OnClick()

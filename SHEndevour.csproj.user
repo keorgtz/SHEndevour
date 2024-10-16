@@ -33,6 +33,9 @@
     <Compile Update="Views\DatabaseView\DbConnectionView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\DatabaseView\DBManager\DbManagerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\History\MaintenanceActionsHistory.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -55,6 +58,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Settings\General\ConfigurarInterfaz.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\LicenseSettings.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Settings\RoomSetting.xaml.cs">
@@ -107,6 +113,9 @@
     <Page Update="Views\DatabaseView\DbConnectionView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\DatabaseView\DBManager\DbManagerView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\History\MaintenanceActionsHistory.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -129,6 +138,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\General\ConfigurarInterfaz.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\LicenseSettings.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\RoomSetting.xaml">
