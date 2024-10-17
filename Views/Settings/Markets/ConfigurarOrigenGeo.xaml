@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="SHEndevour.Views.Settings.Markets.ConfigurarOrigenGeo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxpr="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:SHEndevour.Views.Settings.Markets"
+             xmlns:vm="clr-namespace:SHEndevour.ViewModels.Settings.Markets"
+             mc:Ignorable="d" Background="#f1f1f1" materialDesign:ThemeAssist.Theme="Light"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <vm:GeoOriginManagementViewModel />
+    </UserControl.DataContext>
+
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+
+            <materialDesign:ColorZone Margin="10"
+                      materialDesign:ElevationAssist.Elevation="Dp4"
+                      ClipToBounds="False"
+                      CornerRadius="5"
+                      Foreground="White"
+                      Mode="Custom"
+                      HorizontalAlignment="Left"
+                      materialDesign:ColorZoneAssist.Background="#022534">
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+
+                    <Button Command="{Binding AddGeoCommand}"
+                            Padding="7" Margin="0,0,5,0" Foreground="RoyalBlue"
+            Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="2" Kind="Add" />
+                            <TextBlock Text="Agregar Origen"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Command="{Binding ViewGeoCommand}"
+                            Padding="7" Margin="0,0,5,0" Foreground="Teal"
+            Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="2" Kind="Edit" />
+                            <TextBlock Text="Examinar Origen"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Command="{Binding DeleteGeoCommand}"
+                            Padding="7" Margin="0,0,5,0" Foreground="Red"
+            Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="2" Kind="Remove" />
+                            <TextBlock Text="Eliminar Origen"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </materialDesign:ColorZone>
+
+
+
+        </Grid>
+
+
+        <!-- DataGrid para mostrar los movimientos de habitaciones -->
+        <dxg:GridControl x:Name="MaintenanceRoomsGrid" Grid.Row="1"
+                         ItemsSource="{Binding Geos}"
+                         Margin="10"
+                         SelectionMode="Row"
+                         SelectedItem="{Binding SelectedGeo}">
+            <dxg:GridControl.View>
+                <dxg:TableView AutoWidth="True" AllowSorting="True" />
+            </dxg:GridControl.View>
+
+            <dxg:GridColumn FieldName="GeoKey" Header="Codigo" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="Description" Header="Descripcion del Origen" ReadOnly="True"/>
+        </dxg:GridControl>
+
+    </Grid>
+</UserControl>

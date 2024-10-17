@@ -63,6 +63,21 @@
     <Compile Update="Views\Settings\LicenseSettings.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Settings\MarketSetting.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Markets\ConfigurarOrigenGeo.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Markets\ConfigurarSegmento.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Markets\Dialogs\ConfigurarOrigenGeoDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Markets\Dialogs\ConfigurarSegmentoDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Settings\RoomSetting.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -141,6 +156,21 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\LicenseSettings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\MarketSetting.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Markets\ConfigurarOrigenGeo.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Markets\ConfigurarSegmento.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Markets\Dialogs\ConfigurarOrigenGeoDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Markets\Dialogs\ConfigurarSegmentoDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\RoomSetting.xaml">

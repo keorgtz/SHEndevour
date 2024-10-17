@@ -1,4 +1,4 @@
-﻿
+﻿K:\0Dev\Code\Main\SHEndevour\SHEndevour\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\App.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\AppReports\ReportSelectionWindow.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\AppReports\ReportWindow.xaml;;
@@ -15,6 +15,11 @@ FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Reports\Users\UserReportWindow.xa
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\GeneralSetting.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\General\ConfigurarInterfaz.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\LicenseSettings.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\MarketSetting.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Markets\ConfigurarOrigenGeo.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Markets\ConfigurarSegmento.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Markets\Dialogs\ConfigurarOrigenGeoDialog.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Markets\Dialogs\ConfigurarSegmentoDialog.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\RoomSetting.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Rooms\ConfigurarHabitacion.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Rooms\ConfigurarMantenimientoHabitacion.xaml;;

@@ -9,18 +9,32 @@ namespace SHEndevour.Utilities
     public class AppDbContext : DbContext
     {
         // Agregamos los Modelos para que se Generen las Tablas
+
+        // = = = = = = = = = = = = =  Usuarios  = = = = = = = = = = = = = = = = = = = 
         public DbSet<UserModel> Users { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
+
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =  
+
+        // = = = = = = = = = = = = =  Cuartos  = = = = = = = = = = = = = = = = = = = = 
         public DbSet<RoomModel> RoomTable { get; set; }
         public DbSet<RoomTypeModel> RoomTypeTable { get; set; }
         public DbSet<RoomMaintenanceModel> RoomMaintenanceTable { get; set; }
         public DbSet<MaintenanceHistoryModel> MaintenanceHistoryTable { get; set; }
 
         // = = = = = = = = = = = = =  LicenseModel  = = = = = = = = = = = = = = = = = = 
-
         public DbSet<LicenseModel> LicenseTable { get; set; }
 
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+        // = = = = = = = = = = = = =  Segmentos y Origen  = = = = = = = = = = = = = = = =
+
+        public DbSet<SegmentModel> SegmentTable { get; set; }
+        public DbSet<GeoOriginModel> GeoOriginTable { get; set; }
+
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+
 
         //public DbSet<ProductModel> Products { get; set; }  // Si tienes más modelos, añádelos aquí
 

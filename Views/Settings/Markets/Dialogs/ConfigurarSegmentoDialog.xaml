@@ -1,0 +1,76 @@
+﻿<Window x:Class="SHEndevour.Views.Settings.Markets.Dialogs.ConfigurarSegmentoDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:SHEndevour.Views.Settings.Markets.Dialogs"
+        mc:Ignorable="d"
+        Title="Añadir Segmento" Height="290" Width="450"
+        WindowStartupLocation="CenterScreen"
+        Background="#f1f1f1" materialDesign:ThemeAssist.Theme="Light">
+    <Grid>
+
+
+
+        <StackPanel>
+            <StackPanel>
+                <TextBlock Text="ENDEVØUR" TextAlignment="Center"
+                            FontSize="35" Margin="0,10,0,5"
+                            materialDesign:ElevationAssist.Elevation="Dp4" 
+                            FontFamily="Berlin Sans FB"/>
+
+                <TextBlock x:Name="AddEditSubtitle" TextAlignment="Center"
+                            FontSize="15" Margin="0,0,0,10"
+                            materialDesign:ElevationAssist.Elevation="Dp4" 
+                            FontFamily="Vernada"/>
+            </StackPanel>
+
+            <StackPanel  Margin="10" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <TextBox x:Name="SegmentKeyTextBox" Padding="2" Margin="5,5,5,5"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         VerticalAlignment="Top" MaxLength="5"
+                         TextChanged="OnTextChanged" Height="35" Width="90">
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="TextShort"
+                                                         Width="23" Height="23"/>
+                                <TextBlock Text="Codigo" FontSize="14"  Margin="3,2,0,0"/>
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
+
+                    <TextBox x:Name="DescriptionTextBox" 
+                             Padding="5" Margin="5,5,5,5"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             VerticalAlignment="Top" 
+                             TextChanged="OnTextChanged" Height="60" Width="280">
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Resume" Margin="0,1,5,0"
+                                                         Width="20" Height="20"/>
+                                <TextBlock Text="Description" FontSize="16"/>
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
+
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" 
+                    Margin="10,5,20,5"
+                    HorizontalAlignment="Right">
+
+                <Button Content="Cancelar"
+                    Foreground="Red"
+                    IsCancel="True" Click="CancelButton_Click"
+                    Style="{StaticResource MaterialDesignFlatButton}" />
+
+                <Button x:Name="AddButton" Content="Agregar" Click="OnAcceptClick" 
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    IsEnabled="False" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

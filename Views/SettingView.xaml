@@ -80,6 +80,14 @@
                          Click="SettingButton_Click"
                          Style="{StaticResource RadioBFlat}"/>
 
+                <Separator Margin="10,5,10,5"/>
+
+                <RadioButton Content="Mercados" Tag="Market" 
+                         x:Name="MarketsBTNSide"
+                         FontSize="13"
+                         Click="SettingButton_Click"
+                         Style="{StaticResource RadioBFlat}"/>
+
             </StackPanel>
 
         </materialDesign:ColorZone>
