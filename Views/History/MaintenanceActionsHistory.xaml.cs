@@ -30,6 +30,16 @@ namespace SHEndevour.Views.History
             this.DataContext = new RoomMaintenanceViewModel();
         }
 
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+
+            // Aplica los permisos del usuario actual a esta ventana
+            App.PermissionService?.ApplyPermissions(this);
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
         private void OnPrintPreviewClick(object sender, RoutedEventArgs e)
         {
             // Crear un enlace a los datos del GridControl para la impresión

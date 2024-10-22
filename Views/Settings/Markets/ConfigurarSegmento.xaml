@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
              xmlns:dxpr="http://schemas.devexpress.com/winfx/2008/xaml/printing"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:SHEndevour.Views.Settings.Markets"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vm="clr-namespace:SHEndevour.ViewModels.Settings.Markets"
              mc:Ignorable="d" Background="#f1f1f1" materialDesign:ThemeAssist.Theme="Light"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -78,7 +78,7 @@
 
 
         <!-- DataGrid para mostrar los movimientos de habitaciones -->
-        <dxg:GridControl x:Name="MaintenanceRoomsGrid" Grid.Row="1"
+        <dxg:GridControl x:Name="SegmentsGrid" Grid.Row="1"
                          ItemsSource="{Binding Segments}"
                          Margin="10"
                          SelectionMode="Row"

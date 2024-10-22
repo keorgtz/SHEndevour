@@ -41,6 +41,15 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
             
         }
 
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+
+            // Aplica los permisos del usuario actual a esta ventana
+            App.PermissionService?.ApplyPermissions(this);
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
 
         // Cargar RoomStatuses
         private void LoadRoomStatuses()

@@ -31,7 +31,7 @@
                             <Trigger Property="IsChecked" Value="True" >
                                 <Setter Property="Foreground" Value="#001b48"/>
                                 <Setter Property="Background" Value="#019abe"/>
-                                <Setter Property="Width" Value="60"/>
+                                <Setter Property="Width" Value="70"/>
                                 <Setter Property="Height" Value="60"/>
                                 <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp5"/>
 
@@ -59,36 +59,51 @@
                                   VerticalAlignment="Stretch"
                                   Margin="10" CornerRadius="10">
 
-            <StackPanel Grid.Column="0" Orientation="Vertical">
 
-                <RadioButton Content="Cuartos" Tag="Rooms" 
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+
+                    <StackPanel Grid.Row="0">
+                        <RadioButton Content="Cuartos" Tag="Rooms" 
                          x:Name="RoomBTNSide" 
                          Click="SettingButton_Click"
                          Style="{StaticResource RadioBFlat}"/>
 
-                <Separator Margin="10,5,10,5"/>
+                        <Separator Margin="10,5,10,5"/>
 
-                <RadioButton Content="General" Tag="Generals" 
+                        <RadioButton Content="General" Tag="Generals" 
                          x:Name="GeneralBTNSide"
                          Click="SettingButton_Click"
                          Style="{StaticResource RadioBFlat}"/>
 
-                <Separator Margin="10,5,10,5"/>
+                        <Separator Margin="10,5,10,5"/>
 
-                <RadioButton Content="Licencia" Tag="License" 
-                         x:Name="LicenseBTNSide"
-                         Click="SettingButton_Click"
-                         Style="{StaticResource RadioBFlat}"/>
 
-                <Separator Margin="10,5,10,5"/>
-
-                <RadioButton Content="Mercados" Tag="Market" 
+                        <RadioButton Content="Mercados" Tag="Market" 
                          x:Name="MarketsBTNSide"
-                         FontSize="13"
                          Click="SettingButton_Click"
                          Style="{StaticResource RadioBFlat}"/>
+                    </StackPanel>
 
-            </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="0,0,0,5">
+                        <Button Content="Licencia"
+                         x:Name="LicenseBTNSide"
+                         Click="LicenseButton_Click" Foreground="Aqua"
+                         Style="{StaticResource MaterialDesignFlatButton}"/>
+                    </StackPanel>
+
+
+                </Grid>
+
+
+
+
+
 
         </materialDesign:ColorZone>
 

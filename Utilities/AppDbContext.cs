@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SHEndevour.Models;
+using SHEndevour.Models.ControlRestriction;
 using SHEndevour.Models.License;
 
 namespace SHEndevour.Utilities
@@ -13,6 +14,8 @@ namespace SHEndevour.Utilities
         // = = = = = = = = = = = = =  Usuarios  = = = = = = = = = = = = = = = = = = = 
         public DbSet<UserModel> Users { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
+        public DbSet<ControlPermissionModel> ControlPermissionTable { get; set; }
+        public DbSet<RolePermissionTemplate> RolePermissionTable { get; set; }
 
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =  
 

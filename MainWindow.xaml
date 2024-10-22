@@ -86,186 +86,219 @@
                             ScaleY="{Binding Source={StaticResource GlobalScaleFactor}}"/>
         </Grid.LayoutTransform>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-        <!-- Definimos dos columnas, la primera es el Sidebar, la segunda es el contenido -->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" x:Name="SidebarColumn"/>
-            <!-- Ancho del Sidebar -->
-            <ColumnDefinition Width="*"/>
-            <!-- Resto de la página -->
-        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
+            <!-- Definimos dos columnas, la primera es el Sidebar, la segunda es el contenido -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" x:Name="SidebarColumn"/>
+                <!-- Ancho del Sidebar -->
+                <ColumnDefinition Width="*"/>
+                <!-- Resto de la página -->
+            </Grid.ColumnDefinitions>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto"
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
                       Style="{StaticResource MaterialDesignScrollViewer}"
                       materialDesign:ScrollBarAssist.ThumbCornerRadius="5"
 
                       materialDesign:ScrollBarAssist.ButtonsVisibility="Collapsed"
                       HorizontalScrollBarVisibility="Disabled">
 
-            <materialDesign:ColorZone
+                <materialDesign:ColorZone
                 Margin="10" Foreground="White"
                 materialDesign:ElevationAssist.Elevation="Dp4"
                 ClipToBounds="False" Background="#013d5a"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 CornerRadius="15">
 
-                <!-- Sidebar -->
+                    <!-- Sidebar -->
 
 
 
-                <Grid Grid.Column="0" x:Name="SideGridAligment">
+                    <Grid Grid.Column="0" x:Name="SideGridAligment">
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
 
 
 
-                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical">
 
-                        <materialDesign:Card
+                            <materialDesign:Card
                             materialDesign:ElevationAssist.Elevation="Dp4"
                             ClipToBounds="False" Background="#013d5a"
                             UniformCornerRadius="15"
                             x:Name="LoggedUserField"
-                            Width="220" Height="100">
+                            Width="228" Height="90">
 
-                            <StackPanel Orientation="Horizontal" Margin="20">
+                                <StackPanel Orientation="Horizontal" Margin="20">
 
-                                <materialDesign:PackIcon Kind="AccountCircle"
+                                    <materialDesign:PackIcon Kind="AccountCircle"
                                                          VerticalAlignment="Center"
                                                          Width="55" Height="55"/>
 
-                                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
 
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Nombre:" FontFamily="Microsoft YaHei" FontWeight="Bold" FontSize="12" Margin="2"/>
-                                        <TextBlock Text="{Binding UserFirstname}" FontFamily="Verdana" FontSize="12" Margin="2"/>
-                                    </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Nombre:" FontFamily="Microsoft YaHei" FontWeight="Bold" FontSize="12" Margin="2"/>
+                                            <TextBlock Text="{Binding UserFirstname}" FontFamily="Verdana" FontSize="12" Margin="2"/>
+                                        </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Rol:" FontFamily="Microsoft YaHei" FontWeight="Bold" FontSize="12" Margin="2"/>
-                                        <TextBlock Text="{Binding UserRolename}" FontFamily="Verdana" FontSize="12" Margin="2"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Rol:" FontFamily="Microsoft YaHei" FontWeight="Bold" FontSize="12" Margin="2"/>
+                                            <TextBlock Text="{Binding UserRolename}" FontFamily="Verdana" FontSize="12" Margin="2"/>
+                                        </StackPanel>
+
+
                                     </StackPanel>
 
                                 </StackPanel>
 
-                            </StackPanel>
-
-                        </materialDesign:Card>
+                            </materialDesign:Card>
 
 
 
-                        <Separator Margin="30,20,30,10" x:Name="SeparatorSidebar"/>
+                            <Separator Margin="30,20,30,10" x:Name="SeparatorSidebar"/>
 
 
 
-                        <RadioButton Tag="Inicio" Width="auto" Height="auto" Padding="0" Margin="6"
+                            <RadioButton Tag="Inicio" Width="auto" Height="auto" Padding="0" Margin="6"
                                      Click="NavigationButton_Click" HorizontalAlignment="Left"
+                                     x:Name="HomeRButton"
                                      Style="{StaticResource RoundBFlat}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="HomeVariantOutline"/>
-                                <TextBlock Text="Inicio" FontSize="18"
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="HomeVariantOutline"/>
+                                    <TextBlock Text="Inicio" FontSize="18"
                                            Margin="15,0,110,0" x:Name="TextInicio"
                                            VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </RadioButton>
+                                </StackPanel>
+                            </RadioButton>
 
-                        <RadioButton Tag="Usuarios" Width="auto" Height="auto" Padding="0" Margin="6"
+                            <RadioButton Tag="Usuarios" Width="auto" Height="auto" Padding="0" Margin="6"
                                      Click="NavigationButton_Click" HorizontalAlignment="Left"
+                                         x:Name="UsersSideBTN"
                                      Style="{StaticResource RoundBFlat}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="AccountGroupOutline"/>
-                                <TextBlock Text="Usuarios" FontSize="18"
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="AccountGroupOutline"/>
+                                    <TextBlock Text="Usuarios" FontSize="18"
                                            Margin="15,0,85,0" x:Name="TextUsuarios"
                                            VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </RadioButton>
+                                </StackPanel>
+                            </RadioButton>
 
-                        <RadioButton Tag="Rack" Width="auto" Height="auto" Padding="0" Margin="6"
+                            <RadioButton Tag="Rack" Width="auto" Height="auto" Padding="0" Margin="6"
                                      Click="NavigationButton_Click"  HorizontalAlignment="Left"
-                                     IsChecked="{x:Null}"
+                                     IsChecked="{x:Null}" x:Name="RackSideBTN"
                                      Style="{StaticResource RoundBFlat}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="RoomService"/>
-                                <TextBlock Text="Rack" FontSize="18"
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="RoomService"/>
+                                    <TextBlock Text="Rack" FontSize="18"
                                            Margin="15,0,115,0" x:Name="TextRack"
                                            VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </RadioButton>
+                                </StackPanel>
+                            </RadioButton>
 
-                        <RadioButton Tag="Configuracion" Width="auto" Height="auto" Padding="0" Margin="6"
+                            <RadioButton Tag="Configuracion" Width="auto" Height="auto" Padding="0" Margin="6"
                                      Click="NavigationButton_Click" HorizontalAlignment="Left"
-                                     IsChecked="{x:Null}"
+                                     IsChecked="{x:Null}" x:Name="SettingsSideBTN"
                                      Style="{StaticResource RoundBFlat}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="CogOutline"/>
-                                <TextBlock Text="Configuracion" FontSize="18"
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="CogOutline"/>
+                                    <TextBlock Text="Configuracion" FontSize="18"
                                            Margin="15,0,37,0" x:Name="TextConfig"
                                            VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </RadioButton>
+                                </StackPanel>
+                            </RadioButton>
 
-                        <RadioButton Width="auto" Height="auto" Padding="0" Margin="6"
+                            <RadioButton Width="auto" Height="auto" Padding="0" Margin="6"
                                      Click="ViewReport_Click" HorizontalAlignment="Left"
+                                     x:Name="ReportsSideBTN"
                                      Style="{StaticResource RoundBFlat}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="FileExcel"/>
-                                <TextBlock Text="Reportes" FontSize="18"
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Width="25" Height="25" Margin="10" VerticalAlignment="Center" Kind="FileExcel"/>
+                                    <TextBlock Text="Reportes" FontSize="18"
                                            Margin="15,0,80,0" x:Name="TextReportes"
                                            VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </RadioButton>
+                                </StackPanel>
+                            </RadioButton>
 
 
 
-                    </StackPanel>
+                        </StackPanel>
 
 
 
-                    <StackPanel Grid.Row="1">
-                        <Button  Width="auto" Height="auto" Padding="0" Margin="6"
+                        <StackPanel Grid.Row="1">
+
+                            <Button Content="Control Templates" Click="RoleTemplateButton_Click"/>
+                            
+                            <Button Content="Controls" Click="ControlsButton_Click"/>
+
+                            <Button  Width="auto" Height="auto" Padding="0" Margin="6"
                                 Style="{StaticResource RoundFlatB}"
                                 VerticalAlignment="Bottom" HorizontalAlignment="Left"
                                 Click="ToggleSidebar_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Width="25" Height="25" Margin="10" Kind="ChevronDoubleLeft" VerticalAlignment="Center" x:Name="ToggleIcon"/>
-                                <TextBlock Text="Colapsar" FontSize="15"
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Width="25" Height="25" Margin="10" Kind="ChevronDoubleLeft" VerticalAlignment="Center" x:Name="ToggleIcon"/>
+                                    <TextBlock Text="Colapsar" FontSize="15"
                                            Margin="15,0,95,0" x:Name="TextColapsar"
                                            VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Button>
+                                </StackPanel>
+                            </Button>
 
-                        <Button  Width="auto" Height="auto" Padding="0" Margin="6,5,6,10"
+                            <Button  Width="auto" Height="auto" Padding="0" Margin="6,5,6,10"
                                 Style="{StaticResource RoundFlatB}"
                                 VerticalAlignment="Bottom" HorizontalAlignment="Left"
                                 Click="LogoutButton_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Width="25" Height="25" Margin="10" Foreground="Red" VerticalAlignment="Center" Kind="Logout"/>
-                                <TextBlock Text="Cerrar Sesion" FontSize="15"
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Width="25" Height="25" Margin="10" Foreground="Red" VerticalAlignment="Center" Kind="Logout"/>
+                                    <TextBlock Text="Cerrar Sesion" FontSize="15"
                                            Margin="15,0,65,0" Foreground="Red"
                                            x:Name="TextLogout"
                                            VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Button>
+                                </StackPanel>
+                            </Button>
 
-                    </StackPanel>
+                        </StackPanel>
 
-                </Grid>
+                    </Grid>
 
-            </materialDesign:ColorZone>
-        </ScrollViewer>
-
-
+                </materialDesign:ColorZone>
+            </ScrollViewer>
 
 
 
-        <Grid Grid.Column="1">
-            <!-- Contenido Principal -->
-            <ContentControl x:Name="MainContent" Grid.Column="1" Background="White"/>
+
+
+            <Grid Grid.Column="1">
+                <!-- Contenido Principal -->
+                <ContentControl x:Name="MainContent" Grid.Column="1" Background="White"/>
+            </Grid>
         </Grid>
 
+        <Grid Grid.Row="1">
+
+            <materialDesign:ColorZone Background="#013D5A" Foreground="White">
+                <StackPanel Orientation="Horizontal" Margin="3">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Maquina:" FontFamily="Microsoft YaHei" FontWeight="Bold" FontSize="12" Margin="2"/>
+                        <TextBlock x:Name="MachineName" FontFamily="Verdana" FontSize="12" Margin="2"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                        <TextBlock Text="Servidor:" FontFamily="Microsoft YaHei" FontWeight="Bold" FontSize="12" Margin="2"/>
+                        <TextBlock x:Name="ServerName" FontFamily="Verdana" FontSize="12" Margin="2"/>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:ColorZone>
+            
+        </Grid>
+        
 
     </Grid>
 

@@ -27,6 +27,16 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
             this.DataContext = new RoomManagementViewModel();
         }
 
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+
+            // Aplica los permisos del usuario actual a esta ventana
+            App.PermissionService?.ApplyPermissions(this);
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
             // Obtén el ViewModel del DataContext

@@ -52,6 +52,15 @@ namespace SHEndevour.Views.Settings.Markets.Dialogs
             ValidateFields();
         }
 
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+
+            // Aplica los permisos del usuario actual a esta ventana
+            App.PermissionService?.ApplyPermissions(this);
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
 
         private void PopulateFields()
         {

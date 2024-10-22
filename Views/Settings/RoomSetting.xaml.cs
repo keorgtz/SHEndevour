@@ -28,8 +28,15 @@ namespace SHEndevour.Views.Settings
             InitializeComponent();
             RoomConfigureView.Content = new ConfigurarHabitacion();
             HabitacionesNavButton.IsChecked = true;
+            Loaded += CustomControl_Loaded;  // Suscribe al evento Loaded
         }
 
+        // Se llama cuando el UserControl está completamente cargado
+        private void CustomControl_Loaded(object sender, EventArgs e)
+        {
+            // Aplica los permisos del usuario actual a este UserControl
+            App.PermissionService?.ApplyPermissions(this);
+        }
         private void RoomSettingNav_Click(object sender, RoutedEventArgs e)
         {
             if (sender is RadioButton button) // Verificación de que el sender es un Button

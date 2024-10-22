@@ -29,8 +29,15 @@ namespace SHEndevour.Views.Settings
             GeneralConfigureView.Content = new ConfigurarInterfaz();
             UINavButton.IsChecked = true;
 
+            Loaded += CustomControl_Loaded;  // Suscribe al evento Loaded
         }
 
+        // Se llama cuando el UserControl está completamente cargado
+        private void CustomControl_Loaded(object sender, EventArgs e)
+        {
+            // Aplica los permisos del usuario actual a este UserControl
+            App.PermissionService?.ApplyPermissions(this);
+        }
         private void GeneralNavButton_Click(object sender, RoutedEventArgs e)
         {
 

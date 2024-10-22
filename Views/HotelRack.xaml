@@ -51,7 +51,7 @@
                     <TextBlock Text="Rack de Habitaciones" 
                                HorizontalAlignment="Center" 
                                FontFamily="Montserrat"
-                               Margin="5"
+                               Margin="5" Foreground="White"
                                FontWeight="Bold"
                                FontSize="20"/>
 
@@ -179,7 +179,7 @@
 
 
             <materialDesign:ColorZone Grid.Row="3"
-                                      Background="Teal"
+                                      Background="#013D5A"
                                       Margin="5"
                                       CornerRadius="2"
                                       HorizontalAlignment="Stretch"
@@ -191,9 +191,11 @@
                         <ComboBox ItemsSource="{Binding RoomStatusOptions}" 
                                   SelectedItem="{Binding RoomStatusFilter, Mode=TwoWay}"
                                   Width="150" Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                  Padding="5" Background="#005555"
+                                  Padding="5" Foreground="White"
+                                  materialDesign:HintAssist.Foreground="White"
                                   materialDesign:HintAssist.IsFloating="False"
                                   materialDesign:HintAssist.Hint="Filtros" FontSize="16"
+                                  materialDesign:ThemeAssist.Theme="Dark"
                                   HorizontalAlignment="Left" 
                                   Margin="10,5,0,5"/>
 

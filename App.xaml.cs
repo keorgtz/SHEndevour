@@ -11,6 +11,7 @@ using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 using SHEndevour.Services.Maintenance;
 using SHEndevour.Views.DatabaseView;
+using SHEndevour.Services;
 
 namespace SHEndevour
 {
@@ -18,14 +19,17 @@ namespace SHEndevour
     {
 
         public static UserModel? CurrentUser { get; set; }
+        public static PermissionService? PermissionService { get; private set; }
 
-        private MaintenanceService _maintenanceService;
+        private MaintenanceService? _maintenanceService;
+
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             InitializeApplication();
+            PermissionService = new PermissionService();  // Inicializa el servicio de permisos.
         }
 
         private void InitializeApplication()
@@ -94,7 +98,7 @@ namespace SHEndevour
         protected override void OnExit(ExitEventArgs e)
         {
             // Detener el Timer antes de que la aplicación cierre
-            _maintenanceService.StopTimer();
+            _maintenanceService?.StopTimer();
             base.OnExit(e);
         }
 

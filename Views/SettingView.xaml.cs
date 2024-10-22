@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SHEndevour.Views.Settings;
-
+using SHEndevour.Views.Settings.License;
 using RadioButton = System.Windows.Controls.RadioButton;
 using UserControl = System.Windows.Controls.UserControl;
 
@@ -29,6 +29,14 @@ namespace SHEndevour.Views
             InitializeComponent();
             settingScreen.Content = new RoomSetting();
             RoomBTNSide.IsChecked = true;
+            Loaded += CustomControl_Loaded;  // Suscribe al evento Loaded
+        }
+
+        // Se llama cuando el UserControl está completamente cargado
+        private void CustomControl_Loaded(object sender, EventArgs e)
+        {
+            // Aplica los permisos del usuario actual a este UserControl
+            App.PermissionService?.ApplyPermissions(this);
         }
 
         private void SettingButton_Click(object sender, RoutedEventArgs e)
@@ -63,5 +71,14 @@ namespace SHEndevour.Views
             }
 
         }
+
+        private void LicenseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var licenseScreen = new LicenseSettingDialog();
+            licenseScreen.Show();
+        }
+
+
+
     }
 }

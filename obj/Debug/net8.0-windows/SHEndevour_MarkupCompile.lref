@@ -3,6 +3,8 @@ FK:\0Dev\Code\Main\SHEndevour\SHEndevour\App.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\AppReports\ReportSelectionWindow.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\AppReports\ReportWindow.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\MainWindow.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\ControlRestrictionView\PermissionsDashboardView.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\ControlRestrictionView\RoleTemplatesView.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\DatabaseView\DatabaseConnectionDialog.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\DatabaseView\DbConnectionView.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\DatabaseView\DBManager\DbManagerView.xaml;;
@@ -15,6 +17,7 @@ FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Reports\Users\UserReportWindow.xa
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\GeneralSetting.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\General\ConfigurarInterfaz.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\LicenseSettings.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\License\LicenseSettingDialog.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\MarketSetting.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Markets\ConfigurarOrigenGeo.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Markets\ConfigurarSegmento.xaml;;
@@ -27,6 +30,13 @@ FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Rooms\ConfigurarTipoDeHa
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Rooms\Dialogs\AddEditRoomDialog.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Rooms\Dialogs\AddEditRoomTypeDialog.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Rooms\Dialogs\SelectMaintenanceRoom.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\SaleSetting.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Sales\ConfigurarAsociadosNegocio.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Sales\ConfigurarIngresos.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Sales\ConfigurarPagos.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Sales\Dialogs\ConfigurarAsociadosNegocioDialog.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Sales\Dialogs\ConfigurarIngresosDialog.xaml;;
+FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\Settings\Sales\Dialogs\ConfigurarPagosDialog.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\SettingView.xaml;;
 FK:\0Dev\Code\Main\SHEndevour\SHEndevour\Views\UserView.xaml;;
 

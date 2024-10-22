@@ -26,9 +26,16 @@ namespace SHEndevour.Views.Settings.Rooms
         {
             InitializeComponent();
             this.DataContext = new RoomManagementViewModel();
+            Loaded += CustomControl_Loaded;  // Suscribe al evento Loaded
         }
 
-        
+        // Se llama cuando el UserControl está completamente cargado
+        private void CustomControl_Loaded(object sender, EventArgs e)
+        {
+            // Aplica los permisos del usuario actual a este UserControl
+            App.PermissionService?.ApplyPermissions(this);
+        }
+
 
     }
 }

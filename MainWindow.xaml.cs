@@ -10,13 +10,15 @@ using Button = System.Windows.Controls.Button;
 using MessageBox = System.Windows.MessageBox;
 using Application = System.Windows.Application;
 using System.Windows.Media.Animation;
+using SHEndevour.ViewModels.ControlRestrictionVM;
+using SHEndevour.Views.ControlRestrictionView;
 
 namespace SHEndevour
 {
     
     public partial class MainWindow : Window
     {
-
+        private readonly AppDbContext _context;
         public MainWindow()
         {
             InitializeComponent();
@@ -24,15 +26,43 @@ namespace SHEndevour
             MainContent.Content = new HomeView();
             // Establecer el DataContext como la clase App
             DataContext = this;
+            
+            HomeRButton.IsChecked = true;
 
-           
+            // Cargar la configuración de conexión
+            var connectionSettings = DbConnectionSettings.LoadConnections();
+
+            // Obtener el servidor predeterminado
+            var defaultConnection = connectionSettings.FirstOrDefault(c => c.IsDefault);
+            if (defaultConnection != null)
+            {
+                // Obtener el nombre del servidor
+                string serverName = defaultConnection.GetServerName();
+
+                // Establecer el título de la ventana con el nombre del servidor
+                ServerName.Text = $"[{serverName}]";
+            }
+            else
+            {
+                ServerName.Text = "Sin Conexión";
+            }
+
+            MachineName.Text = System.Environment.MachineName;
 
         }
 
-        public string UserFirstname => App.CurrentUser.FirstName;
-        public string UserRolename => App.CurrentUser.Role.Name;
+        public string? UserFirstname => App.CurrentUser?.FirstName;
+        public string? UserRolename => App.CurrentUser?.Role?.Name;
 
+        // = = = = = = = = = = = = Control Limiter = = = = = = = = = = = = = =
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
 
+            // Aplica los permisos del usuario actual a esta ventana
+            App.PermissionService?.ApplyPermissions(this);
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
         private void NavigationButton_Click(object sender, RoutedEventArgs e)
         {
@@ -106,40 +136,58 @@ namespace SHEndevour
         {
             if (isSidebarCollapsed)
             {
-                // Expande el sidebar
-                SidebarColumn.Width = GridLength.Auto; // Tamaño original
-                TextInicio.Visibility = Visibility.Visible; // Mostrar texto
-                TextUsuarios.Visibility = Visibility.Visible; // Mostrar texto
-                TextRack.Visibility = Visibility.Visible; // Mostrar texto
-                TextConfig.Visibility = Visibility.Visible; // Mostrar texto
-                TextReportes.Visibility = Visibility.Visible; // Mostrar texto
-                TextColapsar.Visibility = Visibility.Visible; // Mostrar texto
-                TextLogout.Visibility = Visibility.Visible; // Mostrar texto
-                LoggedUserField.Visibility = Visibility.Visible; // Mostrar texto
-                SeparatorSidebar.Visibility = Visibility.Visible; // Mostrar separador
-
-                ToggleIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ChevronDoubleLeft;
+                ExpandSidebar();
             }
             else
             {
-                // Colapsa el sidebar
-                SidebarColumn.Width = GridLength.Auto; // Solo mostrar iconos
-                TextInicio.Visibility = Visibility.Collapsed; // Ocultar texto
-                TextUsuarios.Visibility = Visibility.Collapsed; // Mostrar texto
-                TextRack.Visibility = Visibility.Collapsed; // Mostrar texto
-                TextConfig.Visibility = Visibility.Collapsed; // Mostrar texto
-                TextReportes.Visibility = Visibility.Collapsed; // Mostrar texto
-                TextColapsar.Visibility = Visibility.Collapsed; // Mostrar texto
-                TextLogout.Visibility = Visibility.Collapsed; // Mostrar texto
-                LoggedUserField.Visibility = Visibility.Collapsed; // Mostrar texto
-                SeparatorSidebar.Visibility = Visibility.Collapsed; // Mostrar separador
-
-                ToggleIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ChevronDoubleRight;
+                CollapseSidebar();
             }
-
-            isSidebarCollapsed = !isSidebarCollapsed; // Alternar estado
+            isSidebarCollapsed = !isSidebarCollapsed;
         }
 
+        private void ExpandSidebar()
+        {
+            SidebarColumn.Width = GridLength.Auto;
+            SetSidebarVisibility(Visibility.Visible);
+            ToggleIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ChevronDoubleLeft;
+        }
+
+        private void CollapseSidebar()
+        {
+            SidebarColumn.Width = GridLength.Auto; // Ajustar ancho cuando colapsado
+            SetSidebarVisibility(Visibility.Collapsed);
+            ToggleIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.ChevronDoubleRight;
+        }
+
+        private void SetSidebarVisibility(Visibility visibility)
+        {
+            TextInicio.Visibility = visibility;
+            TextUsuarios.Visibility = visibility;
+            TextRack.Visibility = visibility;
+            TextConfig.Visibility = visibility;
+            TextReportes.Visibility = visibility;
+            TextColapsar.Visibility = visibility;
+            TextLogout.Visibility = visibility;
+            LoggedUserField.Visibility = visibility;
+            SeparatorSidebar.Visibility = visibility;
+        }
+
+        private void ControlsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dashboardView = new PermissionsDashboardView
+            {
+                DataContext = new PermissionsDashboardViewModel()
+            };
+            dashboardView.Show();
+
+        }
+
+        private void RoleTemplateButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dashboardView = new RoleTemplatesView();
+            dashboardView.Show();
+
+        }
 
 
 

@@ -37,6 +37,15 @@ namespace SHEndevour.Views.Settings.Rooms.Dialogs
             ValidateFields(); // Inicializar la validación de campos
         }
 
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+
+            // Aplica los permisos del usuario actual a esta ventana
+            App.PermissionService?.ApplyPermissions(this);
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
         private void PopulateFields()
         {
             RoomTypeKeyTextBox.Text = RoomTypeD.RoomTypeKey;

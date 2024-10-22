@@ -15,6 +15,7 @@ using SHEndevour.Repositories.Reports;
 using SHEndevour.Views.Reports.Users;
 using DevExpress.XtraReports.UI;
 using DevExpress.Xpf.Printing;
+using SHEndevour.Models.ControlRestriction;
 
 namespace SHEndevour.ViewModels
 {
@@ -26,7 +27,7 @@ namespace SHEndevour.ViewModels
 
 
         [ObservableProperty]
-        private UserModel selectedUser;
+        private UserModel? selectedUser;
 
 
         // Comandos
@@ -68,23 +69,42 @@ namespace SHEndevour.ViewModels
         }
 
 
-       
+
 
 
         #region AddUsersRegion
         private void AddUser()
         {
-            // Abrir el diálogo de agregar usuario
             var addUserDialog = new AddEditUserDialog();
 
             if (addUserDialog.ShowDialog() == true)
             {
                 var newUser = addUserDialog.User;
-                newUser.Password = PasswordHelper.HashPassword(newUser.Password); // Cifrar la contraseña
+                newUser.Password = PasswordHelper.HashPassword(newUser.Password); // Cifrar contraseña
 
                 using (var dbContext = new AppDbContext())
                 {
+                    // Guardar el nuevo usuario
                     dbContext.Users.Add(newUser);
+                    dbContext.SaveChanges();
+
+                    // Obtener los permisos del rol seleccionado
+                    var rolePermissions = dbContext.RolePermissionTable
+                                                   .Where(p => p.RoleId == newUser.RoleId)
+                                                   .ToList();
+
+                    // Crear los permisos para el usuario basados en la plantilla del rol
+                    var userPermissions = rolePermissions.Select(p => new ControlPermissionModel
+                    {
+                        UserId = newUser.Id,
+                        ControlName = p.ControlName,
+                        ViewName = p.ViewName,
+                        IsVisible = p.IsVisible,
+                        IsEnabled = p.IsEnabled
+                    }).ToList();
+
+                    // Guardar los permisos del usuario
+                    dbContext.ControlPermissionTable.AddRange(userPermissions);
                     dbContext.SaveChanges();
                 }
 
@@ -92,7 +112,9 @@ namespace SHEndevour.ViewModels
                 MessageBox.Show("Usuario añadido con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
         #endregion
+
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 

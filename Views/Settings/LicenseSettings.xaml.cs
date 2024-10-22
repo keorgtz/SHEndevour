@@ -35,8 +35,15 @@ namespace SHEndevour.Views.Settings
             GenerateInstallationCode();
             _dbContext = new AppDbContext();
             LoadLicenseData(); // Cargar datos al iniciar
+            Loaded += CustomControl_Loaded;  // Suscribe al evento Loaded
         }
 
+        // Se llama cuando el UserControl está completamente cargado
+        private void CustomControl_Loaded(object sender, EventArgs e)
+        {
+            // Aplica los permisos del usuario actual a este UserControl
+            App.PermissionService?.ApplyPermissions(this);
+        }
 
 
         // Genera el Código de Instalación basado en la fecha de creación de la carpeta raíz
@@ -85,7 +92,6 @@ namespace SHEndevour.Views.Settings
             RFCTbx.Text = _currentLicense.RFC;
             DomicilioTbx.Text = _currentLicense.DomicilioCompleto;
             CodigoPostalTbx.Text = _currentLicense.CodigoPostal;
-            CodigoInstalacionTXBX.Text = _currentLicense.CodigoInstalacion;
             ClaveInstalacionTXBX.Text = _currentLicense.ClaveInstalacion;
             FechaLicenciaTXBX.SelectedDate = _currentLicense.FechaLicencia;
             ClaveLicenciaTXBX.Text = _currentLicense.ClaveLicencia;
@@ -137,6 +143,10 @@ namespace SHEndevour.Views.Settings
             {
                 MessageBox.Show("Licencia o clave de instalación inválidas.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false; // Retorna false si hay error, pero no detendrá el guardado
+            }
+            else
+            {
+                MessageBox.Show("Las Credenciales Ingresadas son Validas.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             return true; // Retorna true si todo es válido

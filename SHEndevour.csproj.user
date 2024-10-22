@@ -27,6 +27,12 @@
     <Compile Update="Views\AddEditUserDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ControlRestrictionView\PermissionsDashboardView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ControlRestrictionView\RoleTemplatesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\DatabaseView\DatabaseConnectionDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -61,6 +67,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Settings\LicenseSettings.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\License\LicenseSettingDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Settings\MarketSetting.xaml.cs">
@@ -102,6 +111,27 @@
     <Compile Update="Views\Settings\Rooms\Dialogs\SelectMaintenanceRoom.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Settings\SaleSetting.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Sales\ConfigurarAsociadosNegocio.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Sales\ConfigurarIngresos.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Sales\ConfigurarPagos.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Sales\Dialogs\ConfigurarAsociadosNegocioDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Sales\Dialogs\ConfigurarIngresosDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Settings\Sales\Dialogs\ConfigurarPagosDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\SettingView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -120,6 +150,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AddEditUserDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ControlRestrictionView\PermissionsDashboardView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ControlRestrictionView\RoleTemplatesView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\DatabaseView\DatabaseConnectionDialog.xaml">
@@ -156,6 +192,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\LicenseSettings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\License\LicenseSettingDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\MarketSetting.xaml">
@@ -195,6 +234,27 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Settings\Rooms\Dialogs\SelectMaintenanceRoom.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\SaleSetting.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Sales\ConfigurarAsociadosNegocio.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Sales\ConfigurarIngresos.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Sales\ConfigurarPagos.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Sales\Dialogs\ConfigurarAsociadosNegocioDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Sales\Dialogs\ConfigurarIngresosDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Settings\Sales\Dialogs\ConfigurarPagosDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SettingView.xaml">

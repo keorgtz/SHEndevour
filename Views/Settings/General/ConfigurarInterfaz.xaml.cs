@@ -33,14 +33,21 @@ namespace SHEndevour.Views.Settings.General
             InitializeComponent();
 
             // Cargar el valor inicial desde el App.config
-            string scaleFactorConfig = ConfigurationManager.AppSettings["ScaleFactor"];
+            string? scaleFactorConfig = ConfigurationManager.AppSettings["ScaleFactor"];
             ScaleValue = double.TryParse(scaleFactorConfig, out double result) ? result : 1.0;
 
             // Enlazar el valor al control Slider
             DataContext = this;
 
+            Loaded += CustomControl_Loaded;  // Suscribe al evento Loaded
         }
 
+        // Se llama cuando el UserControl está completamente cargado
+        private void CustomControl_Loaded(object sender, EventArgs e)
+        {
+            // Aplica los permisos del usuario actual a este UserControl
+            App.PermissionService?.ApplyPermissions(this);
+        }
 
         private void OnSaveClick(object sender, RoutedEventArgs e)
         {
